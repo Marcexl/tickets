@@ -1,0 +1,15 @@
+.spinner-container{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 11;
+    width: 100%;
+    background: rgba(255,255,255,0.8);
+}
+.spinner-border{
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
+}

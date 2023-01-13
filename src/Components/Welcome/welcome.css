@@ -1,0 +1,11 @@
+.welcome-avatar{
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 450px;
+}
+@media screen and  (max-width:636px){
+    .welcome-avatar{
+        max-width: 100%;
+    }
+}

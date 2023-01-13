@@ -1,13 +1,81 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body,html{
+  background: linear-gradient(114.04deg, #69A1AC 11.79%, rgba(146, 100, 168, 0.74) 66.28%, rgba(112, 11, 239, 0.7) 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+#root{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-content: center;
+  height: 100vh;
+}
+.form-control,
+.btn{
+  width: 368px;
+  height: 50px;
+  border-radius: 30px;
+  display: block;
+  margin: 15px auto;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.btn-primary{
+  background: #700BEF;
+  color: white;
+  border: none;
+  opacity: 1;
+}
+.btn-primary:hover{
+  background: #700BEF;
+  color: white;
+  opacity: 0.9;
+}
+.btn-secondary{
+  background: rgba(112, 11, 239, 0.3);
+  color: #700BEF;
+  border: none;
+  opacity: 1;
+}
+.btn-secondary:hover{
+  background: rgba(112, 11, 239, 0.3);
+  color: #700BEF;
+  opacity: 0.9;
+}
+.form-control:focus,
+.form-control {
+  background: rgba(112, 11, 239, 0.3);
+  color: #700BEF;
+}
+.container-login .row{
+  height: 100%;
+}
+.card-login{
+  min-width: 600px;
+}
+.card-title{
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+.col-login{
+  justify-content: center;    
+  align-items: center;
+  display: flex;
+}
+.logo-login{
+  display: block;
+  padding: 15px;
+  margin: 0 auto;
+  max-width: 250px;
+}
+.alert{
+  display: none;
+}
+@media screen and  (max-width:636px){
+  .card-login{
+      min-width: initial;
+  }
+  .form-control,
+  .btn{
+    width: 100%;
+  }
 }
