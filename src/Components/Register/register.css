@@ -1,0 +1,9 @@
+.google-but{
+    background-color: #f44336;
+    opacity: 1;
+}
+
+.google-but:hover{
+    background-color: #f44336;
+    opacity: 0.9;
+}

@@ -11,6 +11,22 @@ import Alert from 'react-bootstrap/Alert';
 import './eventos.css';
 
 function Eventos() {
+    const AgendarEvento = (e) =>{
+        let spinner = document.getElementById("spinner");
+        let salert = document.getElementById("success-alert");
+        let dalert = document.getElementById("danger-alert");
+    
+        e.preventDefault()
+        spinner.style.display = 'block';
+       
+        setTimeout(() => {
+            spinner.style.display = 'none';
+            salert.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'http://localhost:3000/cuenta';
+            },800);
+        },800);
+    }
   return (
     <>
     <GlobalSpinner />
@@ -21,7 +37,7 @@ function Eventos() {
             <Card.Title className="mt-3">Anotate en las actividades</Card.Title>
             <Card.Img variant="top" src={Logo} className="logo-login"/>
             <Card.Body>
-              <Form>
+              <Form onSubmit={AgendarEvento}>
                 <Form.Select aria-label="Default select example">
                     <option>Selecciona la actividad</option>
                     <option value="1">Encuentro Coral Soka Sabado 21 Enero 18:00 hs</option>
@@ -32,7 +48,7 @@ function Eventos() {
                 </Button>
               </Form>
               <Alert variant='success' id="success-alert">
-                Te haz registrado con exito!
+                Te anotaste con exito!
               </Alert>
               <Alert variant='danger' id="danger-alert"></Alert>
             </Card.Body>

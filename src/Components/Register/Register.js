@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Logo from '../logo.png';
 import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
-import {auth} from '../../FirabaseConfig';
+import {auth, signInWithGoogle} from '../../FirabaseConfig';
 import './register.css';
  
 function Register() {
@@ -54,7 +54,7 @@ function Register() {
       <Row>
         <Col className='col-login'>
           <Card className="card-login">
-            <Card.Title className="mt-3">Registrarme</Card.Title>
+            <Card.Title className="mt-3">Ingresar Datos</Card.Title>
             <Card.Img variant="top" src={Logo} className="logo-login"/>
             <Card.Body>
               <Form onSubmit={RegistrarUsuario}>
@@ -75,9 +75,12 @@ function Register() {
                   />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                  Registrar
+                  Registrarme
                 </Button>
               </Form>
+              <Button  type="button" className='google-but' onClick={signInWithGoogle}>
+                Ingresar con Google
+              </Button>
               <Alert variant='success' id="success-alert">
                 Te haz registrado con exito!
               </Alert>

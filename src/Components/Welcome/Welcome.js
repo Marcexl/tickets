@@ -19,14 +19,9 @@ function Welcome() {
               <Card.Text>
                 <Link to="/register">
                   <Button variant="primary" type="button" className='register-button'>
-                    Registrarse
+                    Comenzar
                   </Button>
-                </Link>
-                <Link to="/login">
-                  <Button variant="secondary" type="button" className='login-button'>
-                    Login
-                  </Button>
-                </Link>                
+                </Link>           
               </Card.Text>
             </Card.Body>
           </Card>

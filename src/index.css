@@ -70,6 +70,10 @@ body,html{
 .alert{
   display: none;
 }
+.form-select{
+  max-width: 450px;
+  margin: 0 auto;
+}
 @media screen and  (max-width:636px){
   .card-login{
       min-width: initial;
@@ -77,5 +81,8 @@ body,html{
   .form-control,
   .btn{
     width: 100%;
+  }
+  .form-select{
+    max-width: 100%;
   }
 }
