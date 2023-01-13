@@ -14,7 +14,7 @@ function Eventos() {
     const AgendarEvento = (e) =>{
         let spinner = document.getElementById("spinner");
         let salert = document.getElementById("success-alert");
-        let dalert = document.getElementById("danger-alert");
+        //let dalert = document.getElementById("danger-alert");
     
         e.preventDefault()
         spinner.style.display = 'block';
@@ -50,7 +50,6 @@ function Eventos() {
               <Alert variant='success' id="success-alert">
                 Te anotaste con exito!
               </Alert>
-              <Alert variant='danger' id="danger-alert"></Alert>
             </Card.Body>
           </Card>
         </Col>

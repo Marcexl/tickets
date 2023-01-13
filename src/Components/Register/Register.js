@@ -10,10 +10,13 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import {auth, signInWithGoogle} from '../../FirabaseConfig';
 import './register.css';
- 
+
+//var urlMaster = 'http://localhost:3000/';
+var urlMaster = 'https://marcexl.com.ar/app/30aniversario/';
+
 function Register() {
   const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const pass = '123456789';
 
   const RegistrarUsuario = (e) =>{
     let spinner = document.getElementById("spinner");
@@ -25,12 +28,14 @@ function Register() {
     auth.createUserWithEmailAndPassword(email, pass)
     .then((userCredential) => {
       // Signed in 
-      //const user = userCredential.user;
+
+      const userID = userCredential.user.multiFactor.user.uid;
+      localStorage.setItem('userId',userID);
       setTimeout(() => {
         spinner.style.display = 'none';
         salert.style.display = 'block';
         setTimeout(() => {
-          window.location.href = 'http://localhost:3000/eventos';
+          window.location.href = `${urlMaster}eventos`;
         },800);
       },800);
 
@@ -58,20 +63,40 @@ function Register() {
             <Card.Img variant="top" src={Logo} className="logo-login"/>
             <Card.Body>
               <Form onSubmit={RegistrarUsuario}>
+                <Form.Group className="mb-3" controlId="name">
+                  <Form.Control 
+                  type="text" 
+                  placeholder="Nombre" 
+                  className='name'
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="lname">
+                  <Form.Control 
+                  type="text" 
+                  placeholder="Apellido" 
+                  className='lname'
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="phone">
+                  <Form.Control 
+                  type="text" 
+                  placeholder="Celular" 
+                  className='phone'
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="documento">
+                  <Form.Control 
+                  type="text" 
+                  placeholder="DNI o Nro. identificacion" 
+                  className='documento'
+                  />
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="email">
                   <Form.Control 
                   type="text" 
                   placeholder="Ingresa un email" 
                   className='email'
                   onChange={(e) => {setEmail(e.target.value)}}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-5" controlId="password]">
-                  <Form.Control 
-                  type="password" 
-                  placeholder="Contrasenia" 
-                  className='password'
-                  onChange={(e) => {setPass(e.target.value)}}
                   />
                 </Form.Group>
                 <Button variant="primary" type="submit">

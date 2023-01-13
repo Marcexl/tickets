@@ -7,3 +7,10 @@
     background-color: #f44336;
     opacity: 0.9;
 }
+
+.logo-login{
+    display: block;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 200px;
+  }

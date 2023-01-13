@@ -31,19 +31,19 @@ body,html{
 }
 .btn-secondary{
   background: rgba(112, 11, 239, 0.3);
-  color: #700BEF;
+  color: #2d095a;
   border: none;
   opacity: 1;
 }
 .btn-secondary:hover{
-  background: rgba(112, 11, 239, 0.3);
-  color: #700BEF;
+  background: rgba(112, 11, 239, 0.1);
+  color: #2d095a;
   opacity: 0.9;
 }
 .form-control:focus,
 .form-control {
-  background: rgba(112, 11, 239, 0.3);
-  color: #700BEF;
+  background: rgba(112, 11, 239, 0.1);
+  color: #2d095a;
 }
 .container-login .row{
   height: 100%;
@@ -74,9 +74,10 @@ body,html{
   max-width: 450px;
   margin: 0 auto;
 }
-@media screen and  (max-width:636px){
+
+@media screen and (max-width:636px){
   .card-login{
-      min-width: initial;
+      min-width: 100%;
   }
   .form-control,
   .btn{
