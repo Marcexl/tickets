@@ -11,7 +11,8 @@ import Alert from 'react-bootstrap/Alert';
 import './eventos.css';
 
 //var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://marcexl.com.ar/app/30aniversario/';
+var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+
 
 function Eventos() {
     const AgendarEvento = (e) =>{
