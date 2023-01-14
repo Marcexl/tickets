@@ -35,7 +35,7 @@ function Register() {
         spinner.style.display = 'none';
         salert.style.display = 'block';
         setTimeout(() => {
-          window.location.href = `${urlMaster}eventos`;
+          window.location.href = `${urlMaster}#/eventos`;
         },800);
       },800);
 

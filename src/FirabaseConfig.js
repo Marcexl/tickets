@@ -39,13 +39,13 @@ const signInWithGoogle = () =>{
       // The signed-in user info.
       //const user = result.user;
       // ...
-      const userID = result.user.multiFactor.user.uid;
+      const userID = result.user.uid;
       localStorage.setItem('userId',userID);
       setTimeout(() => {
         spinner.style.display = 'none';
         salert.style.display = 'block';
         setTimeout(() => {
-          window.location.href = `${urlMaster}eventos`;
+          window.location.href = `${urlMaster}#/eventos`;
         },800);
       },800);
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    BrowserRouter as Router,
+    HashRouter,
     Routes,
     Route
   } from "react-router-dom";
@@ -12,7 +12,7 @@ import Cuenta from './Cuenta/Cuenta';
 
 export default function App() {
     return (
-      <Router>
+      <HashRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -20,6 +20,6 @@ export default function App() {
             <Route path="/cuenta" element={<Cuenta />} />
             <Route path='/' element={<Welcome />} />
           </Routes>
-      </Router>
+      </HashRouter>
     );
   }
