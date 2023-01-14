@@ -10,6 +10,9 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './eventos.css';
 
+//var urlMaster = 'http://localhost:3000/';
+var urlMaster = 'https://marcexl.com.ar/app/30aniversario/';
+
 function Eventos() {
     const AgendarEvento = (e) =>{
         let spinner = document.getElementById("spinner");
@@ -23,7 +26,7 @@ function Eventos() {
             spinner.style.display = 'none';
             salert.style.display = 'block';
             setTimeout(() => {
-                window.location.href = 'http://localhost:3000/cuenta';
+              window.location.href = `${urlMaster}#/cuenta`;
             },800);
         },800);
     }
