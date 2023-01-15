@@ -1,0 +1,14 @@
+.card-title{
+    padding: 30px;
+}
+
+.people{
+    max-width: 250px;
+    display: block;
+    margin: 0 auto;
+    clear: both;
+}
+.card-cuenta{
+    display: block;
+    padding-bottom: 60px;
+}

@@ -3,6 +3,11 @@
     $data = json_decode(file_get_contents('php://input'), true);
   
     $email  = $data['email'];
+    $username = strstr($email, '@', true); //"username"
+    $evento = $data['evento'];
+    $para   = $email;
+    $file = 'https://sgiar.org.ar/dialogos/eventos/Generate/'.$evento.'_'.$username.'.png';
+  
     $para   = $email;
     $titulo = 'Tu entrada para el Encuentro Coral Soka';
     
@@ -10,7 +15,7 @@
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
     
     // Additional headers
-    $headers[] = 'From: No-reply <no_responder@sgiar.org.ar>';
+    $headers[] = 'From: Encuentro Coral Soka <no_responder@sgiar.org.ar>';
     
     $msj = '
     <html>
@@ -22,7 +27,7 @@
       body,h1,h3,p{font-family: "Josefin Sans", sans-serif;}
       h3{max-width: 600px;font-weight: 200;}
       .gracias-image{    
-         max-width: 960px;
+         max-width: 600px;
          padding: 30px;
          box-sizing: border-box;
       }
@@ -30,19 +35,25 @@
          width: 100%;
       }
       .ticket-container{
-         width: 960px;
-         position: relative;
+          width: 1100px;
+          border: 1px solid #000;
+          position: relative;
+          display: flex;
       }
       .ticket-container .ticket{
-         width: 100%;
-      }
+          width: 750px;
+       }
+       .querre{
+          padding: 20px;
+          width: 300px;
+       }
      </style>
     </head>
     <body>
     <div class="gracias-image"><img src="https://sgiar.org.ar/dialogos/eventos/images/gracias.png"></div>
     <div class="ticket-container">
-    '.$data['qr'].'
-    <img src="https://sgiar.org.ar/dialogos/eventos/images/entrada-empty.png" className="ticket" alt="ticket"/>
+      <img src="'.$file .'" alt="querre" class="querre"/>
+      <img src="https://sgiar.org.ar/dialogos/eventos/images/entrada-empty.jpg" class="ticket" alt="ticket"/>
     </div>
     </body>
     </html>

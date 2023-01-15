@@ -18,9 +18,10 @@ function Cuenta() {
   
   if(localStorage.getItem('usr')){
     let userData = localStorage.getItem('usr');
+    let evento = localStorage.getItem('evento');
     let user = JSON.parse(userData);
     let email = user.email;
-    var pathThanks = 'https://sgiar.org.ar/gracias.php?uid='+email+'&evento=1';
+    var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+email+'&evento='+evento;
   }
 
   const ref = createRef(null);
@@ -48,8 +49,8 @@ function Cuenta() {
           <Card className="card-login" >
             <Card.Title className="mt-3">¡Ya tenés tu entrada , te esperamos!</Card.Title>
             <Card.Body className="card-cuenta" ref={ref}>
-                <div class="qr">
-                  <QRCodeImg value={pathThanks} id="qr-code"/>
+                <div className="qr" id="qr">
+                  <QRCodeImg value={pathThanks}/>
                 </div>
                 <img src={Foto} className="ticket" alt='ticket'/>
             </Card.Body>
@@ -74,33 +75,58 @@ function Cuenta() {
 export default Cuenta;
 
 function SendEmail (){
-  let data = '';
-  
-  if(localStorage.getItem('usr')){
-    let userData = localStorage.getItem('usr');
-    let user = JSON.parse(userData);
-    let email = user.email;
-    var picture = document.getElementsByClassName("QRCodeImg");
-    console.log(picture);
-    data = JSON.stringify({email: email});
-  }
-  else
-  {
-    data = '';
-  }
-  
-  fetch('./Mail/mail.php', {
-      method: 'POST',
-      headers:{"Content-Type": "application/json" },
-      body: data,
-      }).then((response) => {
-      if (response.ok) 
+  var data = '';
+  window.addEventListener("load", event => {
+    var image = document.querySelector('.QRCodeImg');
+    var isLoaded = image.complete && image.naturalHeight !== 0;
+
+    if(isLoaded == true)
+    {
+
+      var imgsrc = document.getElementsByClassName("QRCodeImg")[0];
+      console.log(imgsrc.currentSrc);
+      if(localStorage.getItem('usr'))
       {
-        console.log('ok envio mail');
+        let userData = localStorage.getItem('usr');
+        let user = JSON.parse(userData);
+        let email = user.email;
+        let evento = localStorage.getItem('evento');
+        data = JSON.stringify({email: email, qr: imgsrc.currentSrc, evento: evento});
+        fetch('./Generate/generate.php', {
+          method: 'POST',
+          headers:{"Content-Type": "application/json" },
+          body: data,
+          }).then((response) => {
+          if (response.ok) 
+          { 
+            console.log(response);
+            fetch('./Mail/mail.php', {
+              method: 'POST',
+              headers:{"Content-Type": "application/json" },
+              body: data,
+              }).then((response) => {
+              if (response.ok) 
+              {
+                console.log('ok envio mail');
+              }
+              else 
+              {
+                console.log('no se mando el mail');
+              }
+            })
+          }
+          else 
+          {
+            console.log('no se creo el querre');
+          }
+      })
       }
-      else 
+      else
       {
-        console.log('no se mando el mail');
+        data = '';
       }
-  })
+      
+    }
+  });
+  
 }

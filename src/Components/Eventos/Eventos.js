@@ -26,6 +26,9 @@ function Eventos() {
         setTimeout(() => {
             spinner.style.display = 'none';
             salert.style.display = 'block';
+            var option = document.getElementById("eventos");
+            var evento = e.option;
+            localStorage.setItem("evento",evento);
             setTimeout(() => {
               window.location.href = `${urlMaster}#/cuenta`;
             },800);
@@ -42,7 +45,7 @@ function Eventos() {
             <Card.Img variant="top" src={Logo} className="logo-login"/>
             <Card.Body>
               <Form onSubmit={AgendarEvento}>
-                <Form.Select aria-label="Default select example">
+                <Form.Select aria-label="Default select example" id="eventos">
                     <option>Selecciona la actividad</option>
                     <option value="1">Encuentro Coral Soka Sabado 21 Enero 18:00 hs</option>
                     <option value="2">Encuentro Coral Soka Sabado 21 Enero 20:00 hs</option>

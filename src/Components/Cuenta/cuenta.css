@@ -29,6 +29,7 @@
     margin:  0 auto;
     text-align: center;
     padding-bottom: 30px;
+    text-decoration: none   ;
 }
 .row{
     height: 100vh;
