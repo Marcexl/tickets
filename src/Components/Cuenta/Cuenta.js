@@ -12,9 +12,10 @@ import { useScreenshot, createFileName } from "use-react-screenshot";
 import './cuenta.css';
 
 function Cuenta() {
+
   useEffect(() => {
     SendEmail()
-  });
+  }, []);
   
   if(localStorage.getItem('usr')){
     let userData = localStorage.getItem('usr');
@@ -82,7 +83,6 @@ function SendEmail (){
 
     if(isLoaded == true)
     {
-
       var imgsrc = document.getElementsByClassName("QRCodeImg")[0];
       console.log(imgsrc.currentSrc);
       if(localStorage.getItem('usr'))
@@ -125,8 +125,6 @@ function SendEmail (){
       {
         data = '';
       }
-      
     }
   });
-  
 }
