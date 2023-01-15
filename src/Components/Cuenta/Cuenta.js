@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from "react";
+import React, { createRef, componentDidMount } from "react";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -12,7 +12,7 @@ import { useScreenshot, createFileName } from "use-react-screenshot";
 import './cuenta.css';
 
 function Cuenta() {
-  useEffect(() => {
+  componentDidMount(() => {
     SendEmail()
   });
   
@@ -82,7 +82,6 @@ function SendEmail (){
 
     if(isLoaded == true)
     {
-
       var imgsrc = document.getElementsByClassName("QRCodeImg")[0];
       console.log(imgsrc.currentSrc);
       if(localStorage.getItem('usr'))
@@ -97,6 +96,7 @@ function SendEmail (){
           headers:{"Content-Type": "application/json" },
           body: data,
           }).then((response) => {
+
           if (response.ok) 
           { 
             console.log(response);

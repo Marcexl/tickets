@@ -10,8 +10,8 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './register.css';
 
-var urlMaster = 'http://localhost:3000/';
-//var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+//var urlMaster = 'http://localhost:3000/';
+var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
 var errorMessage = 'Por favor completa todos los datos';
 
 function Register() {
@@ -62,7 +62,7 @@ function Register() {
       }
 
       //3) registro el usuario
-      var url = "https://api30aniversario-2ctf2sjmfq-rj.a.run.app/ticket/save";
+      var url = "http://www.sgiar.org.ar:3001/ticket/save";
       fetch(url, {
         method: 'POST',
         headers: {
