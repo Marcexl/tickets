@@ -1,6 +1,8 @@
 .ticket{
     display: block;
     max-width: 100%;
+    min-height: 285px;
+    margin-top: -16px;
 }
 .confetti {
     opacity: 0;
@@ -13,16 +15,9 @@
 #confetti-wrapper {
     overflow: hidden !important;
 }
-.card-body{
+.card-cuenta{
     position: relative;
-}
-.qr-uid{
-    position: absolute;
-    width: 19%;
-    top: 0;
-    margin: 0;
-    padding: 0;
-    height: 100%;
+    display: flex;
 }
 .card-body p{
     text-align: center;
@@ -42,4 +37,26 @@
 .entrada-text{
     text-align: center;
     font-style: italic;
+}
+@media screen and (max-width: 956px){
+    .ticket{
+        min-height: 256px;
+    }
+}
+
+@media screen and (max-width: 428px){
+    .ticket{
+        min-height: auto;
+    }
+    .card-cuenta{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .qr-uid{
+        display: block;
+        margin: 0 auto;
+        max-width: 150px!important;
+    }
 }

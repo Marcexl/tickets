@@ -1,28 +1,33 @@
-import React, { createRef } from "react";
+import React, { createRef, useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import GlobalSpinner from '../Spinner/Spinner';
+import Foto from './entrada-empty.png';
 import { ConfettiCanvas } from "react-raining-confetti";
-import QRCode from "react-qr-code";
+import { QRCodeImg } from '@cheprasov/react-qrcode';
 import { useScreenshot, createFileName } from "use-react-screenshot";
 import './cuenta.css';
 
-var pathThanks = 'https://marcexl.com.ar/gracias.php?uid=';
-
-
 function Cuenta() {
+  useEffect(() => {
+    SendEmail()
+  });
+  
+  if(localStorage.getItem('usr')){
+    let userData = localStorage.getItem('usr');
+    let user = JSON.parse(userData);
+    let email = user.email;
+    var pathThanks = 'https://sgiar.org.ar/gracias.php?uid='+email+'&evento=1';
+  }
 
   const ref = createRef(null);
   const [image, takeScreenShot] = useScreenshot({
     type: "image/jpeg",
     quality: 1.0
   });
-
-  const userID = '123456789';
-  const url = pathThanks+userID;
 
   const download = (image, { name = "img", extension = "jpg" } = {}) => {
     const a = document.createElement("a");
@@ -32,7 +37,7 @@ function Cuenta() {
   };
 
   const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
-  SendEmail()
+
   return (
     <>
     <GlobalSpinner />
@@ -40,12 +45,13 @@ function Cuenta() {
     <Container fluid className=''>
       <Row>
         <Col className='col-login'>
-          <Card className="card-login">
+          <Card className="card-login" >
             <Card.Title className="mt-3">¡Ya tenés tu entrada , te esperamos!</Card.Title>
-            <Card.Body ref={ref} id="ticket">
-              <QRCode value={url} className='qr-uid' />
-              <img src="https://marcexl.com.ar/app/30aniversario/static/media/entrada-empty.c5dc0866af6e2c0eab56.png" className="ticket" alt='ticket'/>
-
+            <Card.Body className="card-cuenta" ref={ref}>
+                <div class="qr">
+                  <QRCodeImg value={pathThanks} id="qr-code"/>
+                </div>
+                <img src={Foto} className="ticket" alt='ticket'/>
             </Card.Body>
             <div className='entrada-text'>
               <p>Esta entrada fue enviada a tu correo electrónico.</p>
@@ -68,15 +74,24 @@ function Cuenta() {
 export default Cuenta;
 
 function SendEmail (){
-  let userData = localStorage.getItem('usr');
-  let user = JSON.parse(userData);
-  let email = user.email;
-  let elem = document.getElementById('ticket');
-  console.log(elem.innerHTML);
-  const data = "email=" + email + "&html=" + elem.innerHTML;
-
+  let data = '';
+  
+  if(localStorage.getItem('usr')){
+    let userData = localStorage.getItem('usr');
+    let user = JSON.parse(userData);
+    let email = user.email;
+    var picture = document.getElementsByClassName("QRCodeImg");
+    console.log(picture);
+    data = JSON.stringify({email: email});
+  }
+  else
+  {
+    data = '';
+  }
+  
   fetch('./Mail/mail.php', {
       method: 'POST',
+      headers:{"Content-Type": "application/json" },
       body: data,
       }).then((response) => {
       if (response.ok) 
@@ -89,6 +104,3 @@ function SendEmail (){
       }
   })
 }
-
- 
-
