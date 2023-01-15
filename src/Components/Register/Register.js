@@ -10,10 +10,9 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './register.css';
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+var urlMaster = 'http://localhost:3000/';
+//var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
 var errorMessage = 'Por favor completa todos los datos';
-
 
 function Register() {
   const [validated, setValidated] = useState(false);
@@ -47,61 +46,61 @@ function Register() {
     }
     else
     {
-      const data = {
-        nombre: name,
-        apellido: lname,
-        dni: documento,
-        mail: email,
-        celular: phone,
-      }
-      console.log("data a mandar " + data)
-      const dataStorage = JSON.stringify(data);
-      localStorage.setItem("usr",dataStorage);
-
-      // Ejemplo implementando el metodo POST:
-      const url = 'https://api30aniversario-2ctf2sjmfq-rj.a.run.app/ticket/save'
-      async function postData(url = '', data = {}) {
-        // Opciones por defecto estan marcadas con un *
-        const response = await fetch(url, {
-          method: 'POST', // *GET, POST, PUT, DELETE, etc.
-          mode: 'no-cors', // no-cors, *cors, same-origin
-          cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-          credentials: 'same-origin', // include, *same-origin, omit
-          headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: 'follow', // manual, *follow, error
-          referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-          body: data // body data type must match "Content-Type" header
-        });
-        return response.json(); // parses JSON response into native JavaScript objects
-      }
-
-      
-
       event.preventDefault();
       setValidated(true);
-  
+
+      //1) activo spinner
       spinner.style.display = 'block';
-      localStorage.setItem('userId',email);
-      // 1) servicio mallo para ingresar usuarios
-      
-      postData(url, data)
-        .then(res => {
-          console.log(res); // JSON data parsed by `data.json()` call
-        });
+
+      //2) traigo las variables
+      const dataString = {
+        "nombre": name,
+        "apellido": lname,
+        "dni": documento,
+        "mail": email,
+        "celular": phone
+      }
+
+      //3) registro el usuario
+      var url = "https://api30aniversario-2ctf2sjmfq-rj.a.run.app/ticket/save";
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataString),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('se registro el usuario');
+
+        //4) guardo en local storage
+        const dataStorage = JSON.stringify(dataString);
+        localStorage.setItem("usr",dataStorage);
+        localStorage.setItem("usrId",data.id);
+
+        setTimeout( () => {
+          dalert.style.display  = 'none';
+          spinner.style.display = 'none';
+          salert.style.display  = 'block'; 
+    
+        setTimeout( () => {
+          window.location.href = `${urlMaster}#/eventos`;
+          },800);
+        },800);
   
-      // setTimeout( () => {
-      //   dalert.style.display = 'none';
-      //   spinner.style.display = 'none';
-      //   salert.style.display = 'block';
-      //   console.log(data);
-  
-      //   setTimeout( () => {
-      //     window.location.href = `${urlMaster}#/eventos`;
-      //   },800);
-      // },800);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setTimeout(() => {
+          spinner.style.display = 'none';
+          dalert.style.display = 'block';
+          dalert.innerHTML = error;
+          setTimeout( () => {
+            dalert.style.display = 'none';
+          },1500);
+        },1000);
+      });
     }
   }
 

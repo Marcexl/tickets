@@ -10,30 +10,67 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './eventos.css';
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
-
+var urlMaster = 'http://localhost:3000/';
+//var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
 
 function Eventos() {
-    const AgendarEvento = (e) =>{
-        let spinner = document.getElementById("spinner");
-        let salert = document.getElementById("success-alert");
-        //let dalert = document.getElementById("danger-alert");
-    
-        e.preventDefault()
-        spinner.style.display = 'block';
-       
-        setTimeout(() => {
-            spinner.style.display = 'none';
-            salert.style.display = 'block';
-            var option = document.getElementById("eventos");
-            var evento = option.value;
-            localStorage.setItem("evento",evento);
-            setTimeout(() => {
-              window.location.href = `${urlMaster}#/cuenta`;
-            },800);
-        },800);
+  const AgendarEvento = (e) =>{
+    let spinner = document.getElementById("spinner");
+    let salert = document.getElementById("success-alert");
+    let dalert = document.getElementById("danger-alert");
+    let userId = localStorage.getItem("usrId");
+    let option = document.getElementById("eventos");
+    let evento = option.value;
+
+    e.preventDefault()
+
+    //1) activo spinner
+    spinner.style.display = 'block';
+
+    //2) traigo las variables
+    const dataString = {
+      "id": userId,
+      "evento": {
+        "id": evento
+      }
     }
+
+    //3) registro el usuario
+    var url = "https://api30aniversario-2ctf2sjmfq-rj.a.run.app/ticket/save";
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataString),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('se registro el evento' + data);
+
+      setTimeout( () => {
+        dalert.style.display  = 'none';
+        spinner.style.display = 'none';
+        salert.style.display  = 'block'; 
+  
+      setTimeout( () => {
+          window.location.href = `${urlMaster}#/cuenta`;
+        },800);
+      },800);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      setTimeout(() => {
+        spinner.style.display = 'none';
+        dalert.style.display = 'block';
+        dalert.innerHTML = error;
+        setTimeout( () => {
+          dalert.style.display = 'none';
+        },1500);
+      },1000);
+    });
+  }
+
   return (
     <>
     <GlobalSpinner />
@@ -57,6 +94,7 @@ function Eventos() {
               <Alert variant='success' id="success-alert">
                 Te anotaste con exito!
               </Alert>
+              <Alert variant='danger' id="danger-alert"></Alert>
             </Card.Body>
           </Card>
         </Col>
