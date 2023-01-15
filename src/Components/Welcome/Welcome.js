@@ -14,7 +14,7 @@ function Welcome() {
         <Col className='col-login'>
           <Card className="card-login">
             <Card.Body>
-              <Card.Title className="mt-3">Bienvenidos</Card.Title>
+              <Card.Title className="mt-3">Bienvenid@s</Card.Title>
               <Card.Img variant="top" src={Logo} className="welcome-avatar"/>
               <Card.Text>
                 <Link to="/register">
