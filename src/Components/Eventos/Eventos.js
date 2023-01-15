@@ -27,7 +27,7 @@ function Eventos() {
             spinner.style.display = 'none';
             salert.style.display = 'block';
             var option = document.getElementById("eventos");
-            var evento = e.option;
+            var evento = option.value;
             localStorage.setItem("evento",evento);
             setTimeout(() => {
               window.location.href = `${urlMaster}#/cuenta`;

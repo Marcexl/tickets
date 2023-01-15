@@ -15,7 +15,7 @@ function Gracias() {
         <Col className='col-login'>
           <Card className="card-login" >
             <Card.Title className="mt-3">¡Falta muy poco para el Encuentro Coral!</Card.Title>
-            <Card.Body className="card-cuenta">
+            <Card.Body className="card-gracias">
               <img src={People} alt="people" className="people" />
               <p>Te esperamos el Sabado 21 de Enero</p>
               <p>En el Auditorio de la Paz, Donado 2150, Villa Urquiza</p>
