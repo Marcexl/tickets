@@ -11,7 +11,7 @@ import Alert from 'react-bootstrap/Alert';
 import './eventos.css';
 
 //var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+var urlMaster = 'https://sgiar.org.ar/dialogos/test/';
 
 function Eventos() {
   const AgendarEvento = (e) =>{

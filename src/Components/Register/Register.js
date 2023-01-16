@@ -11,7 +11,7 @@ import Alert from 'react-bootstrap/Alert';
 import './register.css';
 
 //var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+var urlMaster = 'https://sgiar.org.ar/dialogos/test/';
 var errorMessage = 'Por favor completa todos los datos';
 
 function Register() {
@@ -22,12 +22,12 @@ function Register() {
   const [phone, setPhone] = useState('');
   const [documento, setDocumento] = useState('');
 
-  var spinner = document.getElementById("spinner");
-  var salert = document.getElementById("success-alert");
-  var dalert = document.getElementById("danger-alert");
-
   // chequeo si esta ok el form
   const RegistrarUsuario = (event) => {
+    var spinner = document.getElementById("spinner");
+    var salert = document.getElementById("success-alert");
+    var dalert = document.getElementById("danger-alert");
+
     const form = event.currentTarget;
 
     // no paso false
@@ -85,7 +85,7 @@ function Register() {
           spinner.style.display = 'none';
           salert.style.display  = 'block'; 
     
-        setTimeout( () => {
+          setTimeout( () => {
           window.location.href = `${urlMaster}#/eventos`;
           },800);
         },800);
