@@ -10,10 +10,8 @@ import { ConfettiCanvas } from "react-raining-confetti";
 import { QRCodeImg } from '@cheprasov/react-qrcode';
 import { useScreenshot, createFileName } from "use-react-screenshot";
 import './cuenta.css';
-import { useEffect } from "react";
 
 function Cuenta() {      
-  
   setTimeout(function(){
     SendEmail()
   },5000);
@@ -38,7 +36,7 @@ function Cuenta() {
   };
 
   const downloadScreenshot = () => {
-    SendEmail()
+    SendEmail();
     takeScreenShot(ref.current).then(download);
   }
 
