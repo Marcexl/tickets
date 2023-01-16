@@ -26,8 +26,11 @@ function Register() {
   var salert = document.getElementById("success-alert");
   var dalert = document.getElementById("danger-alert");
 
+  // chequeo si esta ok el form
   const RegistrarUsuario = (event) => {
     const form = event.currentTarget;
+
+    // no paso false
     if (form.checkValidity() === false) 
     {
       event.preventDefault();
@@ -40,39 +43,65 @@ function Register() {
         },1500);
       },1000);
     }
-
+    
     setValidated(true);
 
+    // aqui paso true
     if(form.checkValidity() === true)
     {
-      const data = {
-        nombre: name,
-        apellido: lname,
-        dni: documento,
-        email: email,
-        celular: phone,
-      }
-      const dataStorage = JSON.stringify(data);
-      localStorage.setItem("usr",dataStorage);
 
-      // Ejemplo implementando el metodo POST:
-      event.preventDefault();
-      setValidated(true);
-
+      //1) activo spinner
       spinner.style.display = 'block';
-      localStorage.setItem('userId',email);
-      // 1) servicio mallo para ingresar usuarios
-      
-      setTimeout( () => {
-        dalert.style.display = 'none';
-        spinner.style.display = 'none';
-        salert.style.display = 'block';
-        console.log(data);
+
+      //2) traigo las variables
+      const dataString = {
+        "nombre": name,
+        "apellido": lname,
+        "dni": documento,
+        "mail": email,
+        "celular": phone
+      }
+
+      //3) registro el usuario
+      var url = "https://www.sgiar.org.ar:3001/ticket/save";
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataString),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('se registro el usuario');
+
+        //4) guardo en local storage
+        const dataStorage = JSON.stringify(dataString);
+        localStorage.setItem("usr",dataStorage);
+        localStorage.setItem("usrId",data.id);
 
         setTimeout( () => {
+          dalert.style.display  = 'none';
+          spinner.style.display = 'none';
+          salert.style.display  = 'block'; 
+    
+        setTimeout( () => {
           window.location.href = `${urlMaster}#/eventos`;
+          },800);
         },800);
-      },800);
+  
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setTimeout(() => {
+          spinner.style.display = 'none';
+          dalert.style.display = 'block';
+          dalert.innerHTML = error;
+          setTimeout( () => {
+            dalert.style.display = 'none';
+          },1500);
+        },1000);
+      });
     }
   }
 
