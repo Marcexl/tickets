@@ -36,7 +36,7 @@ function Eventos() {
     }
 
     //3) registro el usuario
-    var url = "http://www.sgiar.org.ar:3001/ticket/save";
+    var url = "https://www.sgiar.org.ar:3001/ticket/save";
     fetch(url, {
       method: 'POST',
       headers: {

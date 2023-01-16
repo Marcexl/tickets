@@ -1,4 +1,4 @@
-import React, { createRef, componentDidMount } from "react";
+import React, { createRef, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -12,9 +12,11 @@ import { useScreenshot, createFileName } from "use-react-screenshot";
 import './cuenta.css';
 
 function Cuenta() {
-  componentDidMount(() => {
+  const [loaded, setLoaded] = useState(false);
+  
+  if(loaded == true){
     SendEmail()
-  });
+  }
   
   if(localStorage.getItem('usr')){
     let userData = localStorage.getItem('usr');
@@ -50,7 +52,20 @@ function Cuenta() {
             <Card.Title className="mt-3">¡Ya tenés tu entrada , te esperamos!</Card.Title>
             <Card.Body className="card-cuenta" ref={ref}>
                 <div className="qr" id="qr">
-                  <QRCodeImg value={pathThanks}/>
+                   {loaded ? null : (
+                    <div
+                      style={{
+                        background: 'wuite',
+                        height: '256px',
+                        width: '256px'
+                      }}
+                    />
+                  )}
+                  <QRCodeImg 
+                  style={loaded ? {} : { display: 'none' }}
+                  value={pathThanks} 
+                  onLoad={() => setLoaded(true)}
+                  />
                 </div>
                 <img src={Foto} className="ticket" alt='ticket'/>
             </Card.Body>
