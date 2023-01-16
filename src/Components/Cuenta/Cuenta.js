@@ -13,9 +13,10 @@ import './cuenta.css';
 
 function Cuenta() {
 
-  useEffect(() => {
+  setTimeout(function(){
     SendEmail()
-  }, []);
+  },3000);
+
   
   if(localStorage.getItem('usr')){
     let userData = localStorage.getItem('usr');
@@ -85,46 +86,45 @@ function SendEmail (){
     {
       var imgsrc = document.getElementsByClassName("QRCodeImg")[0];
       console.log(imgsrc.currentSrc);
-      if(localStorage.getItem('usr'))
-      {
-        let userData = localStorage.getItem('usr');
-        let user = JSON.parse(userData);
-        let email = user.email;
-        let evento = localStorage.getItem('evento');
-        data = JSON.stringify({email: email, qr: imgsrc.currentSrc, evento: evento});
-        fetch('./Generate/generate.php', {
-          method: 'POST',
-          headers:{"Content-Type": "application/json" },
-          body: data,
-          }).then((response) => {
-          if (response.ok) 
-          { 
-            console.log(response);
-            fetch('./Mail/mail.php', {
-              method: 'POST',
-              headers:{"Content-Type": "application/json" },
-              body: data,
-              }).then((response) => {
-              if (response.ok) 
-              {
-                console.log('ok envio mail');
-              }
-              else 
-              {
-                console.log('no se mando el mail');
-              }
-            })
-          }
-          else 
-          {
-            console.log('no se creo el querre');
-          }
-      })
-      }
-      else
-      {
-        data = '';
-      }
+
+      let userData = localStorage.getItem('usr');
+      let user = JSON.parse(userData);
+      let email = user.email;
+      let evento = localStorage.getItem('evento');
+      data = JSON.stringify({email: email, qr: imgsrc.currentSrc, evento: evento});
+      fetch('./Generate/generate.php', {
+        method: 'POST',
+        headers:{"Content-Type": "application/json" },
+        body: data,
+        }).then((response) => {
+        if (response.ok) 
+        { 
+          console.log(response);
+          fetch('./Mail/mail.php', {
+            method: 'POST',
+            headers:{"Content-Type": "application/json" },
+            body: data,
+            }).then((response) => {
+            if (response.ok) 
+            {
+              console.log('ok envio mail');
+            }
+            else 
+            {
+              console.log('no se mando el mail');
+            }
+          })
+        }
+        else 
+        {
+          console.log('no se creo el querre');
+        }
+    })
     }
+    else
+    {
+      data = '';
+    }
+    
   });
 }
