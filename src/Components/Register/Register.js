@@ -51,7 +51,7 @@ function Register() {
         nombre: name,
         apellido: lname,
         dni: documento,
-        mail: email,
+        email: email,
         celular: phone,
       }
       const dataStorage = JSON.stringify(data);
