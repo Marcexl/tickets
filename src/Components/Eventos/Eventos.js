@@ -21,60 +21,67 @@ function Eventos() {
 
     e.preventDefault()
     spinner.style.display = 'block';
-    
-    setTimeout(() => {
-      var option = document.getElementById("eventos");
-      var evento = option.value;
-      if(evento == 0)
-      {
-        spinner.style.display = 'none';
-        dalert.style.display = 'block';
-        salert.style.display = 'none';
-        return false;
-      }
-      else
-      {
-        spinner.style.display = 'none';
-        dalert.style.display = 'none';
-        salert.style.display = 'block';
 
-        localStorage.setItem("evento",evento);
-        // levanto los datos
-        let userData = localStorage.getItem('usr');
-        let user = JSON.parse(userData);
-        let id = user.dni;
-        let nombre = user.nombre;
-        let apellido = user.apellido;
-        let celular = user.celular;
-        let email = user.email; 
+    var option = document.getElementById("eventos");
+    var evento = option.value;
+    if(evento == 0)
+    {
+      spinner.style.display = 'none';
+      dalert.style.display = 'block';
+      salert.style.display = 'none';
+      return false;
+    }
+    else
+    {
+      //1) activo spinner
+      spinner.style.display = 'block';
 
-        //armo el json
-        let data = JSON.stringify({
-          id: id, 
-          nombre: nombre, 
-          apellido: apellido, 
-          dni: id, 
-          email: email, 
-          celular: celular, 
-          evento: evento, 
-          validado: 0
-        });
-        
-        //envio
-        fetch( urlMaster + 'db/insertUsers.php', {
-          method: 'POST',
-          headers:{"Content-Type": "application/json" },
-          body: data,
-          }).then((response) => {
-            console.log(response)
-            setTimeout(() => {
-              window.location.href = `${urlMaster}#/cuenta`;
-            },800);
-        }).catch((response) => {
-          console.log("no se ha podido insertar el usuario");
-        })
+      //2) traigo las variables
+      let userId = localStorage.getItem("usrId");
+      const dataString = {
+        "id": userId,
+        "evento": {
+          "id": evento
+        }
       }
-    },800);
+
+      //3) registro el usuario
+      var url = "https://www.sgiar.org.ar:3001/ticket/save";
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataString),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('se registro el evento' + data);
+
+        // paso redirecciono
+        setTimeout( () => {
+          dalert.style.display  = 'none';
+          spinner.style.display = 'none';
+          salert.style.display  = 'block'; 
+
+          setTimeout( () => {
+            window.location.href = `${urlMaster}#/cuenta`;
+          },800);
+        },800);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        // no llego diplay error
+        setTimeout(() => {
+          spinner.style.display = 'none';
+          dalert.style.display = 'block';
+          dalert.innerHTML = error;
+          setTimeout( () => {
+            dalert.style.display = 'none';
+          },1500);
+        },1000);
+      });
+    }
   }
   return (
     <>
