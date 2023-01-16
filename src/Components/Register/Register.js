@@ -22,11 +22,11 @@ function Register() {
   const [phone, setPhone] = useState('');
   const [documento, setDocumento] = useState('');
 
-  var spinner = document.getElementById("spinner");
-  var salert = document.getElementById("success-alert");
-  var dalert = document.getElementById("danger-alert");
-
   const RegistrarUsuario = (event) => {
+    var spinner = document.getElementById("spinner");
+    var salert = document.getElementById("success-alert");
+    var dalert = document.getElementById("danger-alert");
+    
     const form = event.currentTarget;
     if (form.checkValidity() === false) 
     {
