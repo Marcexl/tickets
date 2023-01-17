@@ -10,8 +10,8 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './register.css';
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/test/';
+var urlMaster = 'http://localhost:3000/';
+//var urlMaster = 'https://sgiar.org.ar/dialogos/test/';
 var errorMessage = 'Por favor completa todos los datos';
 
 function Register() {
@@ -49,7 +49,7 @@ function Register() {
     // aqui paso true
     if(form.checkValidity() === true)
     {
-
+      event.preventDefault();
       //1) activo spinner
       spinner.style.display = 'block';
 
@@ -86,7 +86,7 @@ function Register() {
           salert.style.display  = 'block'; 
     
           setTimeout( () => {
-          window.location.href = `${urlMaster}#/eventos`;
+            window.location.href = `${urlMaster}#/eventos`;
           },800);
         },800);
   
@@ -137,7 +137,7 @@ function Register() {
                 <Form.Group className="mb-3" controlId="phone">
                   <Form.Control 
                   required
-                  type="text" 
+                  type="number" 
                   placeholder="Celular" 
                   className='phone'
                   onChange={(e) => {setPhone(e.target.value)}}
@@ -155,7 +155,7 @@ function Register() {
                 <Form.Group className="mb-3" controlId="email">
                   <Form.Control 
                   required
-                  type="text" 
+                  type="email" 
                   placeholder="Ingresa un email" 
                   className='email'
                   onChange={(e) => {setEmail(e.target.value)}}

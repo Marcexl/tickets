@@ -1,27 +1,34 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useState} from "react";
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import GlobalSpinner from '../Spinner/Spinner';
-import Foto from './entrada-empty.png';
+import Foto from './entrada-empty.jpg';
 import { ConfettiCanvas } from "react-raining-confetti";
 import { QRCodeImg } from '@cheprasov/react-qrcode';
 import { useScreenshot, createFileName } from "use-react-screenshot";
 import './cuenta.css';
 
+var confetti = false;
 function Cuenta() {      
+  
+
   setTimeout(function(){
-    SendEmail()
-  },5000);
+    let ticket = document.getElementById("ticket-final");
+    let bars   = document.getElementById("progressbar");
+    ticket.style.display = 'block';
+    bars.style.display = 'none';
+    SendEmail();
+  },4000)
 
   let userData = localStorage.getItem('usr');
   let evento = localStorage.getItem('evento');
   let user = JSON.parse(userData);
   let email = user.email;
   var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+email+'&evento='+evento;
-
   const ref = createRef(null);
   const [image, takeScreenShot] = useScreenshot({
     type: "image/jpeg",
@@ -43,19 +50,22 @@ function Cuenta() {
   return (
     <>
     <GlobalSpinner />
-    <ConfettiCanvas active={true} fadingMode="LIGHT" stopAfterMs={5000} />
-    <Container fluid className=''>
+    <ProgressBar id="progressbar" animated variant="info" now={0} />
+    <Container fluid className='' id="ticket-final">
+    <ConfettiCanvas active={true} fadingMode="LIGHT" stopAfterMs={9000} />
       <Row>
         <Col className='col-login'>
-          <Card className="card-login" >
+          <Card className="card-login card-ticket" >
             <Card.Title className="mt-3">¡Ya tenés tu entrada , te esperamos!</Card.Title>
             <Card.Body className="card-cuenta" ref={ref}>
+              <div class="ticket-container">
                 <div className="qr" id="qr">
                   <QRCodeImg 
                   value={pathThanks} 
                   />
                 </div>
                 <img src={Foto} className="ticket" alt='ticket'/>
+              </div>
             </Card.Body>
             <div className='entrada-text'>
               <p>Esta entrada fue enviada a tu correo electrónico.</p>

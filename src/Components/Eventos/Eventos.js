@@ -10,8 +10,8 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './eventos.css';
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/test/';
+var urlMaster = 'http://localhost:3000/';
+//var urlMaster = 'https://sgiar.org.ar/dialogos/test/';
 
 function Eventos() {
   const AgendarEvento = (e) =>{
@@ -36,17 +36,19 @@ function Eventos() {
       //1) activo spinner
       spinner.style.display = 'block';
 
-      //2) traigo las variables
+      //2) traigo variable evento + user
       let userId = localStorage.getItem("usrId");
+      
       const dataString = {
         "id": userId,
         "evento": {
           "id": evento
         }
       }
+      
 
-      //3) registro el usuario
-      var url = "https://www.sgiar.org.ar:3001/ticket/save";
+      //3) registro el evento al usuario
+      var url = "https://www.sgiar.org.ar:3001/ticket/event/save";
       fetch(url, {
         method: 'POST',
         headers: {
@@ -56,18 +58,20 @@ function Eventos() {
       })
       .then((response) => response.json())
       .then((data) => {
-        console.log('se registro el evento' + data);
+        if(data == true){
+          console.log('se registro el evento');
 
-        // paso redirecciono
-        setTimeout( () => {
-          dalert.style.display  = 'none';
-          spinner.style.display = 'none';
-          salert.style.display  = 'block'; 
-
+          // paso redirecciono
           setTimeout( () => {
-            window.location.href = `${urlMaster}#/cuenta`;
+            dalert.style.display  = 'none';
+            spinner.style.display = 'none';
+            salert.style.display  = 'block'; 
+
+            setTimeout( () => {
+              window.location.href = `${urlMaster}#/cuenta`;
+            },800);
           },800);
-        },800);
+        }
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -75,7 +79,7 @@ function Eventos() {
         setTimeout(() => {
           spinner.style.display = 'none';
           dalert.style.display = 'block';
-          dalert.innerHTML = error;
+          dalert.innerHTML = 'Ha ocurrido un error, por favor intente mas tarde.';
           setTimeout( () => {
             dalert.style.display = 'none';
           },1500);
