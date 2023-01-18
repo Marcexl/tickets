@@ -36,7 +36,7 @@ function Eventos() {
       //1) activo spinner
       spinner.style.display = 'block';
 
-      //2) traigo variable evento + user
+      //2) traigo variable evento + user 
       let userId = localStorage.getItem("usrId");
       
       const dataString = {
@@ -45,8 +45,11 @@ function Eventos() {
           "id": evento
         }
       }
-      
-      //3) registro el evento al usuario
+
+      //3) guardo en local
+      localStorage.setItem("evento",evento);
+
+      //4) registro el evento al usuario
       var url = "https://www.sgiar.org.ar:3001/ticket/event/save";
       fetch(url, {
         method: 'POST',
@@ -86,6 +89,7 @@ function Eventos() {
       });
     }
   }
+  
   return (
     <>
     <GlobalSpinner />

@@ -7,7 +7,7 @@
     $username = strstr($email, '@', true); //"username"
     $evento = $data['evento'];
     $para   = $email;
-    $file = 'https://sgiar.org.ar/dialogos/eventos/Generate/'.$evento.'_'.$dni.'.png';
+    $file = 'https://sgiar.org.ar/dialogos/test/Generate/'.$evento.'_'.$dni.'.png';
   
     $para   = $email;
     $titulo = 'Tu entrada para el Encuentro Coral Soka';
@@ -51,10 +51,10 @@
      </style>
     </head>
     <body>
-    <div class="gracias-image"><img src="https://sgiar.org.ar/dialogos/eventos/images/gracias.png"></div>
+    <div class="gracias-image"><img src="https://sgiar.org.ar/dialogos/test/images/gracias.png"></div>
     <div class="ticket-container">
       <img src="'.$file .'" alt="querre" class="querre"/>
-      <img src="https://sgiar.org.ar/dialogos/eventos/images/entrada-empty.jpg" class="ticket" alt="ticket"/>
+      <img src="https://sgiar.org.ar/dialogos/test/images/entrada-empty.jpg" class="ticket" alt="ticket"/>
     </div>
     </body>
     </html>
