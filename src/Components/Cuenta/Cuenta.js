@@ -26,7 +26,7 @@ function Cuenta() {
   let evento = localStorage.getItem('evento');
   let user = JSON.parse(userData);
   let dni = user.dni;
-  var pathThanks = 'https://sgiar.org.ar/dialogos/test/#/gracias?uid='+dni+'&evento='+evento;
+  var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
   const ref = createRef(null);
   const [image, takeScreenShot] = useScreenshot({
     type: "image/jpeg",
