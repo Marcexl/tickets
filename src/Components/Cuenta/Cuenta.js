@@ -88,7 +88,6 @@ export default Cuenta;
 function SendEmail (){
   let data = '';
   let imgsrc = document.getElementsByClassName("QRCodeImg")[0];
-  console.log(imgsrc.currentSrc);
   
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
@@ -104,7 +103,7 @@ function SendEmail (){
 
     if (response.ok) 
     { 
-      console.log(response);
+      console.log('ok genero qr');
       fetch('./Mail/mail.php', {
         method: 'POST',
         headers:{"Content-Type": "application/json" },
