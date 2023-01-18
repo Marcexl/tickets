@@ -15,14 +15,8 @@ function Welcome() {
         <Col className='col-login'>
           <Card className="card-login">
             <Card.Body>
-              <Card.Title className="mt-3">Bienvenid@s</Card.Title>
-              <Card.Img variant="top" src={Logo} className="welcome-avatar"/>
               <Card.Text>
-                <Link to="/register">
-                  <Button variant="primary" type="button" className='register-button'>
-                    Comenzar
-                  </Button>
-                </Link>          
+                <p>Estamos actualizando la plataforma espere unos minutos por favor...</p>  
               </Card.Text>
             </Card.Body>
           </Card>
