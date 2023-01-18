@@ -41,7 +41,7 @@
 .progress-bar{
     width: 0;
     transition: .5s;
-    animation: progress 4s ease-in-out 0s 1 forwards;
+    animation: progress 3s ease-in-out 0s 1 forwards;
 }
 #ticket-final{
     display: none;

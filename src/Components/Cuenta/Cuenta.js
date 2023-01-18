@@ -12,17 +12,15 @@ import { QRCodeImg } from '@cheprasov/react-qrcode';
 import { useScreenshot, createFileName } from "use-react-screenshot";
 import './cuenta.css';
 
-var confetti = false;
 function Cuenta() {      
   
-
   setTimeout(function(){
     let ticket = document.getElementById("ticket-final");
     let bars   = document.getElementById("progressbar");
     ticket.style.display = 'block';
     bars.style.display = 'none';
     SendEmail();
-  },4000)
+  },3000)
 
   let userData = localStorage.getItem('usr');
   let evento = localStorage.getItem('evento');
@@ -50,7 +48,7 @@ function Cuenta() {
   return (
     <>
     <GlobalSpinner />
-    <ProgressBar id="progressbar" animated variant="info" now={0} />
+    <ProgressBar id="progressbar" animated variant="info" now={0} label='Generando la entrada, espere por favor...'/>
     <Container fluid className='' id="ticket-final">
     <ConfettiCanvas active={true} fadingMode="LIGHT" stopAfterMs={9000} />
       <Row>

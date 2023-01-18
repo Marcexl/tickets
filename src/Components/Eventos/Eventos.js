@@ -10,8 +10,8 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './eventos.css';
 
-var urlMaster = 'http://localhost:3000/';
-//var urlMaster = 'https://sgiar.org.ar/dialogos/test/';
+//var urlMaster = 'http://localhost:3000/';
+var urlMaster = 'https://sgiar.org.ar/dialogos/test/';
 
 function Eventos() {
   const AgendarEvento = (e) =>{
@@ -46,7 +46,6 @@ function Eventos() {
         }
       }
       
-
       //3) registro el evento al usuario
       var url = "https://www.sgiar.org.ar:3001/ticket/event/save";
       fetch(url, {

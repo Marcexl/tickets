@@ -10,11 +10,13 @@ import Login from './Login/Login';
 import Eventos from './Eventos/Eventos';
 import Cuenta from './Cuenta/Cuenta';
 import Gracias from './Gracias/Gracias';
+import Listado from './Usuarios/Listado';
 
 export default function App() {
     return (
       <HashRouter>
           <Routes>
+            <Route path="/listado" element={<Listado />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/eventos" element={<Eventos />} />
