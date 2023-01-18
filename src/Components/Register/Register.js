@@ -22,6 +22,7 @@ function Register() {
   const [phone, setPhone] = useState('');
   const [documento, setDocumento] = useState('');
 
+  
   // chequeo si esta ok el form
   const RegistrarUsuario = (event) => {
     var spinner = document.getElementById("spinner");
@@ -54,12 +55,15 @@ function Register() {
       spinner.style.display = 'block';
 
       //2) traigo las variables
+      let docuFormated  = documento.replace(/\D/g,'');
+      let phoneFormated = phone.replace(/\D/g,'');
+
       const dataString = {
         "nombre": name,
         "apellido": lname,
-        "dni": documento,
+        "dni": docuFormated,
         "mail": email,
-        "celular": phone
+        "celular": phoneFormated
       }
 
       //3) registro el usuario
@@ -105,6 +109,7 @@ function Register() {
     }
   }
 
+  
   return (
     <>
     <GlobalSpinner />
