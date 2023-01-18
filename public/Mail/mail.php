@@ -63,7 +63,7 @@
     
     if (mail($para, $titulo, $mensaje, implode("\r\n", $headers)))
     {
-    	print_r($msj);
+      echo "se envio el email al usuario";
     	exit();
     } 
     else

@@ -91,7 +91,7 @@ function SendEmail (){
   
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
-  let email = user.email;
+  let email = user.mail;
   let dni = user.dni;
   let evento = localStorage.getItem('evento');
   data = JSON.stringify({email: email, qr: imgsrc.currentSrc, evento: evento, dni:dni});
