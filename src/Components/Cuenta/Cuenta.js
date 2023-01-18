@@ -25,8 +25,8 @@ function Cuenta() {
   let userData = localStorage.getItem('usr');
   let evento = localStorage.getItem('evento');
   let user = JSON.parse(userData);
-  let email = user.email;
-  var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+email+'&evento='+evento;
+  let dni = user.dni;
+  var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
   const ref = createRef(null);
   const [image, takeScreenShot] = useScreenshot({
     type: "image/jpeg",
@@ -93,8 +93,9 @@ function SendEmail (){
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
   let email = user.email;
+  let dni = user.dni;
   let evento = localStorage.getItem('evento');
-  data = JSON.stringify({email: email, qr: imgsrc.currentSrc, evento: evento});
+  data = JSON.stringify({email: email, qr: imgsrc.currentSrc, evento: evento, dni:dni});
   fetch('./Generate/generate.php', {
     method: 'POST',
     headers:{"Content-Type": "application/json" },
