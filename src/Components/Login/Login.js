@@ -5,21 +5,32 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Logo from '../logo.png';
-import {auth} from '../../FirabaseConfig';
 import './login.css';
-import { useState } from 'react';
+import { useState } from 'react'; 
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom'
+
 
 function Login() {
   
   const [email,setEmail] = useState('');
   const [pass,setPass]   = useState('');
+  const { signIn } = useAuth();
+  const [error, setError] = useState('');
+  const navigate = useNavigate()
 
-  const LoginUsuario = () =>{
-    auth.signInWithEmailAndPassword(email,pass)
-    .then( (r) => console.log(r))
-    .catch( (err) => {
-      console.log(err)
-    })
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+    try {
+      const res = await signIn(email,pass);
+      //console.log(res);
+      navigate("/acreditacion")
+      navigate("/listado")
+    } catch (err) {
+      setError(err.message)
+      console.log(error)
+    }
   }
 
   return (
@@ -50,7 +61,7 @@ function Login() {
                 <Button 
                   variant="primary" 
                   type="submit"
-                  onClick={LoginUsuario}>
+                  onClick={handleSubmit}>
                   Ingresar
                 </Button>
               </Form>
