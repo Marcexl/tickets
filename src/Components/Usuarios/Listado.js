@@ -53,7 +53,7 @@ function Listado(){
 }
 
 function getListado(){
-    let url = "https://www.sgiar.org.ar/dialogos/eventos/db/records.json";
+    let url = "https://www.sgiar.org.ar:3001/ticket/getAll";
     let table = '';
     let i = 0;
     let evento = '';
@@ -67,36 +67,35 @@ function getListado(){
     fetch(url)
     .then((response) => response.json())
     .then((data) => {
+        //console.log(data);
         for(var key in data)
         {
+            i++
             table += '<tr>'
-            if(data[key]['nombre'] !== null)
+            table += '<td>'+i+'</td>'
+            table += '<td>'+data[key]['nombre']+'</td>'
+            table += '<td>'+data[key]['apellido']+'</td>'
+
+            //format celu
+            phoneFormated  = data[key]['celular'].replace(/\D/g,''); 
+            table += '<td>'+Number(phoneFormated)+'</td>'
+            
+            //format dni
+            docuFormated  = data[key]['dni'].replace(/\D/g,'');
+            table += '<td>'+docuFormated+'</td>'
+
+            //format email
+            mailFormated = data[key]['mail'].replace(/\s+/g, '');
+            table += '<td>'+mailFormated.toLowerCase()+'</td>'
+            table += '<td>no</td>'
+
+            // me fijo si eligio evento y si es 18 o 20 hs
+            if(data[key]['evento'])
             {
-                i++
-                table += '<td>'+i+'</td>'
-                table += '<td>'+data[key]['nombre']+'</td>'
-                table += '<td>'+data[key]['apellido']+'</td>'
-
-                //format celu
-                phoneFormated  = data[key]['celular'].replace(/\D/g,''); 
-                table += '<td>'+Number(phoneFormated)+'</td>'
-                
-                //format dni
-                docuFormated  = data[key]['dni'].replace(/\D/g,'');
-                table += '<td>'+docuFormated+'</td>'
-
-                //format email
-                mailFormated = data[key]['email'].replace(/\s+/g, '');
-                table += '<td>'+mailFormated.toLowerCase()+'</td>'
-                table += '<td>no</td>'
-                if(data[key]['evento'] == 1){
-                    evento = '18:00 hs'
-                }else{
-                    evento = '20:00 hs'
-                }
-                table += '<td>'+evento+'</td>'
-                table += '</tr>'
+                evento = data[key]['evento'].id == 1 ? "18:00 hs" : "20:00 hs";        
             }
+            table += '<td>'+evento+'</td>'
+            table += '</tr>' 
         }
         setTimeout(function(){
             spinner.style.display = 'none';
