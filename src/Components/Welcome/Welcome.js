@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Logo from './maitainance.jpg';
+import Logo from './welcome.png';
 import './welcome.css';
 
 function Welcome() {
@@ -15,12 +15,14 @@ function Welcome() {
         <Col className='col-login'>
           <Card className="card-login">
             <Card.Body>
+              <Card.Title className="mt-3">Bienvenid@s</Card.Title>
+              <Card.Img variant="top" src={Logo} className="welcome-avatar"/>
               <Card.Text>
-                <img src={Logo} alt="imagen"/>
-                <p>Estamos <b>actualizando</b> el sistema de entradas.</p>
-                <p>En breve vas a poder volver a generar tu invitacion.</p>  
-                <p>Disculpe las molestias.</p>  
-                <p>Muchas gracias!</p>  
+                <Link to="/register">
+                  <Button variant="primary" type="button" className='register-button'>
+                    Comenzar
+                  </Button>
+                </Link>          
               </Card.Text>
             </Card.Body>
           </Card>
