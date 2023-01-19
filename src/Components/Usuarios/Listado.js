@@ -1,5 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import GlobalSpinner from '../Spinner/Spinner';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
@@ -20,7 +21,14 @@ function Listado(){
             <Row>
                 <Col className='col-login'>
                     <Card className="card-login">
-                        <Table striped bordered hover>
+                    <ReactHTMLTableToExcel
+                        id="download-button"
+                        className="download-button"
+                        table="listado-final"
+                        filename="listado"
+                        sheet="tablexls"
+                        buttonText="Download Excel File"/>
+                        <Table striped bordered hover id="listado-final">
                             <thead>
                                 <tr>
                                 <th>#</th>
@@ -50,6 +58,10 @@ function getListado(){
     let i = 0;
     let evento = '';
     let elem = document.getElementById('result');
+    let docuFormated  = '';
+    let phoneFormated = '';
+    let mailFormated = '';
+
     var spinner = document.getElementById("spinner");
     spinner.style.display = 'block';
     fetch(url)
@@ -61,13 +73,21 @@ function getListado(){
             if(data[key]['nombre'] !== null)
             {
                 i++
-
                 table += '<td>'+i+'</td>'
                 table += '<td>'+data[key]['nombre']+'</td>'
                 table += '<td>'+data[key]['apellido']+'</td>'
-                table += '<td>'+data[key]['celular']+'</td>'
-                table += '<td>'+data[key]['dni']+'</td>'
-                table += '<td>'+data[key]['email']+'</td>'
+
+                //format celu
+                phoneFormated  = data[key]['celular'].replace(/\D/g,''); 
+                table += '<td>'+Number(phoneFormated)+'</td>'
+                
+                //format dni
+                docuFormated  = data[key]['dni'].replace(/\D/g,'');
+                table += '<td>'+docuFormated+'</td>'
+
+                //format email
+                mailFormated = data[key]['email'].replace(/\s+/g, '');
+                table += '<td>'+mailFormated.toLowerCase()+'</td>'
                 table += '<td>no</td>'
                 if(data[key]['evento'] == 1){
                     evento = '18:00 hs'
