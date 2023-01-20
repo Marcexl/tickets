@@ -68,14 +68,13 @@ function Cuenta() {
             <div className='entrada-text'>
               <p>Esta entrada fue enviada a tu correo electrónico.</p>
               <p>En caso de no encontrarla revisá tu correo no deseado.</p>
-              <a href="https://www.sgiar.org.ar/dialogos/eventos/Ticket/generateTicket.php" target="_blank">
-                <Button 
-                  id="download-ticket"
-                  variant="primary" 
-                  type="button">
-                    Descarga tu entrada
-                </Button>
-              </a>
+              <Button 
+                id="download-ticket"
+                variant="primary" 
+                type="button"
+                onClick={DownloadTicket}>
+                  Descarga tu entrada
+              </Button>
             </div>
           </Card>
         </Col>
@@ -106,8 +105,10 @@ function SendEmail (){
     if (response.ok) 
     { 
       console.log('ok genero qr');
+      
       //muetro boton para descargar
-      document.getElementById('download-ticket').style.display = 'block';
+      let downloadTicket = document.getElementById('download-ticket');
+      downloadTicket.style.display = 'block';
 
       //envio mail
       fetch('./Mail/mail.php', {
@@ -132,5 +133,15 @@ function SendEmail (){
   })
 }
 
+function DownloadTicket(){
+  let userData = localStorage.getItem('usr');
+  let user = JSON.parse(userData);
+  let dni = user.dni;
+  let evento = localStorage.getItem('evento');
+  let data = '?dni='+dni+'&evento='+evento;
+  window.location.href = 'https://www.sgiar.org.ar/dialogos/eventos/Ticket/generateTicket.php'+data;
+  //window.location.href = 'http://localhost/apps/tickets/public/Ticket/generateTicket.php'+data;
+  return false;
+}
   
   

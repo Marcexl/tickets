@@ -3,11 +3,10 @@ ob_start();
 session_start();
 
 require('../../fpdf/fpdf.php');
-header('Content-Type: application/json');
-$req = json_decode(file_get_contents('php://input'), true);
 
-$dni    = $req['dni'];
-$evento = $req['evento'];
+
+$dni    = $_GET['dni'];
+$evento = $_GET['evento'];
 $file   = $evento.'_'.$dni.'.png';
 
 class PDF extends FPDF
@@ -31,4 +30,4 @@ $pdf->AddPage();
 // Logo
 $pdf->Image('../Generate/'.$file,1,35,24);
 $pdf->Image('../images/entrada-platea.png',1,2,160);
-$pdf->Output('',$file.'.pdf');
+$pdf->Output('','ticket_'.$dni.'.pdf', true);
