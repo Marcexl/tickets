@@ -16,12 +16,14 @@ export const AuthProvider = ({ children }) => {
   const signIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
 
   const signUp = (email, password)  => auth.createUserWithEmailAndPassword(email, password)
+  
+  const logOut = () => auth.signOut()
     
   useEffect(() => {
     auth.onAuthStateChanged(user => setUser(user))
-
   }, [])
 
+  
 
-  return <authContext.Provider value={{ signIn, signUp, user }}>{ children }</authContext.Provider>
+  return <authContext.Provider value={{ signIn, signUp, logOut, user }}>{ children }</authContext.Provider>
 }

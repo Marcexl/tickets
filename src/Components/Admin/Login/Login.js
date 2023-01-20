@@ -1,6 +1,6 @@
 import { useState } from 'react'; 
 import { useAuth } from '../../../context/AuthContext';
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Logo from '../../logo.png';
 import './login.css';
+import { storage } from '../../../utils/storage';
 
 function Login() {
   
@@ -17,20 +18,30 @@ function Login() {
   const { signIn } = useAuth();
   const [error, setError] = useState('');
   const navigate = useNavigate()
+  const [user, setUser] = useState('')
+  const location = useLocation();
 
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
     try {
       const res = await signIn(email,pass);
-      //console.log(res);
-      navigate("/acreditacion")
-      navigate("/listado")
+      storage.set('user', res.user)
+      setUser(res.user)
+
     } catch (err) {
       setError(err.message)
       console.log(error)
     }
+    setTimeout(() => {
+      console.log(user)
+        if(location.state?.from) {
+          navigate(location.state.from)
+        }
+    }, 1500);
+    
   }
+
 
   return (
     <>
