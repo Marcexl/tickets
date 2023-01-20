@@ -41,7 +41,7 @@ function Cuenta() {
   };
 
   const downloadScreenshot = () => {
-    SendEmail();
+    //SendEmail();
     takeScreenShot(ref.current).then(download);
   }
 
