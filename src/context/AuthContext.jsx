@@ -1,10 +1,7 @@
 import { useContext, createContext, useEffect, useState } from 'react'
 import { auth } from '../FirabaseConfig'
 
-
 export  const authContext = createContext()
-
-
 
 export const useAuth = () => {
     const context = useContext(authContext)

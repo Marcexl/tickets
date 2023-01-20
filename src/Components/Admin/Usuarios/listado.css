@@ -1,8 +1,9 @@
 .card-login{
-   max-height: calc(100vh - 60px);
-   margin-top: 0px;
+   max-height: calc(100vh - 100px);
    overflow-y: auto;
+   margin-top: 50px;
 }
+
 .download-button{
    position: fixed;
     left: 30px;

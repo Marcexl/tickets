@@ -1,15 +1,14 @@
+import { useState } from 'react'; 
+import { useAuth } from '../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Logo from '../logo.png';
+import Logo from '../../logo.png';
 import './login.css';
-import { useState } from 'react'; 
-import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom'
-
 
 function Login() {
   
@@ -34,6 +33,7 @@ function Login() {
   }
 
   return (
+    <>
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -70,6 +70,7 @@ function Login() {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }
 

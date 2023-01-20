@@ -1,5 +1,6 @@
 import React from 'react';
-import GlobalSpinner from '../Spinner/Spinner';
+import Nabvar from '../Menu/Menu';
+import GlobalSpinner from '../../Spinner/Spinner';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
@@ -16,6 +17,7 @@ function Listado(){
         
     return (
         <>
+        <Nabvar />
         <GlobalSpinner />
         <Container className='container-login'>
             <Row>

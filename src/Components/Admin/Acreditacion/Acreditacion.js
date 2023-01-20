@@ -1,4 +1,5 @@
 import React from "react";
+import Nabvar from '../Menu/Menu';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -8,6 +9,7 @@ function Acreditacion() {
 
   return (
     <>
+    <Nabvar />
     <Container fluid className=''>
       <Row>
         <Col className='col-login'>
