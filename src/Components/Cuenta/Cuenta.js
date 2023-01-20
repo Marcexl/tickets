@@ -68,12 +68,14 @@ function Cuenta() {
             <div className='entrada-text'>
               <p>Esta entrada fue enviada a tu correo electrónico.</p>
               <p>En caso de no encontrarla revisá tu correo no deseado.</p>
-              <Button 
-                variant="primary" 
-                type="button"
-                onClick={downloadScreenshot}>
-                  Descarga tu entrada
-              </Button>
+              <a href="https://www.sgiar.org.ar/dialogos/eventos/Ticket/generateTicket.php" target="_blank">
+                <Button 
+                  id="download-ticket"
+                  variant="primary" 
+                  type="button">
+                    Descarga tu entrada
+                </Button>
+              </a>
             </div>
           </Card>
         </Col>
@@ -104,6 +106,10 @@ function SendEmail (){
     if (response.ok) 
     { 
       console.log('ok genero qr');
+      //muetro boton para descargar
+      document.getElementById('download-ticket').style.display = 'block';
+
+      //envio mail
       fetch('./Mail/mail.php', {
         method: 'POST',
         headers:{"Content-Type": "application/json" },

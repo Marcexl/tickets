@@ -53,10 +53,14 @@
     transition: .3s;
     transform: scale(0);
     animation: growIn .5s ease-in-out 0s 1 forwards;
+    padding-bottom: 30px;
 }
 .entrada-text p{
     margin-bottom: 0;
     padding: 0 5px;
+}
+#download-ticket{
+    display: none;
 }
 @media screen and (max-width: 956px){
     .QRCodeImg{
