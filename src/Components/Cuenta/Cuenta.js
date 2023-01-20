@@ -139,8 +139,9 @@ function DownloadTicket(){
   let dni = user.dni;
   let evento = localStorage.getItem('evento');
   let data = '?dni='+dni+'&evento='+evento;
-  window.location.href = 'https://www.sgiar.org.ar/dialogos/eventos/Ticket/generateTicket.php'+data;
-  //window.location.href = 'http://localhost/apps/tickets/public/Ticket/generateTicket.php'+data;
+  //window.open('http://localhost/apps/tickets/public/Ticket/generateTicket.php'+data, '_blank');
+  window.open('https://www.sgiar.org.ar/dialogos/eventos/Ticket/generateTicket.php'+data, '_blank')
+
   return false;
 }
   

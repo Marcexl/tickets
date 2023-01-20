@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-require('../../fpdf/fpdf.php');
+require('../fpdf/fpdf.php');
 
 
 $dni    = $_GET['dni'];
