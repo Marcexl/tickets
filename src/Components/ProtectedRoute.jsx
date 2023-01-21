@@ -7,8 +7,8 @@ export const ProtectedRoute = ({ children, redirectTo = "/login" }) => {
   const {user} = useAuth()
   const location = useLocation();
   const userStorage = storage.get('user')
-  console.log('user', user)
-  console.log('userSt', userStorage)
+  //console.log('user', user)
+  //console.log('userSt', userStorage)
   return user || userStorage ? (
     children ? children : <Outlet />
   ): (
