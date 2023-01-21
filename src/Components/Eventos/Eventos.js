@@ -103,8 +103,8 @@ function Eventos() {
               <Form onSubmit={AgendarEvento}>
                 <Form.Select aria-label="Default select example" id="eventos">
                     <option value="0">Selecciona la actividad</option>
-                    <option value="1">Encuentro Coral Soka Sabado 21 Enero 18:00 hs</option>
-                    <option value="2">Encuentro Coral Soka Sabado 21 Enero 20:00 hs</option>
+                    <option value="1" disabled style={{background:"#CCC"}}>Encuentro Coral Soka Sabado 21 Enero 18:00 hs</option>
+                    <option value="2">Encuentro Coral Soka Sabado 21 Enero 20:00 hs (últimos cupos)</option>
                 </Form.Select>
                 <Button variant="primary" type="submit">
                   Anotarse

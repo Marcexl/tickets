@@ -9,11 +9,10 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Foto from './entrada-empty.jpg';
 import { ConfettiCanvas } from "react-raining-confetti";
 import { QRCodeImg } from '@cheprasov/react-qrcode';
-import { useScreenshot, createFileName } from "use-react-screenshot";
 import './cuenta.css';
 
 function Cuenta() {      
-  
+  // espero 3 seg y muestro el ticket
   setTimeout(function(){
     let ticket = document.getElementById("ticket-final");
     let bars   = document.getElementById("progressbar");
@@ -21,29 +20,13 @@ function Cuenta() {
     bars.style.display = 'none';
     SendEmail();
   },3000)
-
+  
+  //armo la url para el QR
   let userData = localStorage.getItem('usr');
   let evento = localStorage.getItem('evento');
   let user = JSON.parse(userData);
   let dni = user.dni;
   var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
-  const ref = createRef(null);
-  const [image, takeScreenShot] = useScreenshot({
-    type: "image/jpeg",
-    quality: 1.0
-  });
-
-  const download = (image, { name = "img", extension = "jpg" } = {}) => {
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = createFileName(extension, name);
-    a.click();
-  };
-
-  const downloadScreenshot = () => {
-    //SendEmail();
-    takeScreenShot(ref.current).then(download);
-  }
 
   return (
     <>
@@ -55,7 +38,7 @@ function Cuenta() {
         <Col className='col-login'>
           <Card className="card-login card-ticket" >
             <Card.Title className="mt-3">¡Ya tenés tu entrada , te esperamos!</Card.Title>
-            <Card.Body className="card-cuenta" ref={ref}>
+            <Card.Body className="card-cuenta">
               <div class="ticket-container">
                 <div className="qr" id="qr">
                   <QRCodeImg 
@@ -96,6 +79,8 @@ function SendEmail (){
   let dni = user.dni;
   let evento = localStorage.getItem('evento');
   data = JSON.stringify({email: email, qr: imgsrc.currentSrc, evento: evento, dni:dni});
+
+  // genero el qr enviando el base64
   fetch('./Generate/generate.php', {
     method: 'POST',
     headers:{"Content-Type": "application/json" },
@@ -134,6 +119,7 @@ function SendEmail (){
 }
 
 function DownloadTicket(){
+
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
   let dni = user.dni;
