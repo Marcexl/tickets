@@ -1,7 +1,10 @@
+import { signOut } from 'firebase/auth';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useAuth } from '../../../context/AuthContext';
+import { storage } from '../../../utils/storage';
 import './menu.css';
 
 function Nabvar() {
@@ -17,6 +20,11 @@ Another action
 Separated link
 </NavDropdown.Item>
 </NavDropdown>*/
+const { logOut } = useAuth();
+const handleLogOut = () => {
+  logOut()
+  storage.remove('user')
+}
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -28,7 +36,7 @@ Separated link
           <Nav>
             <Nav.Link href="/#/acreditacion">Acreditacion</Nav.Link>
             <Nav.Link href="/#/listado">Listado por Evento</Nav.Link>
-            <Nav.Link href="#" className='logout'>Salir</Nav.Link>
+            <Nav.Link href="#" onClick={ handleLogOut } className='logout'>Salir</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
