@@ -45,7 +45,7 @@ function RedirectAcreditacion(){
 
   //redirecciono para acreditar
   setTimeout(function(){
-    //window.location.href = 'https://sgiar.org.ar/dialogos/eventos/#/acreditacion';
-    window.location.href = 'http://localhost:3000/#/acreditacion';
+    window.location.href = 'https://sgiar.org.ar/dialogos/eventos/#/acreditacion';
+    //window.location.href = 'http://localhost:3000/#/acreditacion';
   },2000);
 }

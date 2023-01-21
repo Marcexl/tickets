@@ -2,7 +2,6 @@ import { signOut } from 'firebase/auth';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useAuth } from '../../../context/AuthContext';
 import { storage } from '../../../utils/storage';
 import './menu.css';
@@ -25,8 +24,10 @@ const handleLogOut = () => {
   logOut()
   storage.remove('user')
 }
-
-  return (
+var pathUrl = 'https://sgiar.org.ar/dialogos/eventos';
+//var pathUrl = 'http://localhost:3001';
+  
+return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#home">Panel Admin</Navbar.Brand>
@@ -34,8 +35,8 @@ const handleLogOut = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link href="/#/acreditacion">Acreditacion</Nav.Link>
-            <Nav.Link href="/#/listado">Listado por Evento</Nav.Link>
+            <Nav.Link href={pathUrl + "/#/acreditacion"}>Acreditacion</Nav.Link>
+            <Nav.Link href={pathUrl + "/#/listado"}>Listado por Evento</Nav.Link>
             <Nav.Link href="#" onClick={ handleLogOut } className='logout'>Salir</Nav.Link>
           </Nav>
         </Navbar.Collapse>

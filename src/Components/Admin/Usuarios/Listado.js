@@ -59,17 +59,18 @@ function getListado(){
     let table = '';
     let i = 0;
     let evento = '';
-    let elem = document.getElementById('result');
+    let elem   = document.getElementById('result');
     let docuFormated  = '';
     let phoneFormated = '';
-    let mailFormated = '';
-
+    let mailFormated  = '';
+    let verificado    = '';
     var spinner = document.getElementById("spinner");
     spinner.style.display = 'block';
     fetch(url)
     .then((response) => response.json())
     .then((data) => {
-        //console.log(data);
+        console.log(data);
+        /*return false;*/
         for(var key in data)
         {
             i++
@@ -89,7 +90,10 @@ function getListado(){
             //format email
             mailFormated = data[key]['mail'].replace(/\s+/g, '');
             table += '<td>'+mailFormated.toLowerCase()+'</td>'
-            table += '<td>no</td>'
+      
+            verificado = data[key]['verificado'] == 0 ? 'no' : 'si';
+            
+            table += '<td>'+verificado+'</td>';
 
             // me fijo si eligio evento y si es 18 o 20 hs
             if(data[key]['evento'])
