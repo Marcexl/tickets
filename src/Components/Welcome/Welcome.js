@@ -8,6 +8,7 @@ import Logo from './welcome.png';
 import './welcome.css';
 
 function Welcome() {
+
   return (
     <Container className='container-login'>
       <Row>
@@ -21,7 +22,7 @@ function Welcome() {
                   <Button variant="primary" type="button" className='register-button'>
                     Comenzar
                   </Button>
-                </Link>           
+                </Link>          
               </Card.Text>
             </Card.Body>
           </Card>

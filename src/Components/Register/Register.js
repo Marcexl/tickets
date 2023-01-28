@@ -22,12 +22,23 @@ function Register() {
   const [phone, setPhone] = useState('');
   const [documento, setDocumento] = useState('');
 
+<<<<<<< HEAD
+  
+  // chequeo si esta ok el form
+=======
+>>>>>>> origin/main
   const RegistrarUsuario = (event) => {
     var spinner = document.getElementById("spinner");
     var salert = document.getElementById("success-alert");
     var dalert = document.getElementById("danger-alert");
+<<<<<<< HEAD
+
+=======
     
+>>>>>>> origin/main
     const form = event.currentTarget;
+
+    // no paso false
     if (form.checkValidity() === false) 
     {
       event.preventDefault();
@@ -40,42 +51,72 @@ function Register() {
         },1500);
       },1000);
     }
-
+    
     setValidated(true);
 
+    // aqui paso true
     if(form.checkValidity() === true)
     {
-      const data = {
-        nombre: name,
-        apellido: lname,
-        dni: documento,
-        email: email,
-        celular: phone,
-      }
-      const dataStorage = JSON.stringify(data);
-      localStorage.setItem("usr",dataStorage);
-
-      // Ejemplo implementando el metodo POST:
       event.preventDefault();
-      setValidated(true);
-
+      //1) activo spinner
       spinner.style.display = 'block';
-      localStorage.setItem('userId',email);
-      // 1) servicio mallo para ingresar usuarios
-      
-      setTimeout( () => {
-        dalert.style.display = 'none';
-        spinner.style.display = 'none';
-        salert.style.display = 'block';
-        console.log(data);
+
+      //2) traigo las variables
+      let docuFormated  = documento.replace(/\D/g,'');
+      let phoneFormated = phone.replace(/\D/g,'');
+
+      const dataString = {
+        "nombre": name,
+        "apellido": lname,
+        "dni": docuFormated,
+        "mail": email,
+        "celular": phoneFormated
+      }
+
+      //3) registro el usuario
+      var url = "https://www.sgiar.org.ar:3001/ticket/save";
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataString),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('se registro el usuario');
+
+        //4) guardo en local storage
+        const dataStorage = JSON.stringify(dataString);
+        localStorage.setItem("usr",dataStorage);
+        localStorage.setItem("usrId",data.id);
 
         setTimeout( () => {
-          window.location.href = `${urlMaster}#/eventos`;
+          dalert.style.display  = 'none';
+          spinner.style.display = 'none';
+          salert.style.display  = 'block'; 
+    
+          setTimeout( () => {
+            window.location.href = `${urlMaster}#/eventos`;
+          },800);
         },800);
-      },800);
+  
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setTimeout(() => {
+          spinner.style.display = 'none';
+          dalert.style.display = 'block';
+          dalert.innerHTML = error;
+          setTimeout( () => {
+            dalert.style.display = 'none';
+          },1500);
+        },1000);
+      });
     }
   }
 
+  
   return (
     <>
     <GlobalSpinner />
@@ -108,7 +149,7 @@ function Register() {
                 <Form.Group className="mb-3" controlId="phone">
                   <Form.Control 
                   required
-                  type="text" 
+                  type="number" 
                   placeholder="Celular" 
                   className='phone'
                   onChange={(e) => {setPhone(e.target.value)}}
@@ -126,7 +167,7 @@ function Register() {
                 <Form.Group className="mb-3" controlId="email">
                   <Form.Control 
                   required
-                  type="text" 
+                  type="email" 
                   placeholder="Ingresa un email" 
                   className='email'
                   onChange={(e) => {setEmail(e.target.value)}}

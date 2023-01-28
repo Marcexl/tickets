@@ -3,10 +3,11 @@
     $data = json_decode(file_get_contents('php://input'), true);
   
     $email  = $data['email'];
+    $dni    = $data['dni'];
     $username = strstr($email, '@', true); //"username"
     $evento = $data['evento'];
     $para   = $email;
-    $file = 'https://sgiar.org.ar/dialogos/eventos/Generate/'.$evento.'_'.$username.'.png';
+    $file = 'https://sgiar.org.ar/dialogos/eventos/Generate/'.$evento.'_'.$dni.'.png';
   
     $para   = $email;
     $titulo = 'Tu entrada para el Encuentro Coral Soka';
@@ -62,7 +63,7 @@
     
     if (mail($para, $titulo, $mensaje, implode("\r\n", $headers)))
     {
-    	print_r($msj);
+      echo "se envio el email al usuario";
     	exit();
     } 
     else

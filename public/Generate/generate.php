@@ -4,10 +4,11 @@
   
     $email    = $req['email'];
     $evento   = $req['evento'];
+    $dni      = $req['dni'];
     $username = strstr($email, '@', true); //"username"
     $data     = $req['qr'];
     
-    $file = $evento.'_'.$username;
+    $file = $evento.'_'.$dni;
     if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
         $data = substr($data, strpos($data, ',') + 1);
         $type = strtolower($type[1]); // jpg, png, gif
