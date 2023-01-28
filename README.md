@@ -1,10 +1,26 @@
-# this is made bymarcexl
-
-You can consult the site reference here [https://marcexl.com.ar]
-
-## this is a react app
-
+# Hello! This is a react app
 Made for tickets system for Soka Gakkai Argentina
 
-### date
+# for clone repo
+git clone
+npm install
+happy hacking!
+
+PD: if you have problems during the installation, just run:
+npm i --save ignore-errors
+
+# for local enviroment
+You can try connect to services running Chrome with no-cors
+You need to run cmd as administrator and then:
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
+
+# usefull comands
+npm run build for upload changes to the server
+
+# colaborators
+Mallin Mosca
+German Astorgano
+Marcelo Gallardo
+
+# date
 January, Thursday 12. 2023
