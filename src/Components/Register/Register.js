@@ -22,13 +22,20 @@ function Register() {
   const [phone, setPhone] = useState('');
   const [documento, setDocumento] = useState('');
 
+<<<<<<< HEAD
   
   // chequeo si esta ok el form
+=======
+>>>>>>> origin/main
   const RegistrarUsuario = (event) => {
     var spinner = document.getElementById("spinner");
     var salert = document.getElementById("success-alert");
     var dalert = document.getElementById("danger-alert");
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/main
     const form = event.currentTarget;
 
     // no paso false
