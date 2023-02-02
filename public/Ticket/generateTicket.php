@@ -4,6 +4,7 @@ session_start();
 
 require('../fpdf/fpdf.php');
 
+
 $dni    = $_GET['dni'];
 $evento = $_GET['evento'];
 $file   = $evento.'_'.$dni.'.png';
@@ -18,7 +19,8 @@ class PDF extends FPDF
 	function Footer()
 	{
 
-    }
+    }	
+}
 
 // Creación del objeto de la clase heredada
 $pdf = new PDF('L','mm',array(162,62));

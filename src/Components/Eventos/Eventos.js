@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -36,9 +36,9 @@ function Eventos() {
       //1) activo spinner
       spinner.style.display = 'block';
 
-      //2) traigo variable evento + user
+      //2) traigo variable evento + user 
       let userId = localStorage.getItem("usrId");
-
+      
       const dataString = {
         "id": userId,
         "evento": {
@@ -67,7 +67,7 @@ function Eventos() {
           setTimeout( () => {
             dalert.style.display  = 'none';
             spinner.style.display = 'none';
-            salert.style.display  = 'block';
+            salert.style.display  = 'block'; 
 
             setTimeout( () => {
               window.location.href = `${urlMaster}#/cuenta`;
@@ -89,7 +89,7 @@ function Eventos() {
       });
     }
   }
-
+  
   return (
     <>
     <GlobalSpinner />
@@ -103,7 +103,8 @@ function Eventos() {
               <Form onSubmit={AgendarEvento}>
                 <Form.Select aria-label="Default select example" id="eventos">
                     <option value="0">Selecciona la actividad</option>
-                    <option value="3">Concierto Conmemorativo 14 de febrero 19:00 hs</option>
+                    <option value="1" disabled style={{background:"#CCC"}}>Encuentro Coral Soka Sabado 21 Enero 18:00 hs</option>
+                    <option value="2">Encuentro Coral Soka Sabado 21 Enero 20:00 hs (últimos cupos)</option>
                 </Form.Select>
                 <Button variant="primary" type="submit">
                   Anotarse
