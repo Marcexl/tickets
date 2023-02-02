@@ -2,11 +2,11 @@
 ob_start();
 session_start();
 
-require('../fpdf/fpdf.php');
+require('../../fpdf/fpdf.php');
 
 
-$dni    = $_GET['dni'];
-$evento = $_GET['evento'];
+$dni    = '30816062';
+$evento = 3;
 $file   = $evento.'_'.$dni.'.png';
 
 class PDF extends FPDF
@@ -28,6 +28,6 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 
 // Logo
-$pdf->Image('../Generate/'.$file,1,35,24);
+$pdf->Image($file,1,35,24);
 $pdf->Image('../images/entrada-14feb.png',1,2,160);
 $pdf->Output('','ticket_'.$dni.'.pdf', true);
