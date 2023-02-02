@@ -17,9 +17,9 @@
              <p>Te adjuntamos tu entrada con un código QR y te esperamos con mucha alegría el martes 14 de febrero en nuestro Auditorio de la Paz, para conmemorar los 30 años de la llegada de Ikeda Sensei a nuestro país y renovar nuestro juramento.</p>
              <p>¡Sigamos avanzando juntos, en unión de la Familia Soka!</p>
              <p>¡Muchísimas gracias!</p>';
-             
+
     $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=utf8';
+    $headers[] = 'Content-type: text/html; charset=UTF-8';
 
     // Additional headers
     $headers[] = 'From: '.$assume.' <no_responder@sgiar.org.ar>';
