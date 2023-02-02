@@ -25,7 +25,7 @@ const auth = firebase.auth()
 const provider = new GoogleAuthProvider();
 const authGoogle = getAuth();
 
-const signInWithGoogle = () =>{ 
+const signInWithGoogle = () =>{
   let spinner = document.getElementById("spinner");
   let salert = document.getElementById("success-alert");
   let dalert = document.getElementById("danger-alert");

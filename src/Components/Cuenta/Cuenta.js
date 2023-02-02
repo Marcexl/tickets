@@ -6,9 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import GlobalSpinner from '../Spinner/Spinner';
-import Foto from './entrada-empty.jpg';
-import { ConfettiCanvas } from "react-raining-confetti";
-import QRCode from 'react-google-qrcode';
+import Foto from './entrada-14feb.png';
+import { ConfettiCanvas } from "react-raining-confetti";s
 import './cuenta.css';
 
 function Cuenta() {
@@ -39,14 +38,11 @@ function Cuenta() {
           <Card className="card-login card-ticket" >
             <Card.Title className="mt-3">¡Ya tenés tu entrada , te esperamos!</Card.Title>
             <Card.Body className="card-cuenta">
-              <div class="ticket-container">
+              <div className="ticket-container">
                 <div className="qr" id="qr">
-                <QRCode
-                  id="google-qr"
-                  data={pathThanks}
-                  size={250}
-                  framed
-                />
+                  <QRCodeImg
+                    value={pathThanks}
+                  />
                 </div>
                 <img src={Foto} className="ticket" alt='ticket'/>
               </div>
@@ -90,7 +86,7 @@ function SendEmail (){
     body: data,
     }).then((response) => {
 
-    if (response.ok)
+    if (response === 1)
     {
       console.log('ok genero qr');
 
@@ -104,7 +100,7 @@ function SendEmail (){
         headers:{"Content-Type": "application/json" },
         body: data,
         }).then((response) => {
-        if (response.ok)
+        if (response === 1)
         {
           console.log('ok envio mail');
         }
@@ -122,12 +118,12 @@ function SendEmail (){
 }
 
 function DownloadTicket(){
-
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
   let dni = user.dni;
   let evento = localStorage.getItem('evento');
-  let data = '?dni='+dni+'&evento='+evento;
+  let imgLink = localStorage.setItem(imgsrc);
+  let data = '?dni='+dni+'&evento='+evento+'&qr='+imgLink;
   //window.open('http://localhost/apps/tickets/public/Ticket/generateTicket.php'+data, '_blank');
   window.open('https://www.sgiar.org.ar/dialogos/eventos/Ticket/generateTicket.php'+data, '_blank')
 

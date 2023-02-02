@@ -19,7 +19,7 @@ class PDF extends FPDF
 	function Footer()
 	{
 
-    }	
+    }
 }
 
 // Creación del objeto de la clase heredada
@@ -29,5 +29,5 @@ $pdf->AddPage();
 
 // Logo
 $pdf->Image('../Generate/'.$file,1,35,24);
-$pdf->Image('../images/entrada-platea.png',1,2,160);
+$pdf->Image('../images/entrada-14feb.png',1,2,160);
 $pdf->Output('','ticket_'.$dni.'.pdf', true);
