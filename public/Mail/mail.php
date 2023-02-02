@@ -13,9 +13,13 @@
     
     $para   = $email;
     $titulo = 'Tu entrada para el Concierto Conmemorativo del 30 Aniversario';
-
+    $text = '<p>¡Muchas gracias por haber confirmado tu presencia para la Reunión General de Líderes de Han en conjunto con el Concierto Conmemorativo del 30° Aniversario!</p>
+             <p>Te adjuntamos tu entrada con un código QR y te esperamos con mucha alegría el martes 14 de febrero en nuestro Auditorio de la Paz, para conmemorar los 30 años de la llegada de Ikeda Sensei a nuestro país y renovar nuestro juramento.</p>
+             <p>¡Sigamos avanzando juntos, en unión de la Familia Soka!</p>
+             <p>¡Muchísimas gracias!</p>';
+             
     $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+    $headers[] = 'Content-type: text/html; charset=utf8';
 
     // Additional headers
     $headers[] = 'From: '.$assume.' <no_responder@sgiar.org.ar>';
@@ -53,7 +57,7 @@
      </style>
     </head>
     <body>
-    <div class="gracias-image">Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+    <div class="gracias-image">'.$text.'</div>
     <div class="ticket-container">
       <img src="'.$file .'" alt="querre" class="querre"/>
       <img src="https://sgiar.org.ar/dialogos/eventos/images/entrada-14feb.png" class="ticket" alt="ticket"/>

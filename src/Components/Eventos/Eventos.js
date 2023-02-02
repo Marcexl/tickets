@@ -24,7 +24,7 @@ function Eventos() {
 
     var option = document.getElementById("eventos");
     var evento = option.value;
-    if(evento == 0)
+    if(evento === 0)
     {
       spinner.style.display = 'none';
       dalert.style.display = 'block';
@@ -60,7 +60,7 @@ function Eventos() {
       })
       .then((response) => response.json())
       .then((data) => {
-        if(data == true)
+        if(data === true)
         {
           console.log('se registro el evento');
 
@@ -115,7 +115,7 @@ function Eventos() {
               <Form onSubmit={AgendarEvento}>
                 <Form.Select aria-label="Default select example" id="eventos">
                     <option value="0">Selecciona la actividad</option>
-                    <option value="3">Concierto Conmemorativo 14 de Febrero 19:00 hs</option>
+                    <option value="3">Reunión Gral. de Líderes de Han (Concierto Conmemorativo) 14 de Febrero 19:00 hs</option>
                 </Form.Select>
                 <Button variant="primary" type="submit">
                   Anotarse

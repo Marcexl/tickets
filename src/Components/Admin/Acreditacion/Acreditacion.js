@@ -55,7 +55,7 @@ function Acrediting(){
     let evento = localStorage.getItem("evento_get");
 
     //check if this is a email
-    if(uid.includes("@") == true)
+    if(uid.includes("@") === true)
     {
       mail = uid;
       uid  = '';
@@ -82,13 +82,13 @@ function Acrediting(){
     })
     .then((response) => response.json())
     .then((data) => {
-      if(data == true)
+      if(data === true)
       {
         dalert.style.display  = 'none';
         pacman.style.display = 'none';
         salert.style.display  = 'block';
       }
-      else if (data == false)
+      else if (data === false)
       {
         dalert.style.display  = 'block';
         pacman.style.display = 'none';

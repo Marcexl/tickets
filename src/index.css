@@ -77,6 +77,11 @@ body,html{
   max-width: 450px;
   margin: 0 auto;
 }
+.modal-footer .btn{
+  width: 150px;
+  display: inline-block;
+  margin: 0 5px;
+}
 
 @media screen and (max-width:636px){
   .card-login{
