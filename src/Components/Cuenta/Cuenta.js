@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import GlobalSpinner from '../Spinner/Spinner';
 import Foto from './entrada-empty.jpg';
+import QRCode from 'react-google-qrcode';
 import { ConfettiCanvas } from "react-raining-confetti";
 import './cuenta.css';
 
@@ -17,15 +18,15 @@ function Cuenta() {
     let bars   = document.getElementById("progressbar");
     ticket.style.display = 'block';
     bars.style.display = 'none';
-    SendEmail();
+    //SendEmail();
   },3000)
 
   //armo la url para el QR
-  //let userData = localStorage.getItem('usr');
-  //let evento = localStorage.getItem('evento');
-  //let user = JSON.parse(userData);
-  //let dni = user.dni;
-  //var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
+  let userData = localStorage.getItem('usr');
+  let evento = localStorage.getItem('evento');
+  let user = JSON.parse(userData);
+  let dni = user.dni;
+  var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
 
   return (
     <>
@@ -40,7 +41,11 @@ function Cuenta() {
             <Card.Body className="card-cuenta">
               <div class="ticket-container">
                 <div className="qr" id="qr">
-
+                <QRCode
+                  data={pathThanks}
+                  size={300}
+                  framed
+                />
                 </div>
                 <img src={Foto} className="ticket" alt='ticket'/>
               </div>
@@ -52,7 +57,7 @@ function Cuenta() {
                 id="download-ticket"
                 variant="primary"
                 type="button"
-                onClick={DownloadTicket}>
+                >
                   Descarga tu entrada
               </Button>
             </div>
@@ -65,6 +70,10 @@ function Cuenta() {
 }
 
 export default Cuenta;
+
+/*function createQR(){
+
+}
 
 function SendEmail (){
   let data = '';
@@ -126,5 +135,5 @@ function DownloadTicket(){
   window.open('https://www.sgiar.org.ar/dialogos/eventos/Ticket/generateTicket.php'+data, '_blank')
 
   return false;
-}
+}*/
 
