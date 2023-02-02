@@ -25,7 +25,7 @@ export default function App() {
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
-              <Route path="/acreditacion" element={ 
+              <Route path="/acreditacion" element={
                   <ProtectedRoute redirectTo="/login" >
                     <Acreditacion />
                   </ProtectedRoute>
