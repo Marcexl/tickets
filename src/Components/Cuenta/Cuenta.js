@@ -87,8 +87,8 @@ function SendEmail (){
     headers:{"Content-Type": "application/json" },
     body: data,
     }).then((response) => {
-
-    if (response === 1)
+    console.log(response)
+    if (response.ok)
     {
       console.log('ok genero qr');
 
@@ -102,7 +102,7 @@ function SendEmail (){
         headers:{"Content-Type": "application/json" },
         body: data,
         }).then((response) => {
-        if (response === 1)
+        if (response.ok)
         {
           console.log('ok envio mail');
         }

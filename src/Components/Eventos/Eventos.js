@@ -60,7 +60,8 @@ function Eventos() {
       })
       .then((response) => response.json())
       .then((data) => {
-        if(data == true){
+        if(data == true)
+        {
           console.log('se registro el evento');
 
           // paso redirecciono
@@ -73,6 +74,17 @@ function Eventos() {
               window.location.href = `${urlMaster}#/cuenta`;
             },800);
           },800);
+        }
+        else
+        {
+          setTimeout(() => {
+            spinner.style.display = 'none';
+            dalert.style.display = 'block';
+            dalert.innerHTML = 'Registramos que ya haz generado tu entrada. En breve te va a llegar el email.';
+            setTimeout( () => {
+              dalert.style.display = 'none';
+            },8000);
+          },1000);
         }
       })
       .catch((error) => {

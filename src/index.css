@@ -1,5 +1,5 @@
 body,html{
-  background: linear-gradient(114.04deg, #69A1AC 11.79%, rgba(146, 100, 168, 0.74) 66.28%, rgba(112, 11, 239, 0.7) 100%);
+  background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
 }
 #root{
   display: flex;
@@ -46,6 +46,10 @@ body,html{
 }
 .container-login .row{
   height: 100%;
+}
+.card{
+  box-shadow: 5px 5px 7px 2px rgb(0,0,0,0.2);
+  border: none;
 }
 .card-login{
   min-width: 600px;

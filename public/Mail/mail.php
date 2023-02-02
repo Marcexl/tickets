@@ -10,7 +10,7 @@
     $file = 'https://sgiar.org.ar/dialogos/eventos/Generate/'.$evento.'_'.$dni.'.png';
 
     $para   = $email;
-    $titulo = 'Tu entrada para el Encuentro Coral Soka';
+    $titulo = 'Tu entrada para el Concierto Conmemorativo este 14 de Febrero';
 
     $headers[] = 'MIME-Version: 1.0';
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
