@@ -26,7 +26,12 @@
         throw new \Exception('did not match data URI with image data');
     }
 
-    file_put_contents( $file.".{$type}", $data);
-    echo 1;
-    exit();
+    if(file_put_contents( $file.".{$type}", $data)){
+        echo 1;
+        exit();
+    }else{
+        echo 0;
+        exit();
+    }
+    
 ?>

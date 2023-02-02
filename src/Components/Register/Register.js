@@ -17,6 +17,7 @@ var errorMessage = 'Por favor completa todos los datos';
 function Register() {
   const [validated, setValidated] = useState(false);
   const [documento, setDocumento] = useState('');
+  const [email, setEmail] = useState('');
 
   const RegistrarUsuario = (event) => {
     var spinner = document.getElementById("spinner");
@@ -52,6 +53,7 @@ function Register() {
       let docuFormated  = documento.replace(/\D/g,'');
 
       const dataString = {
+        "mail": email,
         "dni": docuFormated
       }
 
@@ -110,13 +112,22 @@ function Register() {
             <Card.Img variant="top" src={Logo} className="logo-login"/>
             <Card.Body>
               <Form noValidate validated={validated} onSubmit={RegistrarUsuario}>
-                <Form.Group className="mb-3" controlId="documento">
+              <Form.Group className="mb-3" controlId="documento">
                   <Form.Control
                   required
                   type="text"
                   placeholder="DNI o Nro. identificacion"
                   className='documento'
                   onChange={(e) => {setDocumento(e.target.value)}}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="email">
+                  <Form.Control 
+                  required
+                  type="email" 
+                  placeholder="Ingresa un email" 
+                  className='email'
+                  onChange={(e) => {setEmail(e.target.value)}}
                   />
                 </Form.Group>
                 <Button variant="primary" type="submit">
