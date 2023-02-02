@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import GlobalSpinner from '../Spinner/Spinner';
 import Foto from './entrada-empty.jpg';
 import { ConfettiCanvas } from "react-raining-confetti";
+import QRCode from 'react-google-qrcode';
 import './cuenta.css';
 
 function Cuenta() {
@@ -21,11 +22,11 @@ function Cuenta() {
   },3000)
 
   //armo la url para el QR
-  //let userData = localStorage.getItem('usr');
-  //let evento = localStorage.getItem('evento');
-  //let user = JSON.parse(userData);
-  //let dni = user.dni;
-  //var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
+  let userData = localStorage.getItem('usr');
+  let evento = localStorage.getItem('evento');
+  let user = JSON.parse(userData);
+  let dni = user.dni;
+  var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/acreditacion?uid='+dni+'&evento='+evento;
 
   return (
     <>
@@ -40,7 +41,12 @@ function Cuenta() {
             <Card.Body className="card-cuenta">
               <div class="ticket-container">
                 <div className="qr" id="qr">
-
+                <QRCode
+                  id="google-qr"
+                  data={pathThanks}
+                  size={250}
+                  framed
+                />
                 </div>
                 <img src={Foto} className="ticket" alt='ticket'/>
               </div>
