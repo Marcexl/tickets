@@ -1,7 +1,6 @@
 import React from 'react';
 import Nabvar from '../Menu/Menu';
 import GlobalSpinner from '../../Spinner/Spinner';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
@@ -14,7 +13,7 @@ function Listado(){
     setTimeout(function(){
         getListado()
     },1000)
-        
+
     return (
         <>
         <Nabvar />
@@ -23,29 +22,22 @@ function Listado(){
             <Row>
                 <Col className='col-login'>
                     <Card className="card-login">
-                    <ReactHTMLTableToExcel
-                        id="download-button"
-                        className="download-button"
-                        table="listado-final"
-                        filename="listado"
-                        sheet="tablexls"
-                        buttonText="Download Excel File"/>
-                        <Table striped bordered hover id="listado-final">
-                            <thead>
-                                <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Celular</th>
-                                <th>DNI</th>
-                                <th>Email</th>
-                                <th>Verificado</th>
-                                <th>Evento</th>
-                                </tr>
-                            </thead>
-                            <tbody id="result">
-                            </tbody>
-                        </Table>
+                    <Table striped bordered hover id="listado-final">
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Celular</th>
+                            <th>DNI</th>
+                            <th>Email</th>
+                            <th>Verificado</th>
+                            <th>Evento</th>
+                            </tr>
+                        </thead>
+                        <tbody id="result">
+                        </tbody>
+                    </Table>
                     </Card>
                 </Col>
             </Row>
@@ -80,9 +72,9 @@ function getListado(){
             table += '<td>'+data[key]['apellido']+'</td>'
 
             //format celu
-            phoneFormated  = data[key]['celular'].replace(/\D/g,''); 
+            phoneFormated  = data[key]['celular'].replace(/\D/g,'');
             table += '<td>'+Number(phoneFormated)+'</td>'
-            
+
             //format dni
             docuFormated  = data[key]['dni'].replace(/\D/g,'');
             table += '<td>'+docuFormated+'</td>'
@@ -90,18 +82,18 @@ function getListado(){
             //format email
             mailFormated = data[key]['mail'].replace(/\s+/g, '');
             table += '<td>'+mailFormated.toLowerCase()+'</td>'
-      
-            verificado = data[key]['verificado'] == 0 ? 'no' : 'si';
-            
+
+            verificado = data[key]['verificado'] === 0 ? 'no' : 'si';
+
             table += '<td>'+verificado+'</td>';
 
             // me fijo si eligio evento y si es 18 o 20 hs
             if(data[key]['evento'])
             {
-                evento = data[key]['evento'].id == 1 ? "18:00 hs" : "20:00 hs";        
+                evento = data[key]['evento'].id === 1 ? "18:00 hs" : "20:00 hs";
             }
             table += '<td>'+evento+'</td>'
-            table += '</tr>' 
+            table += '</tr>'
         }
         setTimeout(function(){
             spinner.style.display = 'none';

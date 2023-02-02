@@ -1,4 +1,4 @@
-import React, { createRef, useState} from "react";
+import React from "react";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
@@ -8,10 +8,9 @@ import Button from 'react-bootstrap/Button';
 import GlobalSpinner from '../Spinner/Spinner';
 import Foto from './entrada-empty.jpg';
 import { ConfettiCanvas } from "react-raining-confetti";
-import { QRCodeImg } from '@cheprasov/react-qrcode';
 import './cuenta.css';
 
-function Cuenta() {      
+function Cuenta() {
   // espero 3 seg y muestro el ticket
   setTimeout(function(){
     let ticket = document.getElementById("ticket-final");
@@ -20,13 +19,13 @@ function Cuenta() {
     bars.style.display = 'none';
     SendEmail();
   },3000)
-  
+
   //armo la url para el QR
-  let userData = localStorage.getItem('usr');
-  let evento = localStorage.getItem('evento');
-  let user = JSON.parse(userData);
-  let dni = user.dni;
-  var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
+  //let userData = localStorage.getItem('usr');
+  //let evento = localStorage.getItem('evento');
+  //let user = JSON.parse(userData);
+  //let dni = user.dni;
+  //var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
 
   return (
     <>
@@ -41,9 +40,7 @@ function Cuenta() {
             <Card.Body className="card-cuenta">
               <div class="ticket-container">
                 <div className="qr" id="qr">
-                  <QRCodeImg 
-                  value={pathThanks} 
-                  />
+
                 </div>
                 <img src={Foto} className="ticket" alt='ticket'/>
               </div>
@@ -51,9 +48,9 @@ function Cuenta() {
             <div className='entrada-text'>
               <p>Esta entrada fue enviada a tu correo electrónico.</p>
               <p>En caso de no encontrarla revisá tu correo no deseado.</p>
-              <Button 
+              <Button
                 id="download-ticket"
-                variant="primary" 
+                variant="primary"
                 type="button"
                 onClick={DownloadTicket}>
                   Descarga tu entrada
@@ -72,7 +69,7 @@ export default Cuenta;
 function SendEmail (){
   let data = '';
   let imgsrc = document.getElementsByClassName("QRCodeImg")[0];
-  
+
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
   let email = user.mail;
@@ -87,10 +84,10 @@ function SendEmail (){
     body: data,
     }).then((response) => {
 
-    if (response.ok) 
-    { 
+    if (response.ok)
+    {
       console.log('ok genero qr');
-      
+
       //muetro boton para descargar
       let downloadTicket = document.getElementById('download-ticket');
       downloadTicket.style.display = 'block';
@@ -101,17 +98,17 @@ function SendEmail (){
         headers:{"Content-Type": "application/json" },
         body: data,
         }).then((response) => {
-        if (response.ok) 
+        if (response.ok)
         {
           console.log('ok envio mail');
         }
-        else 
+        else
         {
           console.log('no se mando el mail');
         }
       })
     }
-    else 
+    else
     {
       console.log('no se creo el querre');
     }
@@ -130,5 +127,4 @@ function DownloadTicket(){
 
   return false;
 }
-  
-  
+
