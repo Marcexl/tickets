@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef, useState} from "react";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
@@ -7,7 +7,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import GlobalSpinner from '../Spinner/Spinner';
 import Foto from './entrada-14feb.png';
-import { ConfettiCanvas } from "react-raining-confetti";s
+import { ConfettiCanvas } from "react-raining-confetti";
+import { QRCodeImg } from '@cheprasov/react-qrcode';
 import './cuenta.css';
 
 function Cuenta() {
@@ -70,7 +71,8 @@ export default Cuenta;
 
 function SendEmail (){
   let data = '';
-  let imgsrc = document.getElementsByClassName("QRCodeImg")[0];
+  let imgsrc = '';
+  imgsrc = document.getElementsByClassName("QRCodeImg")[0];
 
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
@@ -118,15 +120,14 @@ function SendEmail (){
 }
 
 function DownloadTicket(){
+
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
   let dni = user.dni;
   let evento = localStorage.getItem('evento');
-  let imgLink = localStorage.setItem(imgsrc);
-  let data = '?dni='+dni+'&evento='+evento+'&qr='+imgLink;
+  let data = '?dni='+dni+'&evento='+evento;
   //window.open('http://localhost/apps/tickets/public/Ticket/generateTicket.php'+data, '_blank');
   window.open('https://www.sgiar.org.ar/dialogos/eventos/Ticket/generateTicket.php'+data, '_blank')
 
   return false;
 }
-

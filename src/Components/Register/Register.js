@@ -10,8 +10,8 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './register.css';
 
-var urlMaster = 'http://localhost:3000/';
-//var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+//var urlMaster = 'http://localhost:3000/';
+var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
 var errorMessage = 'Por favor completa todos los datos';
 
 function Register() {
