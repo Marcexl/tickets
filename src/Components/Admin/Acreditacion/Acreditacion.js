@@ -20,7 +20,7 @@ function Acreditacion() {
       <Row>
         <Col className='col-login'>
           <Card className="card-login" >
-            <Card.Title className="mt-3">Datos de la persona</Card.Title>
+            <Card.Title className="mt-3 a-c">Datos de la persona</Card.Title>
             <Card.Body className="card-acreditacion">
               <h2 className='pb-3' id="nombre"></h2>
                 <Form.Group className="mb-3" controlId="email">
