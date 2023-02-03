@@ -14,6 +14,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import Login from './Admin/Login/Login';
 import Acreditacion from "./Admin/Acreditacion/Acreditacion";
 import { AuthProvider } from "../context/AuthContext";
+import { LectorQr } from "./LectorQR";
 
 export default function App() {
     return (
@@ -25,6 +26,7 @@ export default function App() {
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
+              <Route path="/QR" element={<LectorQr />} />
               <Route path="/acreditacion" element={
                   <ProtectedRoute redirectTo="/gracias" >
                     <Acreditacion />
