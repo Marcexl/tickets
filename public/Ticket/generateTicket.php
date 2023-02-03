@@ -30,4 +30,4 @@ $pdf->AddPage();
 // Logo
 $pdf->Image('../Generate/'.$file,1,35,24);
 $pdf->Image('../images/entrada-14feb.png',1,2,160);
-$pdf->Output('','ticket_'.$dni.'.pdf', true);
+$pdf->Output('D','ticket_'.$dni.'.pdf', true);

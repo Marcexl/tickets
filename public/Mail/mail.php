@@ -9,11 +9,11 @@
     $para   = $email;
     $file = 'https://sgiar.org.ar/dialogos/eventos/Generate/'.$evento.'_'.$dni.'.png';
     
-    $assume = 'Concierto Conmemorativo del 30 Aniversario';
+    $assume = 'Reunión Gral. de Líderes de han del 30º Aniversario';
     
     $para   = $email;
-    $titulo = 'Tu entrada para el Concierto Conmemorativo del 30 Aniversario';
-    $text = '<p>¡Muchas gracias por haber confirmado tu presencia para la Reunión General de Líderes de Han en conjunto con el Concierto Conmemorativo del 30° Aniversario!</p>
+    $titulo = 'Tu entrada para la Reunión General de Líderes de han del 30º Aniversario';
+    $text = '<p>¡Muchas gracias por haber confirmado tu presencia para la <b><i>Reunión General de Líderes de Han</i></b> en conjunto con el <b><i>Concierto Conmemorativo del 30° Aniversario</i></b>!</p>
              <p>Te adjuntamos tu entrada con un código QR y te esperamos con mucha alegría el martes 14 de febrero en nuestro Auditorio de la Paz, para conmemorar los 30 años de la llegada de Ikeda Sensei a nuestro país y renovar nuestro juramento.</p>
              <p>¡Sigamos avanzando juntos, en unión de la Familia Soka!</p>
              <p>¡Muchísimas gracias!</p>';
@@ -54,13 +54,16 @@
           padding: 20px;
           width: 300px;
        }
+       p{
+         font-size:1rem;
+       }
      </style>
     </head>
     <body>
     <div class="gracias-image">'.$text.'</div>
     <div class="ticket-container">
       <img src="'.$file .'" alt="querre" class="querre"/>
-      <img src="https://sgiar.org.ar/dialogos/eventos/images/entrada-14feb.png" class="ticket" alt="ticket"/>
+      <img src="https://sgiar.org.ar/dialogos/eventos/images/entrada-empty-14feb.jpg" class="ticket" alt="ticket"/>
     </div>
     </body>
     </html>
