@@ -58,11 +58,61 @@ function getListado(){
     let verificado    = '';
     var spinner = document.getElementById("spinner");
     spinner.style.display = 'block';
-    fetch(url)
+    const uid = localStorage.getItem("uid");
+    fetch(url, {
+        method: 'GET', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+          'accept': uid
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+          for(var key in data)
+          {
+              i++
+              table += '<tr>'
+              table += '<td>'+i+'</td>'
+              table += '<td>'+data[key]['nombre']+'</td>'
+              table += '<td>'+data[key]['apellido']+'</td>'
+  
+              //format celu
+              phoneFormated  = data[key]['celular'].replace(/\D/g,'');
+              table += '<td>'+Number(phoneFormated)+'</td>'
+  
+              //format dni
+              docuFormated  = data[key]['dni'].replace(/\D/g,'');
+              table += '<td>'+docuFormated+'</td>'
+  
+              //format email
+              mailFormated = data[key]['mail'].replace(/\s+/g, '');
+              table += '<td>'+mailFormated.toLowerCase()+'</td>'
+  
+              verificado = data[key]['verificado'] === 0 ? 'no' : 'si';
+  
+              table += '<td>'+verificado+'</td>';
+  
+              // me fijo si eligio evento y si es 18 o 20 hs
+              
+              evento = data[key]['evento'].id;
+              
+              table += '<td>'+evento+'</td>'
+              table += '</tr>'
+          }
+          setTimeout(function(){
+              spinner.style.display = 'none';
+              elem.innerHTML = table;
+          },1500)
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    /*fetch(url)
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
-        /*return false;*/
+        
         for(var key in data)
         {
             i++
@@ -88,10 +138,9 @@ function getListado(){
             table += '<td>'+verificado+'</td>';
 
             // me fijo si eligio evento y si es 18 o 20 hs
-            if(data[key]['evento'])
-            {
-                evento = data[key]['evento'].id === 1 ? "18:00 hs" : "20:00 hs";
-            }
+            
+            evento = data[key]['evento'].id;
+            
             table += '<td>'+evento+'</td>'
             table += '</tr>'
         }
@@ -99,7 +148,7 @@ function getListado(){
             spinner.style.display = 'none';
             elem.innerHTML = table;
         },1500)
-    })
+    })*/
 }
 
 export default Listado;

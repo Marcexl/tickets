@@ -8,43 +8,65 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Logo from '../../logo.png';
+import Alert from 'react-bootstrap/Alert';
+import GlobalSpinner from '../../Spinner/Spinner';
+
 import './login.css';
 import { storage } from '../../../utils/storage';
 
+var urlMaster = 'http://localhost:3000/';
+//var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+
 function Login() {
-  
+  var spinner = document.getElementById("spinner");
+  var salert = document.getElementById("success-alert");
+  var dalert = document.getElementById("danger-alert");
+
   const [email,setEmail] = useState('');
   const [pass,setPass]   = useState('');
   const { signIn } = useAuth();
   const [error, setError] = useState('');
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
   const [user, setUser] = useState('')
-  const location = useLocation();
+  //const location = useLocation();
 
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
+    spinner.style.display = 'block';
     try {
       const res = await signIn(email,pass);
-      storage.set('user', res.user)
-      setUser(res.user)
-
-    } catch (err) {
-      setError(err.message)
-      console.log(error)
-    }
-    setTimeout(() => {
-      console.log(user)
-        if(location.state?.from) {
-          navigate(location.state.from)
-        }
-    }, 1500);
+      const uid = res.user.multiFactor.user.uid;
     
-  }
+      setUser(res.user)
+      //storage("uid",uid);
+      localStorage.setItem("uid",uid);
+      
+      setTimeout( () => {
+        dalert.style.display  = 'none';
+        spinner.style.display = 'none';
+        salert.style.display  = 'block';
 
+        setTimeout( () => {
+          window.location.href = `${urlMaster}#/acreditacion`;
+        },800);
+      },800);
+    } catch (err) {
+      //setError(err.message)
+      setTimeout(() => {
+        spinner.style.display = 'none';
+        dalert.style.display = 'block';
+        dalert.innerHTML = err;
+        setTimeout( () => {
+          dalert.style.display = 'none';
+        },5000);
+      },1000);
+    }
+  }
 
   return (
     <>
+    <GlobalSpinner />
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -76,6 +98,10 @@ function Login() {
                   Ingresar
                 </Button>
               </Form>
+              <Alert variant='success' id="success-alert">
+                Ya puedes acceder al panel admin!
+              </Alert>
+              <Alert variant='danger' id="danger-alert"></Alert>
             </Card.Body>
           </Card>
         </Col>
