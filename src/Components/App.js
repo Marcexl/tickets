@@ -14,6 +14,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import Login from './Admin/Login/Login';
 import Acreditacion from "./Admin/Acreditacion/Acreditacion";
 import { AuthProvider } from "../context/AuthContext";
+import { AgregarEvento } from "./Eventos/AgregarEvento";
 
 export default function App() {
     return (
@@ -23,6 +24,7 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/eventos" element={<Eventos />} />
+              <Route path="/eventos/agregar" element={<AgregarEvento />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
               <Route path="/acreditacion" element={
