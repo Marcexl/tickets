@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './listado.css';
 import { useEffect, useState } from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 
@@ -30,47 +31,48 @@ export const Listado = () =>{
     return (
         <>
         <Nabvar />
-        <GlobalSpinner />
-        <Container className='container-login'>
-            <Row>
-                <Col className='col-login'>
-                    <Card className="card-login">
-                    <Table striped bordered hover id="listado-final">
-                        <thead>
-                            <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Celular</th>
-                            <th>DNI</th>
-                            <th>Email</th>
-                            <th>Verificado</th>
-                            <th>Evento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                tickets !== null &&
-                                tickets.map((ticket, index) => (
-                                        <tr>
-                                            <td>{index}</td>
-                                            <td>{ticket.nombre}</td>
-                                            <td>{ticket.apellido}</td>
-                                            <td>{ticket.celular}</td>
-                                            <td>{ticket.dni}</td>
-                                            <td>{ticket.mail}</td>
-                                            <td>{ticket.verificado === 0 ? 'No' : 'Si'}</td>
-                                            <td>{ticket.evento.nombre}</td>
-                                        </tr>
+        {tickets === null ? <Spinner animation="border" variant="secondary"/> :
+            <Container className='container-login'>
+                <Row>
+                    <Col className='col-login'>
+                        <Card className="card-login">
+                        <Table striped bordered hover id="listado-final">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Celular</th>
+                                <th>DNI</th>
+                                <th>Email</th>
+                                <th>Verificado</th>
+                                <th>Evento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    tickets !== null &&
+                                    tickets.map((ticket, index) => (
+                                            <tr>
+                                                <td>{index}</td>
+                                                <td>{ticket.nombre}</td>
+                                                <td>{ticket.apellido}</td>
+                                                <td>{ticket.celular}</td>
+                                                <td>{ticket.dni}</td>
+                                                <td>{ticket.mail}</td>
+                                                <td>{ticket.verificado === 0 ? 'No' : 'Si'}</td>
+                                                <td>{ticket.evento.nombre}</td>
+                                            </tr>
+                                        )
                                     )
-                                )
-                            }
-                        </tbody>
-                    </Table>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+                                }
+                            </tbody>
+                        </Table>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        }
         </>
     )
 }
