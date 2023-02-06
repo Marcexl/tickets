@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import './listado.css';
 import { useEffect, useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 
 export const Listado = () =>{
@@ -36,6 +36,13 @@ export const Listado = () =>{
                 <Row>
                     <Col className='col-login'>
                         <Card className="card-login">
+                        <ReactHTMLTableToExcel
+                            id="test-table-xls-button"
+                            className="download-button"
+                            table="listado-final"
+                            filename="listado14feb"
+                            sheet="tablexls"
+                            buttonText="Download as XLS"/>
                         <Table striped bordered hover id="listado-final">
                             <thead>
                                 <tr>
@@ -45,6 +52,8 @@ export const Listado = () =>{
                                 <th>Celular</th>
                                 <th>DNI</th>
                                 <th>Email</th>
+                                <th>Region</th>
+                                <th>Han</th>
                                 <th>Verificado</th>
                                 <th>Evento</th>
                                 </tr>
@@ -60,6 +69,8 @@ export const Listado = () =>{
                                                 <td>{ticket.celular}</td>
                                                 <td>{ticket.dni}</td>
                                                 <td>{ticket.mail}</td>
+                                                <td>{ticket.region}</td>
+                                                <td>{ticket.han}</td>
                                                 <td>{ticket.verificado === 0 ? 'No' : 'Si'}</td>
                                                 <td>{ticket.evento.nombre}</td>
                                             </tr>
