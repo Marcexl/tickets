@@ -31,7 +31,9 @@ export default function App() {
                   </ProtectedRoute>
                 } />
               <Route path="/listado" element={
+                <ProtectedRoute redirectTo="/login" >
                   <Listado />
+                </ProtectedRoute>
               } />
               <Route path='/' element={<Welcome />} />
             </Routes>

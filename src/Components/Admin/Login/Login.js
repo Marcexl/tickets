@@ -14,8 +14,8 @@ import GlobalSpinner from '../../Spinner/Spinner';
 import './login.css';
 import { storage } from '../../../utils/storage';
 
-var urlMaster = 'http://localhost:3000/';
-//var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+//var urlMaster = 'http://localhost:3000/';
+var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
 
 function Login() {
   var spinner = document.getElementById("spinner");
