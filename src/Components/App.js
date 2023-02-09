@@ -14,6 +14,7 @@ import Login from './Admin/Login/Login';
 import Acreditacion from "./Admin/Acreditacion/Acreditacion";
 import { AuthProvider } from "../context/AuthContext";
 import { Listado } from "./Admin/Usuarios/Listado";
+import { InscripcionFinalizada } from "./InscripcionFinalizada";
 
 export default function App() {
     return (
@@ -21,10 +22,10 @@ export default function App() {
         <HashRouter>
             <Routes>
               <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              {/* <Route path="/register" element={<Register />} />
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
-              <Route path="/gracias" element={<Gracias />} />
+              <Route path="/gracias" element={<Gracias />} /> */}
               <Route path="/acreditacion" element={
                   <ProtectedRoute redirectTo="/gracias" >
                     <Acreditacion />
@@ -35,7 +36,7 @@ export default function App() {
                   <Listado />
                 </ProtectedRoute>
               } />
-              <Route path='/' element={<Welcome />} />
+              <Route path='/' element={<InscripcionFinalizada />} />
             </Routes>
         </HashRouter>
       </AuthProvider>

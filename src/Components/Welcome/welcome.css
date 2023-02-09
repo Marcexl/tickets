@@ -4,6 +4,10 @@
     margin: 0 auto;
     max-width: 450px;
 }
+
+.logoInscFin {
+    max-width: 300px;
+}
 /* gjola */
 @media screen and  (max-width:636px){
     .welcome-avatar{
