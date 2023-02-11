@@ -14,6 +14,7 @@ export const LectorQr = () => {
 
   const [qr, setQr] = useState(false)
   const [data, setData] = useState(null)
+  const [dni, setDni] = useState('')
 
   const handleResults = (result, error) => {
     if (!!result) {
@@ -24,6 +25,10 @@ export const LectorQr = () => {
     if (!!error) {
       console.info(error);
     }
+  }
+
+  const handleSubmit = () => {
+    console.log("Submit " + dni)
   }
 
 
@@ -43,11 +48,18 @@ export const LectorQr = () => {
                       style={{ width: '100%' }}
                   />) }
                 <Form.Control 
-                  required
+                  disabled
+                  placeholder='Leer QR'
                   type="text" 
                   value={data !== null ? data : (e) => e.target.value }
                   />
-                <Button onClick={() => setQr(true)}>QR</Button>
+                <Button onClick={() => setQr(true)}>Leer QR</Button>
+                <Form.Control 
+                  placeholder='Ingrese DNI'
+                  type="number" 
+                  onChange={(e) => setDni(e.target.value)}
+                  />
+                <Button onClick={ handleSubmit }>Enviar</Button>
               </Form>
 
               <Alert variant='success' id="success-alert">
