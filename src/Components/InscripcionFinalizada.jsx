@@ -13,13 +13,12 @@ export const InscripcionFinalizada = () => {
         <Col className='col-login'>
           <Card className="card-login">
             <Card.Body class="text-center">
-              <Card.Img className="logoInscFin mt-2" src={Logo} />
-              <Card.Title className="mt-3">Ha finalizado la inscripción a la Reunión General de Líderes.</Card.Title>
-              <Card.Title>¡Muchísimas Gracias!</Card.Title>
+              <Card.Img className="logoInscFin p-3 mt-3" src={Logo} />
+              <Card.Title className="p-5">Ha finalizado la inscripción a la Reunión General de Líderes. <br />¡Muchísimas Gracias! </Card.Title>
             </Card.Body>
           </Card>
         </Col>
       </Row>
     </Container>
   )
-}
+}         
