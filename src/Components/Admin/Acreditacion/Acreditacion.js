@@ -48,10 +48,6 @@ function Acreditacion() {
 export default Acreditacion;
 
 function Acrediting(){
-    //init spinner and alerts
-    const salert = document.getElementById("success-alert");
-    const dalert = document.getElementById("danger-alert");
-
     // obtengo parametros de url
     const url = window.location.href;
     const a = url.split('uid=')[1];
@@ -75,28 +71,17 @@ function Acrediting(){
     .then((data) => {
       if(data.data.p === false)
       {
-        document.getElementById("nombre").innerHTML = ''; 
-        document.getElementById("div").innerHTML = '';
-        document.getElementById("email").innerHTML = ''; 
-        document.getElementById("dni").innerHTML = '';
+
         
-        dalert.style.display = 'block';
-        salert.style.display = 'none';
-        dalert.innerHTML     = "El dni "+uid+" ingresado no existe en la extranet";
       }
       else
       {
-        document.getElementById("nombre").innerHTML = nombre +' '+apellido; 
-        document.getElementById("div").innerHTML = div; 
-        document.getElementById("email").innerHTML = email; 
-        document.getElementById("dni").innerHTML = uid; 
-        dalert.style.display  = 'none';
-        salert.style.display  = 'block';
+
       } 
     });
     
     //registro a la persona
-    /*const url3 = "https://www.sgiar.org.ar:3001/ticket/event/acreditate";
+    const url3 = "https://www.sgiar.org.ar:3001/ticket/event/acreditate";
     fetch(url3, {
       method: 'POST',
       headers: {
@@ -108,24 +93,16 @@ function Acrediting(){
     .then((data) => {
       if(data === true)
       {
-        dalert.style.display  = 'none';
-        salert.style.display  = 'block';
       }
       else if (data === false)
       {
-        dalert.style.display  = 'block';
-        salert.style.display  = 'none';
-        dalert.innerHTML = "Ooops... no se ha encontrado el usuario";
+
       }
     })
     .catch((error) => {
       setTimeout(() => {
-        pacman.style.display = 'none';
-        dalert.style.display = 'block';
-        dalert.innerHTML = error;
         setTimeout( () => {
-          dalert.style.display = 'none';
         },1500);
       },1000);
-    });*/
+    });
   }
