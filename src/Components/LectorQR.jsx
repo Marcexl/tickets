@@ -13,12 +13,13 @@ import { QrReader } from 'react-qr-reader';
 export const LectorQr = () => {
 
   const [qr, setQr] = useState(false)
-  const [data, setData] = useState(null)
+  const [dataQr, setDataQr] = useState('')
+  const [dataQrLeido, setDataQrLeido] = useState(null)
   const [dni, setDni] = useState('')
 
   const handleResults = (result, error) => {
     if (!!result) {
-      setData(result?.text);
+      setDataQrLeido(result?.text);
       setQr(false)
     }
 
@@ -29,6 +30,11 @@ export const LectorQr = () => {
 
   const handleSubmit = () => {
     console.log("Submit " + dni)
+  }
+
+  const handleSubmitQr = () => {
+    setQr(true)
+    console.log(dataQr)
   }
 
 
@@ -49,11 +55,12 @@ export const LectorQr = () => {
                   />) }
                 <Form.Control 
                   disabled
-                  placeholder='Leer QR'
+                  placeholder='Presione Leer QR'
                   type="text" 
-                  value={data !== null ? data : (e) => e.target.value }
+                  onChange={(e) => setDataQr(e.target.value)}
+                  value={ dataQrLeido }
                   />
-                <Button onClick={() => setQr(true)}>Leer QR</Button>
+                <Button onClick={ handleSubmitQr }>{qr ? 'Leer QR' : 'Enviar'}</Button>
                 <Form.Control 
                   placeholder='Ingrese DNI'
                   type="number" 
