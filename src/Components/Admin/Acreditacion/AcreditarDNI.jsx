@@ -21,8 +21,6 @@ export const AcreditarDNI = ({setQr}) => {
     }
     const response = await acreditarPersona(data)
     setDataPersona(response)
-    
-    
   }
 
   const volver = () => {
