@@ -1,32 +1,59 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { acreditarPersona } from '../../../utils/FetchToAPI';
+import { AcreditadoForm } from './AcreditadoForm';
 
-export const LectorQr = () => {
+export const AcreditarDNI = ({setQr}) => {
 
-  const [data, setData] = useState(null)
-  const [dni, setDni] = useState('')
+  //const [data, setData] = useState(null)
+  const [dniData, setDniData] = useState('')
+  const [dataPersona, setDataPersona] = useState(null)
+  const idEvento = 3;
 
-  const handleSubmit = () => {
-    console.log("Submit " + dni)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const data = {
+      idEvento,
+      dniData
+    }
+    const response = await acreditarPersona(data)
+    setDataPersona(response)
+    
+    
   }
+
+  const volver = () => {
+    setQr(true)
+  }
+  
 
   return (
     <>
-      <Card className="card-acreditar" id="acreditarDNI">
+      {dataPersona === null ? 
+      <>
         <Card.Title className="mt-3">Acreditar con DNI</Card.Title>
         <Card.Body className='dni-acreditar'>
-          <Form>
+          <Form onSubmit={ handleSubmit }>
             <Form.Control 
               placeholder='Ingrese DNI'
               type="number" 
-              onChange={(e) => setDni(e.target.value)}
+              onChange={(e) => setDniData(e.target.value)}
               />
-            <Button onClick={ handleSubmit }>Enviar</Button>
+            <Button type='submit'>Enviar</Button>
+            <Button onClick={ volver }>Acreditar con QR</Button>
           </Form>
         </Card.Body>
-      </Card>
+      </>
+      :
+      <>
+        <AcreditadoForm props={dataPersona} />
+        <br />
+        <Button onClick={() => setDataPersona(null)}>Continuar Acreditando</Button>
+      </>
+    }
     </>
   )
 }

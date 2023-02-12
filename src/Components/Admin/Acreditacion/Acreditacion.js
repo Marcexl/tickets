@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nabvar from '../Menu/Menu';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -7,37 +7,62 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import './acreditacion.css';
+import { Button } from "react-bootstrap";
+import { AcreditarDNI } from "./AcreditarDNI";
+import { AcreditarQr } from "./AcreditarQR";
+
+
+
 
 function Acreditacion() {
-  setTimeout(function(){
-    Acrediting()
-  },500);
+
+  const [dataPersona, setDataPersona] = useState(null)
+  const [qr, setQr] = useState(false)
+  const [dni, setDni] = useState(false)
+
+
+  // setTimeout(function(){
+  //   Acrediting()
+  // },500);
+
+  const handleSubmitDni = () => {
+    console.log("submit dni")
+    setDni(true)
+  }
+
+  const handleSubmitQr = () => {
+    console.log("submit Qr")
+    setQr(true)
+  }
+
+  useEffect(() => {
+    qr && setDni(false)
+    dni && setQr(false)
+  }, [])
+  
 
   return (
     <>
     <Nabvar />
     <Container fluid className=''>
       <Row>
-        <Col className='col-login'>
-          <Card className="card-login" >
-            <Card.Title className="mt-3 a-c">Datos de la persona</Card.Title>
-            <Card.Body className="card-acreditacion">
-              <h2 className='pb-3' id="nombre"></h2>
-                <Form.Group className="mb-3" controlId="email">
-                  <Form.Label id="email"></Form.Label>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="dni">
-                  <Form.Label id="dni"></Form.Label>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="div">
-                  <Form.Label id="div"></Form.Label>
-                </Form.Group>
-                <Alert variant="success" id="success-alert">
-                  Ya puede acceder al evento!
-                </Alert>
-              <Alert variant='danger' id="danger-alert"></Alert>
-            </Card.Body>
-          </Card>
+          <Col className='col-login'>
+            <Card className="card-login" >
+            {qr ? <AcreditarQr  setDni={setDni}/> : dni && <AcreditarDNI setQr={setQr}/>}
+            {dataPersona == null & !qr & !dni && 
+              <>
+              <Card.Title className="mt-3">Acreditacion</Card.Title>
+              <Card.Body className='dni-acreditar'>
+                      <Button
+                        onClick={handleSubmitDni}
+                      >Con DNI</Button>
+                      <Button
+                        onClick={handleSubmitQr}
+                      >Con QR</Button>
+                </Card.Body>
+              </> 
+            }
+        </Card>
         </Col>
       </Row>
     </Container>
@@ -47,62 +72,62 @@ function Acreditacion() {
 
 export default Acreditacion;
 
-function Acrediting(){
-    // obtengo parametros de url
-    const url = window.location.href;
-    const a = url.split('uid=')[1];
-    const uid = a.split('&')[0];
-    const evento = url.split('evento=')[1];
+// function Acrediting(){
+//     // obtengo parametros de url
+//     const url = window.location.href;
+//     const a = url.split('uid=')[1];
+//     const uid = a.split('&')[0];
+//     const evento = url.split('evento=')[1];
     
-    const nombre   = 'Marcelo';
-    const apellido = 'Gallardo';
-    const div = 'DJM';
-    const email = 'mxlgallardo@gmail.com';
+//     const nombre   = 'Marcelo';
+//     const apellido = 'Gallardo';
+//     const div = 'DJM';
+//     const email = 'mxlgallardo@gmail.com';
 
-    const dataString = {
-      "dni": uid,
-      "idEvento": evento
-    }
+//     const dataString = {
+//       "dni": uid,
+//       "idEvento": evento
+//     }
 
-    //chequeo si es miembro
-    const url2 = 'https://www.sgiar.org.ar/api/v1-test/public/_p?d=';
-    fetch(url2+uid)
-    .then((response) => response.json())
-    .then((data) => {
-      if(data.data.p === false)
-      {
+//     //chequeo si es miembro
+//     const url2 = 'https://www.sgiar.org.ar/api/v1-test/public/_p?d=';
+//     fetch(url2+uid)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       if(data.data.p === false)
+//       {
 
         
-      }
-      else
-      {
+//       }
+//       else
+//       {
 
-      } 
-    });
+//       } 
+//     });
     
-    //registro a la persona
-    const url3 = "https://www.sgiar.org.ar:3001/ticket/event/acreditate";
-    fetch(url3, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dataString),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      if(data === true)
-      {
-      }
-      else if (data === false)
-      {
+//     //registro a la persona
+//     const url3 = "https://www.sgiar.org.ar:3001/ticket/event/acreditate";
+//     fetch(url3, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(dataString),
+//     })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       if(data === true)
+//       {
+//       }
+//       else if (data === false)
+//       {
 
-      }
-    })
-    .catch((error) => {
-      setTimeout(() => {
-        setTimeout( () => {
-        },1500);
-      },1000);
-    });
-  }
+//       }
+//     })
+//     .catch((error) => {
+//       setTimeout(() => {
+//         setTimeout( () => {
+//         },1500);
+//       },1000);
+//     });
+//   }

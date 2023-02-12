@@ -3,15 +3,20 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { QrReader } from 'react-qr-reader';
+import { acreditarPersona } from '../../../utils/FetchToAPI';
+import { AcreditadoForm } from './AcreditadoForm';
+import { useEffect } from 'react';
 
-export const LectorQr = () => {
+export const AcreditarQr = ({setDni}) => {
 
   const [qr, setQr] = useState(false)
-  const [data, setData] = useState(null)
+  const [dataQr, setDataQr] = useState('')
+  const [dataPersona, setDataPersona] = useState(null)
 
   const handleResults = (result, error) => {
+    debugger
     if (!!result) {
-      setData(result?.text);
+      setDataQr(result?.text);
       setQr(false)
     }
 
@@ -19,32 +24,59 @@ export const LectorQr = () => {
       console.info(error);
     }
   }
-
-  const handleSubmit = () => {
-    console.log("Submit " + dni)
+  useEffect(() => {
+    if(dataQr.length > 70){
+      const string = dataQr.slice(0, -1)
+      const dni = string.replace(/[^0-9]+/g, "");
+      const idEvento = 3;
+      const data = {
+        idEvento,
+        dni
+      }
+      acreditarPersona(data)
+        .then(response => setDataPersona(response))
+    }
+  
+  }, [dataQr])
+  
+  const volver = () => {
+    setDni(true)
+    console.log("volver")
   }
+
 
   return (
     <>
+      {dataPersona === null ?
       <Card className="card-acreditar" id="acreditarQr">
       <Card.Title className="mt-3">Acreditar con QR</Card.Title>
       <Card.Body>
         <Form>
           {qr && (<QrReader
-                constraints={{facingMode: 'enviroment'}}
+                //constraints={{facingMode: 'user'}}
+                 constraints={{facingMode: 'environment'}}
+                //facingMode={'environment'}
                 onResult={ handleResults }
                 style={{ width: '100%' }}
             />) }
           <Form.Control 
-            disabled
             placeholder='Leer QR'
             type="text" 
-            value={data !== null ? data : (e) => e.target.value }
+            onChange={(e) => setDataQr(e.target.value)}
             />
-          <Button onClick={() => setQr(true)}>Leer QR</Button>
+          <Button onClick={() => setQr(true)}>Abrir Camara</Button>
+          <Button onClick={ volver }>Acreditar con DNI</Button>
         </Form>
       </Card.Body>
     </Card>
+    :
+    <>
+        <AcreditadoForm props={dataPersona} />
+        <br />
+        <Button onClick={() => setDataPersona(null)}>Continuar Acreditando</Button>
+    </>
+    }
+      
     </>
   )
 }
