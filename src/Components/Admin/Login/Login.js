@@ -9,8 +9,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Logo from '../../logo.png';
 import Alert from 'react-bootstrap/Alert';
-import GlobalSpinner from '../../Spinner/Spinner';
-
 import './login.css';
 import { storage } from '../../../utils/storage';
 import GlobalSpinner from '../../Spinner/Spinner';
@@ -63,7 +61,7 @@ function Login() {
 
   return (
     <>
-    {loader === true ? <GlobalSpinner /> :
+    {/* {loader === true ? <GlobalSpinner /> : */}
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -100,12 +98,12 @@ function Login() {
               </Alert>
               <Alert variant='danger' id="danger-alert"></Alert>
             </Card.Body>
-           <DisplayAlert title={setMsjAlert(msjAlert)} variant={setVariant(variant)} display={setDisplay(display)} /> 
+           {/* <DisplayAlert title={setMsjAlert(msjAlert)} variant={setVariant(variant)} display={setDisplay(display)} />  */}
           </Card>
         </Col>
       </Row>
     </Container>
-    }
+    {/* } */}
 
     </>
   );

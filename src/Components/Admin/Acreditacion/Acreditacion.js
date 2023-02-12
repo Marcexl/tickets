@@ -8,14 +8,11 @@ import './acreditacion.css';
 import { Button } from "react-bootstrap";
 import { AcreditarDNI } from "./AcreditarDNI";
 import { AcreditarQr } from "./AcreditarQR";
-import GlobalSpinner from '../../Spinner/Spinner';
 
 function Acreditacion() {
 
   const [showQr, setShowQr] = useState(false)
   const [showDni, setShowDni] = useState(false)
-
-
 
   const handleSubmitDni = () => {
     setShowDni(true)
@@ -41,7 +38,6 @@ function Acreditacion() {
   return (
     <>
     <Nabvar />
-    <GlobalSpinner />
     <Container fluid className=''>
       <Row>
           <Col className='col-login'>
@@ -62,9 +58,7 @@ function Acreditacion() {
                 >Con QR</Button>
                 </Card.Body>
               </> 
-              
             }
-
         </Card>
         </Col>
       </Row>
