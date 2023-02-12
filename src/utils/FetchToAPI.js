@@ -1,5 +1,3 @@
-import React, { useState } from 'react'
-
 const acreditarPersona = async (data) => {
   //var res = null;
   const url = "https://www.sgiar.org.ar:3001/ticket/event/acreditate";

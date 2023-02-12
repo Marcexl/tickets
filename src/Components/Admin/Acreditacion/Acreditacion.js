@@ -8,9 +8,7 @@ import './acreditacion.css';
 import { Button } from "react-bootstrap";
 import { AcreditarDNI } from "./AcreditarDNI";
 import { AcreditarQr } from "./AcreditarQR";
-
-
-
+import GlobalSpinner from '../../Spinner/Spinner';
 
 function Acreditacion() {
 
@@ -43,6 +41,7 @@ function Acreditacion() {
   return (
     <>
     <Nabvar />
+    <GlobalSpinner />
     <Container fluid className=''>
       <Row>
           <Col className='col-login'>
@@ -55,12 +54,12 @@ function Acreditacion() {
               <>
               <Card.Title className="mt-3">Acreditacion</Card.Title>
               <Card.Body className='dni-acreditar'>
-                      <Button
-                        onClick={handleSubmitDni}
-                      >Con DNI</Button>
-                      <Button
-                        onClick={handleSubmitQr}
-                      >Con QR</Button>
+                <Button
+                  onClick={handleSubmitDni}
+                >Con DNI</Button>
+                <Button
+                  onClick={handleSubmitQr}
+                >Con QR</Button>
                 </Card.Body>
               </> 
               

@@ -9,7 +9,7 @@ import Register from './Register/Register';
 import Eventos from './Eventos/Eventos';
 import Cuenta from './Cuenta/Cuenta';
 import Gracias from './Gracias/Gracias';
-import Listado from './Admin/Usuarios/Listado';
+import {Listado} from './Admin/Usuarios/Listado';
 import { ProtectedRoute } from "./ProtectedRoute";
 import Login from './Admin/Login/Login';
 import { AuthProvider } from "../context/AuthContext";
@@ -26,7 +26,7 @@ export default function App() {
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
               <Route path="/acreditacion" element={
-                  <ProtectedRoute redirectTo="/gracias" >
+                  <ProtectedRoute redirectTo="/login" >
                     <Acreditacion />
                   </ProtectedRoute>
                 } />

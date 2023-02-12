@@ -10,34 +10,46 @@ import Form from 'react-bootstrap/Form';
 import Logo from '../../logo.png';
 import './login.css';
 import { storage } from '../../../utils/storage';
+import GlobalSpinner from '../../Spinner/Spinner';
+import DisplayAlert from '../../Alert/Alert'
+
 
 function Login() {
   
   const [email,setEmail] = useState('');
   const [pass,setPass]   = useState('');
+  const [loader, setLoader] = useState(false);
+  const [msjAlert, setMsjAlert] = useState('');
+  const [variant, setVariant] = useState('');
+  const [display, setDisplay] = useState('none');
   const { signIn } = useAuth();
-  const [error, setError] = useState('');
-  const navigate = useNavigate()
-  const [user, setUser] = useState('')
   const location = useLocation();
+  const navigate = useNavigate()
 
+  let displayMsj = '';
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
     try {
       const res = await signIn(email,pass);
       storage.set('user', res.user)
-      setUser(res.user)
+      setLoader(true)
+      displayMsj = "Bienvenido nuevamente " + res.user;
+      setDisplay('block')
+      setVariant('success')
+      setMsjAlert(displayMsj)
 
     } catch (err) {
-      setError(err.message)
-      console.log(error)
+      setLoader(false)
+      displayMsj = err.message;
+      setDisplay('block')
+      setVariant('danger')
+      setMsjAlert(displayMsj)
     }
     setTimeout(() => {
-      console.log(user)
-        if(location.state?.from) {
+        /*if(location.state?.from) {
           navigate(location.state.from)
-        }
+        }*/
     }, 1500);
     
   }
@@ -45,6 +57,7 @@ function Login() {
 
   return (
     <>
+    {loader === true ? <GlobalSpinner /> :
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -77,10 +90,13 @@ function Login() {
                 </Button>
               </Form>
             </Card.Body>
+           <DisplayAlert title={setMsjAlert(msjAlert)} variant={setVariant(variant)} display={setDisplay(display)} /> 
           </Card>
         </Col>
       </Row>
     </Container>
+    }
+
     </>
   );
 }

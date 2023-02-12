@@ -14,7 +14,7 @@ export const AcreditarQr = ({setShowDni}) => {
   const [dataPersona, setDataPersona] = useState(null)
 
   const handleResults = (result, error) => {
-    debugger
+
     if (!!result) {
       setDataQr(result?.text);
       setQr(false)
