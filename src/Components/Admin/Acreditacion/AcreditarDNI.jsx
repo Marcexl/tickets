@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { acreditarPersona } from '../../../utils/FetchToAPI';
 import { AcreditadoForm } from './AcreditadoForm';
 
-export const AcreditarDNI = ({setQr}) => {
+export const AcreditarDNI = ({setShowQr}) => {
 
-  //const [data, setData] = useState(null)
   const [dniData, setDniData] = useState('')
   const [dataPersona, setDataPersona] = useState(null)
   const idEvento = 3;
@@ -21,12 +20,10 @@ export const AcreditarDNI = ({setQr}) => {
     }
     const response = await acreditarPersona(data)
     setDataPersona(response)
-    
-    
   }
 
   const volver = () => {
-    setQr(true)
+    setShowQr(true)
   }
   
 

@@ -1,10 +1,6 @@
 import React from 'react'
-import Nabvar from '../Menu/Menu';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import './acreditacion.css';
 

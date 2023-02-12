@@ -7,7 +7,7 @@ import { acreditarPersona } from '../../../utils/FetchToAPI';
 import { AcreditadoForm } from './AcreditadoForm';
 import { useEffect } from 'react';
 
-export const AcreditarQr = ({setDni}) => {
+export const AcreditarQr = ({setShowDni}) => {
 
   const [qr, setQr] = useState(false)
   const [dataQr, setDataQr] = useState('')
@@ -40,15 +40,16 @@ export const AcreditarQr = ({setDni}) => {
   }, [dataQr])
   
   const volver = () => {
-    setDni(true)
-    console.log("volver")
+
+    setShowDni(true)
+    console.log("dni:true")
   }
 
 
   return (
     <>
       {dataPersona === null ?
-      <Card className="card-acreditar" id="acreditarQr">
+      <>
       <Card.Title className="mt-3">Acreditar con QR</Card.Title>
       <Card.Body>
         <Form>
@@ -68,7 +69,7 @@ export const AcreditarQr = ({setDni}) => {
           <Button onClick={ volver }>Acreditar con DNI</Button>
         </Form>
       </Card.Body>
-    </Card>
+    </>
     :
     <>
         <AcreditadoForm props={dataPersona} />
