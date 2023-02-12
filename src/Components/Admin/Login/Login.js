@@ -13,9 +13,9 @@ import GlobalSpinner from '../../Spinner/Spinner';
 
 import './login.css';
 import { storage } from '../../../utils/storage';
+import GlobalSpinner from '../../Spinner/Spinner';
+import DisplayAlert from '../../Alert/Alert'
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
 
 function Login() {
   var spinner = document.getElementById("spinner");
@@ -24,49 +24,46 @@ function Login() {
 
   const [email,setEmail] = useState('');
   const [pass,setPass]   = useState('');
+  const [loader, setLoader] = useState(false);
+  const [msjAlert, setMsjAlert] = useState('');
+  const [variant, setVariant] = useState('');
+  const [display, setDisplay] = useState('none');
   const { signIn } = useAuth();
-  const [error, setError] = useState('');
-  //const navigate = useNavigate()
-  const [user, setUser] = useState('')
-  //const location = useLocation();
+  const location = useLocation();
+  const navigate = useNavigate()
 
+  let displayMsj = '';
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
     spinner.style.display = 'block';
     try {
       const res = await signIn(email,pass);
-      const uid = res.user.multiFactor.user.uid;
-    
-      setUser(res.user)
-      //storage("uid",uid);
-      localStorage.setItem("uid",uid);
-      
-      setTimeout( () => {
-        dalert.style.display  = 'none';
-        spinner.style.display = 'none';
-        salert.style.display  = 'block';
+      storage.set('user', res.user)
+      setLoader(true)
+      displayMsj = "Bienvenido nuevamente " + res.user;
+      setDisplay('block')
+      setVariant('success')
+      setMsjAlert(displayMsj)
 
-        setTimeout( () => {
-          window.location.href = `${urlMaster}#/acreditacion`;
-        },800);
-      },800);
     } catch (err) {
-      //setError(err.message)
-      setTimeout(() => {
-        spinner.style.display = 'none';
-        dalert.style.display = 'block';
-        dalert.innerHTML = err;
-        setTimeout( () => {
-          dalert.style.display = 'none';
-        },5000);
-      },1000);
+      setLoader(false)
+      displayMsj = err.message;
+      setDisplay('block')
+      setVariant('danger')
+      setMsjAlert(displayMsj)
     }
+    setTimeout(() => {
+        /*if(location.state?.from) {
+          navigate(location.state.from)
+        }*/
+    }, 1500);
+    
   }
 
   return (
     <>
-    <GlobalSpinner />
+    {loader === true ? <GlobalSpinner /> :
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -103,10 +100,13 @@ function Login() {
               </Alert>
               <Alert variant='danger' id="danger-alert"></Alert>
             </Card.Body>
+           <DisplayAlert title={setMsjAlert(msjAlert)} variant={setVariant(variant)} display={setDisplay(display)} /> 
           </Card>
         </Col>
       </Row>
     </Container>
+    }
+
     </>
   );
 }
