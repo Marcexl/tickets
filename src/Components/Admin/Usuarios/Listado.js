@@ -9,6 +9,8 @@ import './listado.css';
 import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import { listadoPorEvento } from '../../../utils/FetchToAPI';
+import { async } from 'q';
 
 export const Listado = () =>{
     const [tickets, setTickets] = useState(null)
@@ -74,16 +76,11 @@ export const Listado = () =>{
         },
     };
     
-    const getListado = (idEvento) => {
-        const url = `https://www.sgiar.org.ar:3001/ticket/getAll/evento/${idEvento}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                setTickets(data);
-            });
-        }
-
+    const getListado = async (idEvento) => {
+        const data = await listadoPorEvento(idEvento)
+        data !== null && setTickets(data)
+    }
+    
     useEffect(() => {
         getListado(3)
     }, [])

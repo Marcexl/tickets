@@ -103,7 +103,7 @@ function Register() {
 
   return (
     <>
-    <GlobalSpinner />
+    {/* <GlobalSpinner /> */}
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>

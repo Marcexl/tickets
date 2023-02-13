@@ -6,14 +6,18 @@ import { QrReader } from 'react-qr-reader';
 import { acreditarPersona } from '../../../utils/FetchToAPI';
 import { AcreditadoForm } from './AcreditadoForm';
 import { useEffect } from 'react';
+import { Alert } from 'react-bootstrap';
 
 export const AcreditarQr = ({setShowDni}) => {
 
   const [qr, setQr] = useState(false)
   const [dataQr, setDataQr] = useState('')
   const [dataPersona, setDataPersona] = useState(null)
+  const [error, setError] = useState(false)
 
   const handleResults = (result, error) => {
+    setError(false)
+    setDataQr('')
 
     if (!!result) {
       setDataQr(result?.text);
@@ -35,6 +39,7 @@ export const AcreditarQr = ({setShowDni}) => {
       }
       acreditarPersona(data)
         .then(response => setDataPersona(response))
+        .catch(error => setError(true))
     }
   
   }, [dataQr])
@@ -54,17 +59,17 @@ export const AcreditarQr = ({setShowDni}) => {
       <Card.Body>
         <Form>
           {qr && (<QrReader
-                //constraints={{facingMode: 'user'}}
-                 constraints={{facingMode: 'environment'}}
-                //facingMode={'environment'}
+                constraints={{facingMode: 'environment'}}
                 onResult={ handleResults }
                 style={{ width: '100%' }}
             />) }
           <Form.Control 
+            autoFocus='true'
             placeholder='Leer QR'
             type="text" 
             onChange={(e) => setDataQr(e.target.value)}
             />
+            {error && <Alert variant='danger' style={{display: 'block'}}>Ocurrio un Error al intentar acreditar</Alert>}
           <Button onClick={() => setQr(true)}>Abrir Camara</Button>
           <Button onClick={ volver }>Acreditar con DNI</Button>
         </Form>
@@ -74,7 +79,7 @@ export const AcreditarQr = ({setShowDni}) => {
     <>
         <AcreditadoForm props={dataPersona} />
         <br />
-        <Button onClick={() => setDataPersona(null)}>Continuar Acreditando</Button>
+        <Button type='submit' onClick={() => setDataPersona(null)}>Continuar Acreditando</Button>
     </>
     }
       

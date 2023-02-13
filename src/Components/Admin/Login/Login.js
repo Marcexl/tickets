@@ -13,6 +13,7 @@ import './login.css';
 import { storage } from '../../../utils/storage';
 import GlobalSpinner from '../../Spinner/Spinner';
 import DisplayAlert from '../../Alert/Alert'
+import { login } from '../../../utils/FetchToAPI';
 
 
 function Login() {
@@ -26,23 +27,36 @@ function Login() {
   const [msjAlert, setMsjAlert] = useState('');
   const [variant, setVariant] = useState('');
   const [display, setDisplay] = useState('none');
+  const [errorLogin, setErrorLogin] = useState(false)
   const { signIn } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
 
   let displayMsj = '';
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
-    spinner.style.display = 'block';
+    //spinner.style.display = 'block';
     try {
-      const res = await signIn(email,pass);
-      storage.set('user', res.user)
       setLoader(true)
-      displayMsj = "Bienvenido nuevamente " + res.user;
-      setDisplay('block')
-      setVariant('success')
-      setMsjAlert(displayMsj)
+      const res = await signIn(email,pass);
+      setLoader(false)
+
+      
+      if(!errorLogin){
+        if(location.state?.from) {
+          navigate(location.state.from)
+        }else{
+          navigate("/acreditacion")
+        }
+      }
+      
+
+      // displayMsj = "Bienvenido nuevamente " + res.user;
+      // setDisplay('block')
+      // setVariant('success')
+      // setMsjAlert(displayMsj)
 
     } catch (err) {
       setLoader(false)
@@ -61,7 +75,7 @@ function Login() {
 
   return (
     <>
-    {/* {loader === true ? <GlobalSpinner /> : */}
+    {loader === true ? <GlobalSpinner /> :
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -93,17 +107,14 @@ function Login() {
                   Ingresar
                 </Button>
               </Form>
-              <Alert variant='success' id="success-alert">
-                Ya puedes acceder al panel admin!
-              </Alert>
-              <Alert variant='danger' id="danger-alert"></Alert>
+              {errorLogin === null && <Alert variant='danger' id="danger-alert"> Ocurrió un Error al intentar ingresar</Alert>}
             </Card.Body>
            {/* <DisplayAlert title={setMsjAlert(msjAlert)} variant={setVariant(variant)} display={setDisplay(display)} />  */}
           </Card>
         </Col>
       </Row>
     </Container>
-    {/* } */}
+    } 
 
     </>
   );
