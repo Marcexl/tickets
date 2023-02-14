@@ -15,18 +15,14 @@ export const Listado = () =>{
     const [tickets, setTickets] = useState(null)
     const [acreditados, setAcreditados] = useState(0);
 
-    const getListado = (idEvento) => {
-        const url = `https://www.sgiar.org.ar:3001/ticket/getAll/evento/${idEvento}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => setTickets(data));
-            }
+    const getListado = async (idEvento) => {
+        const data = await listadoPorEvento(idEvento)
+        data !== null && setTickets(data)
+    }
 
     useEffect(() => {
         getListado(3)
     }, [])
-
 
     return (
         <>

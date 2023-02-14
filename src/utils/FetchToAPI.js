@@ -42,6 +42,7 @@ const listadoPorEvento = async (idEvento) => {
 
   const url = `https://localhost:3001/ticket/getAll/evento/${idEvento}`;
   const url2 = `https://www.sgiar.org.ar:3001/ticket/getAll/evento/${idEvento}`;
+
   try{
     const response = await fetch(url2, {
       headers: {Authorization: await getToken()}

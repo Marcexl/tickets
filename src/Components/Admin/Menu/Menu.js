@@ -1,12 +1,15 @@
-import { signOut } from 'firebase/auth';
+import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useAuth } from '../../../context/AuthContext';
 import { storage } from '../../../utils/storage';
 import './menu.css';
+import GlobalSpinner from '../../Spinner/Spinner';
 
 function Nabvar() {
+
+  const [loader,setLoader] = useState(false);
 
 /*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -26,13 +29,16 @@ Separated link
 
 const { logOut } = useAuth();
 const handleLogOut = () => {
-  logOut()
+  setLoader(true)
+    logOut()
   storage.remove('user')
 }
 var pathUrl = 'https://sgiar.org.ar/dialogos/eventos';
 //var pathUrl = 'http://localhost:3001';
 
 return (
+    <>
+    {loader === true ? <GlobalSpinner style={{display:"block"}}/> :
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#/acreditacion">Panel Admin</Navbar.Brand>
@@ -45,6 +51,8 @@ return (
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    }
+    </>
   );
 }
 
