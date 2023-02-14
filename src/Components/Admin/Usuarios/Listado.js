@@ -13,6 +13,7 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 export const Listado = () =>{
     const [tickets, setTickets] = useState(null)
+    const [acreditados, setAcreditados] = useState(0);
 
     const getListado = (idEvento) => {
         const url = `https://www.sgiar.org.ar:3001/ticket/getAll/evento/${idEvento}`;

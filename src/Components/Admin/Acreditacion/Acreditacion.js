@@ -33,7 +33,7 @@ function Acreditacion() {
       setShowQr(false)
     }
   }, [showDni])
-  
+
 
   return (
     <>
@@ -43,7 +43,7 @@ function Acreditacion() {
           <Col className='col-login'>
             <Card className="card-login" >
             {
-              (showQr) ? <AcreditarQr  setShowDni={setShowDni}/> 
+              (showQr) ? <AcreditarQr  setShowDni={setShowDni}/>
               :
               (showDni) ? <AcreditarDNI setShowQr={setShowQr}/>
               :
@@ -57,7 +57,7 @@ function Acreditacion() {
                   onClick={handleSubmitQr}
                 >Con QR</Button>
                 </Card.Body>
-              </> 
+              </>
             }
         </Card>
         </Col>

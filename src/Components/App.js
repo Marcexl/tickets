@@ -21,10 +21,14 @@ export default function App() {
         <HashRouter>
             <Routes>
               <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
+              <Route path="/register" element={
+                  <ProtectedRoute redirectTo="/gracias" >
+                    <Acreditacion />
+                  </ProtectedRoute>
+                } />
               <Route path="/acreditacion" element={
                   <ProtectedRoute redirectTo="/login" >
                     <Acreditacion />
