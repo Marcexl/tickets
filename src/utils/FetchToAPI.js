@@ -2,9 +2,11 @@ import { useAuth } from "../context/AuthContext";
 import { storage } from "./storage";
 
 
-const user = storage.get('user')
-const token = user !== null ? user.token : '';
-
+const getToken = async () => {
+  const user = await storage.get('user')
+  const token = user !== null ? user.token : '';
+  return token
+}
 
 const login = async (data) => {
   const url = 'https://localhost:3001/auth/login'
@@ -20,8 +22,6 @@ const login = async (data) => {
   return response.json()
 }
 
-
-
 const acreditarPersona = async (data) => {
   const url = "https://localhost:3001/ticket/event/acreditate";
   const url2 = "https://www.sgiar.org.ar:3001/ticket/event/acreditate";
@@ -29,7 +29,7 @@ const acreditarPersona = async (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': token
+      'Authorization': await getToken()
     },
     body: JSON.stringify(data)
   })
@@ -39,12 +39,12 @@ const acreditarPersona = async (data) => {
 
 
 const listadoPorEvento = async (idEvento) => {
-  
+
   const url = `https://localhost:3001/ticket/getAll/evento/${idEvento}`;
   const url2 = `https://www.sgiar.org.ar:3001/ticket/getAll/evento/${idEvento}`;
   try{
     const response = await fetch(url2, {
-      headers: {Authorization: token}
+      headers: {Authorization: await getToken()}
     })
     return response.json()
   }catch{
