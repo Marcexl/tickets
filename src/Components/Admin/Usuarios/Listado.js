@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import './listado.css';
 import { useEffect, useState } from 'react';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import { listadoPorEvento } from '../../../utils/FetchToAPI';
 
 
 export const Listado = () =>{
