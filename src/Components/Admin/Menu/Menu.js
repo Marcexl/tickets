@@ -19,6 +19,11 @@ Another action
 Separated link
 </NavDropdown.Item>
 </NavDropdown>*/
+/*
+  <Nav.Link href={pathUrl + "/#/acreditacion"}>Acreditacion</Nav.Link>
+  <Nav.Link href={pathUrl + "/#/listado"}>Listado por Evento</Nav.Link>
+*/
+
 const { logOut } = useAuth();
 const handleLogOut = () => {
   logOut()
@@ -26,17 +31,15 @@ const handleLogOut = () => {
 }
 var pathUrl = 'https://sgiar.org.ar/dialogos/eventos';
 //var pathUrl = 'http://localhost:3001';
-  
+
 return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Panel Admin</Navbar.Brand>
+        <Navbar.Brand href="#/acreditacion">Panel Admin</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link href={pathUrl + "/#/acreditacion"}>Acreditacion</Nav.Link>
-            <Nav.Link href={pathUrl + "/#/listado"}>Listado por Evento</Nav.Link>
             <Nav.Link href="#" onClick={ handleLogOut } className='logout'>Salir</Nav.Link>
           </Nav>
         </Navbar.Collapse>

@@ -41,9 +41,9 @@ export const AcreditarQr = ({setShowDni}) => {
         .then(response => setDataPersona(response))
         .catch(error => setError(true))
     }
-  
+
   }, [dataQr])
-  
+
   const volver = () => {
 
     setShowDni(true)
@@ -63,15 +63,15 @@ export const AcreditarQr = ({setShowDni}) => {
                 onResult={ handleResults }
                 style={{ width: '100%' }}
             />) }
-          <Form.Control 
+          <Form.Control
             autoFocus='true'
             placeholder='Leer QR'
-            type="text" 
+            type="text"
             onChange={(e) => setDataQr(e.target.value)}
             />
             {error && <Alert variant='danger' style={{display: 'block'}}>Ocurrio un Error al intentar acreditar</Alert>}
           <Button onClick={() => setQr(true)}>Abrir Camara</Button>
-          <Button onClick={ volver }>Acreditar con DNI</Button>
+          <Button onClick={ volver } className="btn-secondary">Acreditar con DNI</Button>
         </Form>
       </Card.Body>
     </>
@@ -82,7 +82,7 @@ export const AcreditarQr = ({setShowDni}) => {
         <Button type='submit' onClick={() => setDataPersona(null)}>Continuar Acreditando</Button>
     </>
     }
-      
+
     </>
   )
 }

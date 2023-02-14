@@ -103,7 +103,7 @@ function Register() {
 
   return (
     <>
-    {/* <GlobalSpinner /> */}
+    <GlobalSpinner />
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -122,10 +122,10 @@ function Register() {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="email">
-                  <Form.Control 
+                  <Form.Control
                   required
-                  type="email" 
-                  placeholder="Ingresa un email" 
+                  type="email"
+                  placeholder="Ingresa un email"
                   className='email'
                   onChange={(e) => {setEmail(e.target.value)}}
                   />
