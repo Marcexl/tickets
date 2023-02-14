@@ -7,16 +7,12 @@ export const ProtectedRoute = ({ children, redirectTo = "/login" }) => {
   const {user} = useAuth()
   const location = useLocation();
   const userStorage = storage.get('user')
-  //console.log('user', user)
-  //console.log('userSt', userStorage)
-  return user || userStorage ? (
+  //  console.log('context', user)
+  //  console.log('storage', userStorage)
+  //
+  return user && user.token || userStorage && userStorage.token ? (
     children ? children : <Outlet />
   ): (
     <Navigate to= { redirectTo } replace state={{ from: location}} />
   );
-
-  //   if(!user && !userStorage){
-  //       return <Navigate to= { redirectTo } />
-  //   }
-  // return children ? children : <Outlet />
 }
