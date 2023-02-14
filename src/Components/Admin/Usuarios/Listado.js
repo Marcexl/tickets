@@ -13,8 +13,7 @@ import { listadoPorEvento } from '../../../utils/FetchToAPI';
 
 
 export const Listado = () =>{
-    const [tickets, setTickets] = useState(null)
-    const [acreditados, setAcreditados] = useState(0);
+    const [tickets, setTickets] = useState(null);
 
     const getListado = async (idEvento) => {
         const data = await listadoPorEvento(idEvento)
