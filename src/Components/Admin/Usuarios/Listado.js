@@ -10,11 +10,23 @@ import './listado.css';
 import { useEffect, useState } from 'react';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { listadoPorEvento } from '../../../utils/FetchToAPI';
-
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export const Listado = () =>{
-    const [tickets, setTickets] = useState(null);
 
+    const [tickets, setTickets] = useState(null);
+    const [acreditados, setAcreditados] = useState(null);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+        getVerificados(3)
+        setTimeout(function(){
+            setShow(true);
+        },500);
+    }
+
+    
     const getListado = async (idEvento) => {
         const data = await listadoPorEvento(idEvento)
         data !== null && setTickets(data)
@@ -23,10 +35,34 @@ export const Listado = () =>{
     useEffect(() => {
         getListado(3)
     }, [])
+   
+    //get cantidad de verificados
+    const getVerificados = async (idEvento) => {
+        fetch('https://www.sgiar.org.ar/dialogos/test/fetch/getCantidadAcreditados.php?idEvento=' + idEvento)
+        .then((response) => response.json())
+        .then((data) => {
+            setAcreditados(data.verificados);
+        });
+    }
 
     return (
         <>
         <Nabvar />
+        <Button variant="primary" className="verButton" onClick={handleShow}>
+            ver acreditados
+        </Button>
+    
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>Personas Acreditadas</Modal.Title>
+            </Modal.Header>
+            <Modal.Body><h1>{acreditados}</h1></Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+                Cerrar
+            </Button>
+            </Modal.Footer>
+        </Modal>
         {tickets === null ? <GlobalSpinner/> :
             <Container className='container-login'>
                 <Row>

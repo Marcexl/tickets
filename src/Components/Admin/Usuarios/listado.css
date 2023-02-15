@@ -22,3 +22,19 @@
    overflow-x: hidden!important;
    overflow-y: auto!important;
 }
+
+.verButton{
+   width: 170px;
+   background: #daa31a;
+   border: none;
+   border-radius: 30px;
+   bottom: 60px;
+   box-shadow: 3px 3px 5px 3px rgb(0 0 0 / 20%);
+   box-sizing: border-box;
+   color: #fff;
+   left: 30px;
+   padding: 5px 15px;
+   height: 34px;
+   position: fixed;
+   z-index: 111;
+}

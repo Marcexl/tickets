@@ -6,9 +6,10 @@ import { useAuth } from '../../../context/AuthContext';
 import { storage } from '../../../utils/storage';
 import './menu.css';
 import GlobalSpinner from '../../Spinner/Spinner';
+import { useNavigate } from 'react-router-dom'
 
 function Nabvar() {
-
+  const navigate = useNavigate();
   const [loader,setLoader] = useState(false);
 
 /*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
@@ -31,6 +32,7 @@ const { logOut } = useAuth();
 const handleLogOut = () => {
   setLoader(true)
     logOut()
+    navigate("/login")
   storage.remove('user')
 }
 var pathUrl = 'https://sgiar.org.ar/dialogos/eventos';
@@ -46,6 +48,8 @@ return (
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
+            <Nav.Link href="#/acreditacion">Acreditacion</Nav.Link>
+            <Nav.Link href="#/listado">Listado general</Nav.Link>
             <Nav.Link href="#" onClick={ handleLogOut } className='logout'>Salir</Nav.Link>
           </Nav>
         </Navbar.Collapse>
