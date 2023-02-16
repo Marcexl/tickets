@@ -14,6 +14,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import Login from './Admin/Login/Login';
 import { AuthProvider } from "../context/AuthContext";
 import Acreditacion from "./Admin/Acreditacion/Acreditacion";
+import { BarcodeScanner } from "./Admin/Acreditacion/BarcodeScanner";
 
 export default function App() {
     return (
@@ -24,6 +25,7 @@ export default function App() {
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
+              <Route path="/reader" element={<BarcodeScanner />} />
               <Route path="/register" element={
                   <ProtectedRoute redirectTo="/gracias" >
                     <Register />
