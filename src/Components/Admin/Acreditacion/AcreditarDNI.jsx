@@ -7,31 +7,43 @@ import { AcreditadoForm } from './AcreditadoForm';
 import { Alert } from 'react-bootstrap';
 import DisplayAlert from '../../Alert/Alert';
 
-export const AcreditarDNI = ({setShowQr}) => {
+export const AcreditarDNI = ({setShowQr, idEvento}) => {
 
   const [dniData, setDniData] = useState('')
   const [dataPersona, setDataPersona] = useState(null)
   const [error, setError] = useState(false)
-
-  const idEvento = 3;
+  const [message, setMessage] = useState('')
+  const [sent, setSent] = useState(false)
 
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSent(false)
     setError(false)
     const data = {
       idEvento,
       dni : dniData
     }
+    if(idEvento < 1){
+      setError(true)
+      setMessage("Debe seleccionar un evento.")
+      setSent(true)
+      return null;
+    }
     try{
       const response = await acreditarPersona(data)
-      if(response.error != null){
-        setError(true)
-      }else{
-        setDataPersona(response)
+      setSent(true)
+      if(response){
+        if(response.status == 'error'){
+          setError(true)
+        }else{
+          setDataPersona(response.data)
+        }
+        setMessage(response.message)
       }
     }catch{
       setError(true)
+      setMessage("Ocurrio un error al intentar acreditar.")
     }
   }
 
@@ -48,15 +60,17 @@ export const AcreditarDNI = ({setShowQr}) => {
         <Card.Body className='dni-acreditar'>
           <Form onSubmit={ handleSubmit }>
             <Form.Control
+              required
               autoFocus={true}
+              onFocus={() => setSent(false)}
               placeholder='Ingrese DNI'
               type="number"
-              onChange={(e) => setDniData(e.target.value)}
+              onChange={(e) => setDniData(e.target.value) & setSent(false)}
               />
 
-              {error && <Alert variant='danger' style={{display: 'block'}}>Ocurrio un Error al intentar acreditar</Alert>}
+              {sent && <Alert variant={error ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
             <Button type='submit'>Enviar</Button>
-            <Button onClick={ volver } className="btn-secondary">Acreditar con QR</Button>
+            {/* <Button onClick={ volver } className="btn-secondary">Acreditar con QR</Button> */}
           </Form>
         </Card.Body>
       </>

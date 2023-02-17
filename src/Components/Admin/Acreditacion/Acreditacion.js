@@ -8,11 +8,13 @@ import './acreditacion.css';
 import { Button } from "react-bootstrap";
 import { AcreditarDNI } from "./AcreditarDNI";
 import { AcreditarQr } from "./AcreditarQR";
+import { EventosList } from "../../Eventos/EventosList";
 
 function Acreditacion() {
 
   const [showQr, setShowQr] = useState(false)
-  const [showDni, setShowDni] = useState(false)
+  const [showDni, setShowDni] = useState(true)
+  const [idEvento, setIdEvento] = useState('')
 
   const handleSubmitDni = () => {
     setShowDni(true)
@@ -42,10 +44,12 @@ function Acreditacion() {
       <Row>
           <Col className='col-login'>
             <Card className="card-login" >
+              <Card.Title className="mt-3">Selecciona el evento a acreditar</Card.Title>
+              <EventosList setIdEvento={setIdEvento} />
             {
               (showQr) ? <AcreditarQr  setShowDni={setShowDni}/>
               :
-              (showDni) ? <AcreditarDNI setShowQr={setShowQr}/>
+              (showDni) ? <AcreditarDNI setShowQr={setShowQr} idEvento={idEvento} />
               :
               <>
               <Card.Title className="mt-3">Acreditacion</Card.Title>
