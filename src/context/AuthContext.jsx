@@ -19,8 +19,8 @@ export const AuthProvider = ({ children }) => {
   //const signIn = (email, password) => auth.signInWithEmailAndPassword(email, password)
   const signIn = async (user, pass) => {
     const response = await login({user, pass})
-    setUser(response)
-    storage.set('user', response)
+    setUser(response.data)
+    storage.set('user', response.data)
     return response
   } 
 

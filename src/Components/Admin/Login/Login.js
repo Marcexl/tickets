@@ -11,6 +11,7 @@ import Logo from '../../logo.png';
 import Alert from 'react-bootstrap/Alert';
 import './login.css';
 import GlobalSpinner from '../../Spinner/Spinner';
+import { Spinner } from 'react-bootstrap';
 
 
 function Login() {
@@ -18,33 +19,38 @@ function Login() {
   const [pass,setPass]   = useState('');
   const [loader, setLoader] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false)
+  const [message, setMessage] = useState('')
   const { signIn } = useAuth();
   const location = useLocation();
 
   const navigate = useNavigate();
 
-  let displayMsj = '';
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
     try {
+      setLoader(true)
       const res = await signIn(email,pass);
-      if(!errorLogin){
+      setMessage(res.message)
+      setLoader(false)
+      if(res.status == 'ok'){
         if(location.state?.from) {
             navigate(location.state.from)
         }else{
             navigate("/acreditacion")
         }
+      }else{
+        setErrorLogin(true)
       }
     } catch (err) {
       setLoader(false)
-      displayMsj = err.message;
+      setErrorLogin(true)
     }
   }
 
   return (
     <>
-    <GlobalSpinner/>
+    {loader ? <Spinner /> : 
     <Container className='cotainer-login'>
       <Row>
         <Col className='col-login'>
@@ -76,13 +82,13 @@ function Login() {
                   Ingresar
                 </Button>
               </Form>
-              {errorLogin === null && <Alert variant='danger' id="danger-alert"> Ocurrió un Error al intentar ingresar</Alert>}
+              {errorLogin && <Alert variant={errorLogin ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
             </Card.Body>
-           {/* <DisplayAlert title={setMsjAlert(msjAlert)} variant={setVariant(variant)} display={setDisplay(display)} />  */}
           </Card>
         </Col>
       </Row>
     </Container>
+    }
     </>
   );
 }
