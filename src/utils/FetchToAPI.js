@@ -11,10 +11,6 @@ const getToken = async () => {
 const login = async (data) => {
   const url = 'https://localhost:3001/auth/login'
   const url2 = 'https://www.sgiar.org.ar:3001/auth/login'
-<<<<<<< HEAD
-  debugger
-=======
->>>>>>> 1f457299d665e786145fb3e3dbb83842e317eda3
   const response = await fetch(url2, {
     method: 'POST',
     headers: {
@@ -90,5 +86,16 @@ const newEvento = async (data) => {
 
 }
 
+const acreditarDrive = async (data) => {
+  const { dni, idEvento } = data;
+  const url = `https://script.google.com/macros/s/AKfycbwmcBPqqlg0RHnDlO-MZ8g3u7iLIXx6E7xWaLmiGQA0omrSIPIvPVqPEKfuXmXHH-Hx/exec?dni=${dni}&idEvento=${idEvento}`;
+  try{
+    const response = await fetch(url)
+    return response.json()
+  }catch{
+    throw new Error ('Error al intentar grabar nuevo evento')
+  }
+}
 
-export {acreditarPersona, login, listadoPorEvento, getEventosActivos, newEvento}
+
+export {acreditarPersona, login, listadoPorEvento, getEventosActivos, newEvento, acreditarDrive}

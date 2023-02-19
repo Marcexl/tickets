@@ -74,7 +74,7 @@ export const AcreditarDNI = ({setShowQr, idEvento}) => {
 
                   {sent && <Alert variant={error ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
                 <Button type='submit'>Enviar</Button>
-                {/* <Button onClick={ volver } className="btn-secondary">Acreditar con QR</Button> */}
+                <Button onClick={ volver } className="btn-secondary">Acreditar con QR</Button>
               </Form>
             </Card.Body>
           </>
