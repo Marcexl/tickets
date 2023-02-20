@@ -11,7 +11,6 @@ import Logo from '../../logo.png';
 import Alert from 'react-bootstrap/Alert';
 import './login.css';
 import GlobalSpinner from '../../Spinner/Spinner';
-import { Spinner } from 'react-bootstrap';
 
 
 function Login() {
@@ -50,7 +49,7 @@ function Login() {
 
   return (
     <>
-    {loader ? <Spinner /> : 
+    {loader ? <GlobalSpinner display="block" /> : 
     <Container className='cotainer-login'>
       <Row>
         <Col className='col-login'>

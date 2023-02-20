@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,6 +11,7 @@ import GlobalSpinner from '../../Spinner/Spinner';
 function Nabvar() {
 
   const [loader,setLoader] = useState(false);
+  const navigate = useNavigate();
 
 /*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -30,15 +32,18 @@ Separated link
 const { logOut } = useAuth();
 const handleLogOut = () => {
   setLoader(true)
+  setTimeout(function(){
     logOut()
-  storage.remove('user')
+    navigate("/login")
+    storage.remove('user')
+  },1500)
 }
 var pathUrl = 'https://sgiar.org.ar/dialogos/eventos';
 //var pathUrl = 'http://localhost:3001';
 
 return (
     <>
-    {loader === true ? <GlobalSpinner style={{display:"block"}}/> :
+    {loader ? <GlobalSpinner display="block" /> : 
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#/acreditacion">Panel Admin</Navbar.Brand>
