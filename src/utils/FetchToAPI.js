@@ -11,7 +11,10 @@ const getToken = async () => {
 const login = async (data) => {
   const url = 'https://localhost:3001/auth/login'
   const url2 = 'https://www.sgiar.org.ar:3001/auth/login'
-
+<<<<<<< HEAD
+  debugger
+=======
+>>>>>>> 1f457299d665e786145fb3e3dbb83842e317eda3
   const response = await fetch(url2, {
     method: 'POST',
     headers: {

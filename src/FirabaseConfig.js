@@ -3,8 +3,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar';
+var urlMaster = 'http://localhost:3000/';
 
 // Firebase configuration
 const firebaseConfig = {
