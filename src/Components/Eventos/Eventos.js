@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -24,7 +24,7 @@ function Eventos() {
 
     var option = document.getElementById("eventos");
     var evento = option.value;
-    if(evento == 0)
+    if(evento === 0)
     {
       spinner.style.display = 'none';
       dalert.style.display = 'block';
@@ -36,9 +36,9 @@ function Eventos() {
       //1) activo spinner
       spinner.style.display = 'block';
 
-      //2) traigo variable evento + user 
+      //2) traigo variable evento + user
       let userId = localStorage.getItem("usrId");
-      
+
       const dataString = {
         "id": userId,
         "evento": {
@@ -60,19 +60,31 @@ function Eventos() {
       })
       .then((response) => response.json())
       .then((data) => {
-        if(data == true){
+        if(data === true)
+        {
           console.log('se registro el evento');
 
           // paso redirecciono
           setTimeout( () => {
             dalert.style.display  = 'none';
             spinner.style.display = 'none';
-            salert.style.display  = 'block'; 
+            salert.style.display  = 'block';
 
             setTimeout( () => {
               window.location.href = `${urlMaster}#/cuenta`;
             },800);
           },800);
+        }
+        else
+        {
+          setTimeout(() => {
+            spinner.style.display = 'none';
+            dalert.style.display = 'block';
+            dalert.innerHTML = 'Registramos que ya haz generado tu entrada. En breve te va a llegar el email.';
+            setTimeout( () => {
+              dalert.style.display = 'none';
+            },8000);
+          },1000);
         }
       })
       .catch((error) => {
@@ -89,7 +101,7 @@ function Eventos() {
       });
     }
   }
-  
+
   return (
     <>
     <GlobalSpinner />
@@ -103,8 +115,7 @@ function Eventos() {
               <Form onSubmit={AgendarEvento}>
                 <Form.Select aria-label="Default select example" id="eventos">
                     <option value="0">Selecciona la actividad</option>
-                    <option value="1" disabled style={{background:"#CCC"}}>Encuentro Coral Soka Sabado 21 Enero 18:00 hs</option>
-                    <option value="2">Encuentro Coral Soka Sabado 21 Enero 20:00 hs (últimos cupos)</option>
+                    <option value="3">Reunión Gral. de Líderes de Han (Concierto Conmemorativo) 14 de Febrero 19:00 hs</option>
                 </Form.Select>
                 <Button variant="primary" type="submit">
                   Anotarse

@@ -1,3 +1,10 @@
+.card-title.a-c{
+    background: #fdd835;
+    margin: 0!important;
+    padding: 20px 0;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
 .card-acreditacion img{
     display: block;
     margin: 0 auto;

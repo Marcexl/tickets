@@ -9,11 +9,12 @@ import Register from './Register/Register';
 import Eventos from './Eventos/Eventos';
 import Cuenta from './Cuenta/Cuenta';
 import Gracias from './Gracias/Gracias';
-import Listado from './Admin/Usuarios/Listado';
-import { ProtectedRoute } from "./ProtectedRoute";
 import Login from './Admin/Login/Login';
 import Acreditacion from "./Admin/Acreditacion/Acreditacion";
+import { Listado } from './Admin/Usuarios/Listado';
+import { ProtectedRoute } from "./ProtectedRoute";
 import { AuthProvider } from "../context/AuthContext";
+import { EventoForm } from "./Eventos/EventoForm";
 
 export default function App() {
     return (
@@ -21,20 +22,15 @@ export default function App() {
         <HashRouter>
             <Routes>
               <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
-              <Route path="/acreditacion" element={ 
-                  <ProtectedRoute redirectTo="/login" >
-                    <Acreditacion />
-                  </ProtectedRoute>
-                } />
-              <Route path="/listado" element={
-                <ProtectedRoute redirectTo="/login" >
-                  <Listado />
-                </ProtectedRoute>
-              } />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/register" element={<Register />} />
+                <Route path="/acreditacion" element={<Acreditacion />} />
+                <Route path="/listado" element={<Listado />} />
+                <Route path="/nuevoEvento" element={ <EventoForm />} />
+              </Route>
               <Route path='/' element={<Welcome />} />
             </Routes>
         </HashRouter>

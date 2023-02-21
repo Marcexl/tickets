@@ -1,4 +1,4 @@
-import React, {useState} from 'react'; 
+import React, {useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -16,14 +16,9 @@ var errorMessage = 'Por favor completa todos los datos';
 
 function Register() {
   const [validated, setValidated] = useState(false);
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [lname, setLname] = useState('');
-  const [phone, setPhone] = useState('');
   const [documento, setDocumento] = useState('');
+  const [email, setEmail] = useState('');
 
-  
-  // chequeo si esta ok el form
   const RegistrarUsuario = (event) => {
     var spinner = document.getElementById("spinner");
     var salert = document.getElementById("success-alert");
@@ -32,7 +27,7 @@ function Register() {
     const form = event.currentTarget;
 
     // no paso false
-    if (form.checkValidity() === false) 
+    if (form.checkValidity() === false)
     {
       event.preventDefault();
       event.stopPropagation();
@@ -44,7 +39,7 @@ function Register() {
         },1500);
       },1000);
     }
-    
+
     setValidated(true);
 
     // aqui paso true
@@ -56,14 +51,10 @@ function Register() {
 
       //2) traigo las variables
       let docuFormated  = documento.replace(/\D/g,'');
-      let phoneFormated = phone.replace(/\D/g,'');
 
       const dataString = {
-        "nombre": name,
-        "apellido": lname,
-        "dni": docuFormated,
         "mail": email,
-        "celular": phoneFormated
+        "dni": docuFormated
       }
 
       //3) registro el usuario
@@ -87,13 +78,13 @@ function Register() {
         setTimeout( () => {
           dalert.style.display  = 'none';
           spinner.style.display = 'none';
-          salert.style.display  = 'block'; 
-    
+          salert.style.display  = 'block';
+
           setTimeout( () => {
             window.location.href = `${urlMaster}#/eventos`;
           },800);
         },800);
-  
+
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -109,7 +100,7 @@ function Register() {
     }
   }
 
-  
+
   return (
     <>
     <GlobalSpinner />
@@ -121,47 +112,20 @@ function Register() {
             <Card.Img variant="top" src={Logo} className="logo-login"/>
             <Card.Body>
               <Form noValidate validated={validated} onSubmit={RegistrarUsuario}>
-                <Form.Group className="mb-3" controlId="name">
-                  <Form.Control 
+              <Form.Group className="mb-3" controlId="documento">
+                  <Form.Control
                   required
-                  type="text" 
-                  placeholder="Nombre" 
-                  className='name'
-                  onChange={(e) => {setName(e.target.value)}}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="lname">
-                  <Form.Control 
-                  required
-                  type="text" 
-                  placeholder="Apellido" 
-                  className='lname'
-                  onChange={(e) => {setLname(e.target.value)}}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="phone">
-                  <Form.Control 
-                  required
-                  type="number" 
-                  placeholder="Celular" 
-                  className='phone'
-                  onChange={(e) => {setPhone(e.target.value)}}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="documento">
-                  <Form.Control 
-                  required
-                  type="text" 
-                  placeholder="DNI o Nro. identificacion" 
+                  type="text"
+                  placeholder="DNI o Nro. identificacion"
                   className='documento'
                   onChange={(e) => {setDocumento(e.target.value)}}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="email">
-                  <Form.Control 
+                  <Form.Control
                   required
-                  type="email" 
-                  placeholder="Ingresa un email" 
+                  type="email"
+                  placeholder="Ingresa un email"
                   className='email'
                   onChange={(e) => {setEmail(e.target.value)}}
                   />
@@ -170,7 +134,7 @@ function Register() {
                   Enviar
                 </Button>
               </Form>
-             
+
               <Alert variant='success' id="success-alert">
                 Te haz registrado con exito!
               </Alert>

@@ -1,5 +1,4 @@
 .spinner-container{
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -7,6 +6,7 @@
     z-index: 11;
     width: 100%;
     background: rgba(255,255,255,0.8);
+    display: none;
 }
 .spinner-border{
     position: absolute;

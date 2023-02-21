@@ -3,8 +3,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://marcexl.com.ar/app/30aniversario/';
+var urlMaster = 'http://localhost:3000/';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -25,7 +24,7 @@ const auth = firebase.auth()
 const provider = new GoogleAuthProvider();
 const authGoogle = getAuth();
 
-const signInWithGoogle = () =>{ 
+const signInWithGoogle = () =>{
   let spinner = document.getElementById("spinner");
   let salert = document.getElementById("success-alert");
   let dalert = document.getElementById("danger-alert");

@@ -62,6 +62,11 @@
 #download-ticket{
     display: none;
 }
+.modal{
+    display: none;
+    transition: all .3s;
+    background: rgba(0,0,0,0.5);
+}
 @media screen and (max-width: 956px){
     .QRCodeImg{
         width: 200px;
