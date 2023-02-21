@@ -1,5 +1,7 @@
 import React from 'react';
 import Nabvar from '../Menu/Menu';
+import Sidebar from '../Menu/Sidebar';
+import Footer from "../Footer";
 import GlobalSpinner from '../../Spinner/Spinner';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
@@ -10,10 +12,13 @@ import './listado.css';
 import { useEffect, useState } from 'react';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { listadoPorEvento } from '../../../utils/FetchToAPI';
+import { EventosList } from "../../Eventos/EventosList";
 
 
 export const Listado = () =>{
+    const [aside, setSidebar] = useState('sidebar')
     const [tickets, setTickets] = useState(null);
+    const [idEvento, setIdEvento] = useState(1);
 
     const getListado = async (idEvento) => {
         const data = await listadoPorEvento(idEvento)
@@ -21,17 +26,32 @@ export const Listado = () =>{
     }
 
     useEffect(() => {
-        getListado(3)
+        getListado(idEvento)
     }, [])
 
     return (
         <>
         <Nabvar />
+        <Sidebar />
         {tickets === null ? <GlobalSpinner/> :
-            <Container className='container-login'>
-                <Row>
-                    <Col className='col-login'>
-                        <Card className="card-login">
+            <Container fluid className={aside}>
+                 <Row className="h-1">
+                    <Col>
+                    <div className="card-admin">
+                        <label>Ver listado por evento:</label>
+                        <EventosList setIdEvento={setIdEvento} onChange={getListado(idEvento)}/>
+                    </div>
+                    </Col>
+                </Row>
+                <Row className="h-3">
+                    <Col>
+                    <div className="card-admin">
+                    </div>
+                    </Col>
+                </Row>
+                <Row className="h-8 row-overflow">
+                    <Col>
+                    <div className="card-admin-column">
                         <ReactHTMLTableToExcel
                         id="download-button"
                         className="download-button"
@@ -39,7 +59,7 @@ export const Listado = () =>{
                         filename="listado"
                         sheet="tablexls"
                         buttonText="Download Excel File"/>
-                        <Table striped bordered hover id="listado-final">
+                        <Table striped bordered hover id="listado-final" className='listado'>
                             <thead>
                                 <tr>
                                 <th>#</th>
@@ -71,7 +91,7 @@ export const Listado = () =>{
                                 }
                             </tbody>
                         </Table>
-                        </Card>
+                        </div>
                     </Col>
                 </Row>
             </Container>

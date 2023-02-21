@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import DisplayAlert from '../../Alert/Alert';
 import { QrReader } from 'react-qr-reader';
 import { acreditarPersona } from '../../../utils/FetchToAPI';
 import { AcreditadoForm } from './AcreditadoForm';
@@ -69,7 +70,7 @@ export const AcreditarQr = ({setShowDni}) => {
             type="text"
             onChange={(e) => setDataQr(e.target.value)}
             />
-            {error && <Alert variant='danger' style={{display: 'block'}}>Ocurrio un Error al intentar acreditar</Alert>}
+            {error && <DisplayAlert type={error ? 'danger' : 'success'} display="block"  title="Ocurrio un Error al intentar acreditar" />}
           <Button onClick={() => setQr(true)}>Abrir Camara</Button>
           <Button onClick={ volver } className="btn-secondary">Acreditar con DNI</Button>
         </Form>

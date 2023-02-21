@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import DisplayAlert from '../../Alert/Alert';
 import { acreditarPersona } from '../../../utils/FetchToAPI';
 import { AcreditadoForm } from './AcreditadoForm';
 import { Alert, Spinner } from 'react-bootstrap';
-import DisplayAlert from '../../Alert/Alert';
 
 export const AcreditarDNI = ({setShowQr, idEvento}) => {
 
@@ -72,7 +72,7 @@ export const AcreditarDNI = ({setShowQr, idEvento}) => {
                   onChange={(e) => setDniData(e.target.value) & setSent(false)}
                   />
 
-                  {sent && <Alert variant={error ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
+                  {sent && <DisplayAlert type={error ? 'danger' : 'success'} display="block"  title={ message } />}
                 <Button type='submit'>Enviar</Button>
                 {/* <Button onClick={ volver } className="btn-secondary">Acreditar con QR</Button> */}
               </Form>
