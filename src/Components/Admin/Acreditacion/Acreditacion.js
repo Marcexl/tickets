@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Nabvar from '../Menu/Menu';
+import Sidebar from '../Menu/Sidebar';
+import Footer from "../Footer";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -13,6 +15,7 @@ import { EventosList } from "../../Eventos/EventosList";
 function Acreditacion() {
 
   const [showQr, setShowQr] = useState(false)
+  const [aside, setSidebar] = useState('sidebar')
   const [showDni, setShowDni] = useState(true)
   const [idEvento, setIdEvento] = useState('')
 
@@ -40,19 +43,26 @@ function Acreditacion() {
   return (
     <>
     <Nabvar />
-    <Container fluid className=''>
-      <Row>
-          <Col className='col-login'>
-            <Card className="card-login" >
-              <Card.Title className="mt-3">Selecciona el evento a acreditar</Card.Title>
-              <EventosList setIdEvento={setIdEvento} />
-            {
-              (showQr) ? <AcreditarQr  setShowDni={setShowDni}/>
-              :
-              (showDni) ? <AcreditarDNI setShowQr={setShowQr} idEvento={idEvento} />
-              :
-              <>
-              <Card.Title className="mt-3">Acreditacion</Card.Title>
+    <Sidebar />
+    <Container fluid className={aside}>
+      <Row className="h-1">
+        <Col>
+          <div className="card-admin">
+            <label>Selecciona el evento a acreditar:</label>
+            <EventosList setIdEvento={setIdEvento} />
+          </div>
+        </Col>
+      </Row>
+      <Row className="h-11">
+        <Col>
+          <div className="card-admin-column">
+          {
+            (showQr) ? <AcreditarQr  setShowDni={setShowDni}/>
+            :
+            (showDni) ? <AcreditarDNI setShowQr={setShowQr} idEvento={idEvento} />
+            :
+            <>
+            <label>Acreditacion</label>
               <Card.Body className='dni-acreditar'>
                 <Button
                   onClick={handleSubmitDni}
@@ -61,9 +71,10 @@ function Acreditacion() {
                   onClick={handleSubmitQr}
                 >Con QR</Button>
                 </Card.Body>
-              </>
-            }
-        </Card>
+        
+            </>
+          }
+          </div>
         </Col>
       </Row>
     </Container>

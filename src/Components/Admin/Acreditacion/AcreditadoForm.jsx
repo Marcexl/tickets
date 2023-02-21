@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import Alert from 'react-bootstrap/Alert';
+import DisplayAlert from '../../Alert/Alert';
 import './acreditacion.css';
 
 export const AcreditadoForm = (props) => {
@@ -28,9 +28,7 @@ export const AcreditadoForm = (props) => {
                 <Form.Label id="region">Region: {region}</Form.Label>
               </Form.Group>
             }
-            <Alert variant="success" style={{display: 'block'}}>
-              Ya puede acceder al evento!
-            </Alert>
+            <DisplayAlert type='success' display="block"  title="Ya puede acceder al evento!" />
         </Card.Body>
     </>
   )

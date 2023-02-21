@@ -11,6 +11,7 @@ import Cuenta from './Cuenta/Cuenta';
 import Gracias from './Gracias/Gracias';
 import Login from './Admin/Login/Login';
 import Acreditacion from "./Admin/Acreditacion/Acreditacion";
+import MiCuenta from "./Admin/Account/Account";
 import { Listado } from './Admin/Usuarios/Listado';
 import { ProtectedRoute } from "./ProtectedRoute";
 import { AuthProvider } from "../context/AuthContext";
@@ -27,6 +28,7 @@ export default function App() {
               <Route path="/gracias" element={<Gracias />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/register" element={<Register />} />
+                <Route path="/account" element={<MiCuenta />} />
                 <Route path="/acreditacion" element={<Acreditacion />} />
                 <Route path="/listado" element={<Listado />} />
                 <Route path="/nuevoEvento" element={ <EventoForm />} />
