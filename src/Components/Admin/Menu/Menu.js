@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,35 +11,25 @@ import GlobalSpinner from '../../Spinner/Spinner';
 function Nabvar() {
 
   const [loader,setLoader] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+  const userData = storage.get("user");
+  const userName = userData.user;
   const navigate = useNavigate();
+  const urlHost = process.env.REACT_APP_HOST;
 
-/*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-<NavDropdown.Item href="#action/3.2">
-Another action
-</NavDropdown.Item>
-<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-<NavDropdown.Divider />
-<NavDropdown.Item href="#action/3.4">
-Separated link
-</NavDropdown.Item>
-</NavDropdown>*/
-/*
-  <Nav.Link href={pathUrl + "/#/acreditacion"}>Acreditacion</Nav.Link>
-  <Nav.Link href={pathUrl + "/#/listado"}>Listado por Evento</Nav.Link>
-*/
-
-const { logOut } = useAuth();
-const handleLogOut = () => {
-  setLoader(true)
-  setTimeout(function(){
-    logOut()
-    navigate("/login")
-    storage.remove('user')
-  },1500)
-}
-var pathUrl = 'https://sgiar.org.ar/dialogos/eventos';
-//var pathUrl = 'http://localhost:3001';
+  const { logOut } = useAuth();
+  const handleLogOut = () => {
+    setLoader(true)
+    setTimeout(function(){
+      logOut()
+      navigate("/login")
+      storage.remove('user')
+    },1500)
+  }
 
 return (
     <>
@@ -51,6 +41,9 @@ return (
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
+            <h4>Hola {userName}</h4>
+            <Nav.Link href={`${urlHost}/#/acreditacion`}>Acreditacion</Nav.Link>
+            <Nav.Link href={`${urlHost}/#/listado`}>Listado por Evento</Nav.Link>
             <Nav.Link href="#" onClick={ handleLogOut } className='logout'>Salir</Nav.Link>
           </Nav>
         </Navbar.Collapse>

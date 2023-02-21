@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom'
+import { storage } from '../../../utils/storage';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -9,9 +10,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Logo from '../../logo.png';
 import Alert from 'react-bootstrap/Alert';
-import './login.css';
 import GlobalSpinner from '../../Spinner/Spinner';
 
+import './login.css';
 
 function Login() {
   const [email,setEmail] = useState('');
@@ -21,9 +22,7 @@ function Login() {
   const [message, setMessage] = useState('')
   const { signIn } = useAuth();
   const location = useLocation();
-
   const navigate = useNavigate();
-
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
