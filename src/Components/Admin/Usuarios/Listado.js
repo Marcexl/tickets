@@ -19,13 +19,34 @@ export const Listado = () =>{
     const [aside, setSidebar] = useState('sidebar')
     const [tickets, setTickets] = useState(null);
     const [idEvento, setIdEvento] = useState(1);
+    const [acreditados, setAcreditados] = useState(null);
+    const [noAcreditados, setNoAcreditados] = useState(null);
 
     const getListado = async (idEvento) => {
         const data = await listadoPorEvento(idEvento)
         data !== null && setTickets(data)
     }
 
+     //get cantidad de verificados
+     const getVerificados = async (idEvento) => {
+        fetch('https://www.sgiar.org.ar/dialogos/test/fetch/getVerificados.php?idEvento=' + idEvento)
+        .then((response) => response.json())
+        .then((data) => {
+            setAcreditados(data.verificados);
+        });
+    }
+
+    const getNoVerificados = async (idEvento) => {
+        fetch('https://www.sgiar.org.ar/dialogos/test/fetch/getNoVerificados.php?idEvento=' + idEvento)
+        .then((response) => response.json())
+        .then((data) => {
+            setNoAcreditados(data.verificados);
+        });
+    }
+
     useEffect(() => {
+        getVerificados(idEvento)
+        getNoVerificados(idEvento)
         getListado(idEvento)
     }, [])
 
@@ -46,6 +67,22 @@ export const Listado = () =>{
                 <Row className="h-3">
                     <Col>
                     <div className="card-admin">
+                        <Table striped bordered hover id="listado-final" className='listado'>
+                                <thead>
+                                    <tr>
+                                        <th>Evento</th>
+                                        <th>Acreditados</th>
+                                        <th>No Acreditados</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td>{acreditados}</td>
+                                        <td>{noAcreditados}</td>
+                                    </tr>
+                                </tbody>
+                        </Table>
                     </div>
                     </Col>
                 </Row>
