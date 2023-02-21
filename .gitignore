@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 public/db/records.json
 .env
+public/fetch/getNoVerificados.php
+public/fetch/getVerificados.php

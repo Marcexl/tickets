@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import DisplayAlert from '../../Alert/Alert';
 import { acreditarPersona } from '../../../utils/FetchToAPI';
 import { AcreditadoForm } from './AcreditadoForm';
-import { Alert, Spinner } from 'react-bootstrap';
-import DisplayAlert from '../../Alert/Alert';
 
 export const AcreditarDNI = ({setShowQr, idEvento}) => {
 
@@ -57,35 +56,34 @@ export const AcreditarDNI = ({setShowQr, idEvento}) => {
 
   return (
     <>
-      {loader && <Spinner /> }
-        {dataPersona === null || dataPersona === '' ?
-          <>
-            <Card.Title className="mt-3">Acreditar con DNI</Card.Title>
-            <Card.Body className='dni-acreditar'>
-              <Form onSubmit={ handleSubmit }>
-                <Form.Control
-                  required
-                  autoFocus={true}
-                  onFocus={() => setSent(false)}
-                  placeholder='Ingrese DNI'
-                  type="number"
-                  onChange={(e) => setDniData(e.target.value) & setSent(false)}
-                  />
+      {dataPersona === null || dataPersona === '' ?
+        <>
+          <Card.Title className="mt-3">Acreditar con DNI</Card.Title>
+          <Card.Body className='dni-acreditar'>
+            <Form onSubmit={ handleSubmit }>
+              <Form.Control
+                required
+                autoFocus={true}
+                onFocus={() => setSent(false)}
+                placeholder='Ingrese DNI'
+                type="number"
+                onChange={(e) => setDniData(e.target.value) & setSent(false)}
+                />
 
-                  {sent && <Alert variant={error ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
-                <Button type='submit'>Enviar</Button>
-                {/* <Button onClick={ volver } className="btn-secondary">Acreditar con QR</Button> */}
-              </Form>
-            </Card.Body>
-          </>
-            :
-          <Form onSubmit={() => setDataPersona(null)}>
-            <AcreditadoForm props={dataPersona}/>
-            <br />
-            <Button type='submit' >Continuar Acreditando</Button>
-          </Form>
-        }
-      
+                {sent && <DisplayAlert type={error ? 'danger' : 'success'} display="block"  title={ message } />}
+              <Button type='submit'>Enviar</Button>
+              {/* <Button onClick={ volver } className="btn-secondary">Acreditar con QR</Button> */}
+            </Form>
+          </Card.Body>
+        </>
+          :
+        <Form onSubmit={() => setDataPersona(null)}>
+          <AcreditadoForm props={dataPersona}/>
+          <br />
+          <Button type='submit' >Continuar Acreditando</Button>
+        </Form>
+      }
+    
     </>
   )
 }

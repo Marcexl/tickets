@@ -11,10 +11,6 @@ import GlobalSpinner from '../../Spinner/Spinner';
 function Nabvar() {
 
   const [loader,setLoader] = useState(false);
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   
   const userData = storage.get("user");
   const userName = userData.user;
@@ -34,16 +30,13 @@ function Nabvar() {
 return (
     <>
     {loader ? <GlobalSpinner display="block" /> : 
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="light" variant="dark">
       <Container>
-        <Navbar.Brand href="#/acreditacion">Panel Admin</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
             <h4>Hola {userName}</h4>
-            <Nav.Link href={`${urlHost}/#/acreditacion`}>Acreditacion</Nav.Link>
-            <Nav.Link href={`${urlHost}/#/listado`}>Listado por Evento</Nav.Link>
             <Nav.Link href="#" onClick={ handleLogOut } className='logout'>Salir</Nav.Link>
           </Nav>
         </Navbar.Collapse>

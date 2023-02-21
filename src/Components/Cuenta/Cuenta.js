@@ -54,7 +54,7 @@ function Cuenta() {
     </div>
     <Container fluid className='' id="ticket-final">
     <ConfettiCanvas active={true} fadingMode="LIGHT" stopAfterMs={9000} />
-      <Row>
+      <Row className="row-cuenta">
         <Col className='col-login'>
           <Card className="card-login card-ticket" >
             <Card.Title className="mt-3">¡Ya tenés tu entrada , te esperamos!</Card.Title>
