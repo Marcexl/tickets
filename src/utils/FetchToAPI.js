@@ -1,6 +1,5 @@
-import { useAuth } from "../context/AuthContext";
 import { storage } from "./storage";
-
+const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 const getToken = async () => {
   const user = await storage.get('user')
@@ -9,13 +8,9 @@ const getToken = async () => {
 }
 
 const login = async (data) => {
-  const url = 'https://localhost:3001/auth/login'
-  const url2 = 'https://www.sgiar.org.ar:3001/auth/login'
-<<<<<<< HEAD
-  debugger
-=======
->>>>>>> 1f457299d665e786145fb3e3dbb83842e317eda3
-  const response = await fetch(url2, {
+  console.log(apiEndpoint)
+  const apiLogin = `${apiEndpoint}/auth/login`
+  const response = await fetch(apiLogin, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -26,9 +21,8 @@ const login = async (data) => {
 }
 
 const acreditarPersona = async (data) => {
-  const url = "https://localhost:3001/ticket/event/acreditate";
-  const url2 = "https://www.sgiar.org.ar:3001/ticket/event/acreditate";
-  const response = await fetch(url2, {
+  const apiAcreditate = `${apiEndpoint}/ticket/event/acreditate`
+  const response = await fetch(apiAcreditate, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,12 +36,9 @@ const acreditarPersona = async (data) => {
 
 
 const listadoPorEvento = async (idEvento) => {
-
-  const url = `https://localhost:3001/ticket/getAll/evento/${idEvento}`;
-  const url2 = `https://www.sgiar.org.ar:3001/ticket/getAll/evento/${idEvento}`;
-
+  const apiGetEventos = `${apiEndpoint}/ticket/getAll/evento/${idEvento}`;
   try{
-    const response = await fetch(url2, {
+    const response = await fetch(apiGetEventos, {
       headers: {Authorization: await getToken()}
     })
     return response.json()
@@ -57,11 +48,9 @@ const listadoPorEvento = async (idEvento) => {
 }
 
 const getEventosActivos = async () => {
-  const url = `https://localhost:3001/eventos`;
-  const url2 = `https://www.sgiar.org.ar:3001/eventos`;
-
+  const apiEventosActivos = `${apiEndpoint}/eventos`;
   try{
-    const response = await fetch(url2, {
+    const response = await fetch(apiEventosActivos, {
       headers: {Authorization: await getToken()}
     })
     return response.json()
@@ -71,11 +60,9 @@ const getEventosActivos = async () => {
 }
 
 const newEvento = async (data) => {
-  const url = `https://localhost:3001/eventos/save`;
-  const url2 = `https://www.sgiar.org.ar:3001/eventos/save`;
-
+  const apiSaveEventos = `${apiEndpoint}/eventos/save`;
   try{
-    const response = await fetch(url2, {
+    const response = await fetch(apiSaveEventos, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
