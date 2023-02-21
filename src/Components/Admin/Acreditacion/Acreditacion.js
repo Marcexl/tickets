@@ -42,7 +42,7 @@ function Acreditacion() {
 
   return (
     <>
-    <Nabvar />
+    <Nabvar page="Acreditacion"/>
     <Sidebar />
     <Container fluid className={aside}>
       <Row className="h-1">

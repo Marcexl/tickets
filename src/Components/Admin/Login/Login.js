@@ -33,9 +33,9 @@ function Login() {
       setLoader(false)
       if(res.status == 'ok'){
         if(location.state?.from) {
-            navigate(location.state.from)
+          navigate(location.state.from)
         }else{
-            navigate("/acreditacion")
+          navigate("/admin/dashboard")
         }
       }else{
         setErrorLogin(true)

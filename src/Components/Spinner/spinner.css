@@ -3,9 +3,9 @@
     top: 0;
     left: 0;
     height: 100vh;
-    z-index: 11;
+    z-index: 111;
     width: 100%;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.9);
     display: none;
 }
 .spinner-border{

@@ -38,9 +38,8 @@
 }
 .aside-header{
     display: flex;
-    padding: 9px 0px;
+    padding: 9px 15px;
     align-items: center;
-    justify-content: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2)
 }
 
@@ -48,6 +47,7 @@
     color: #f2f2f2;
     font-size: 1.5rem;
     padding-left:10px;
+    margin-bottom: 0;
 }
 
 .aside-header img{
@@ -78,4 +78,10 @@
     position: relative;
     top: -2px;
     margin: 5px;
+}
+.dashboard-link:hover,
+.dashboard-link{
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
 }

@@ -16,22 +16,24 @@ import { Listado } from './Admin/Usuarios/Listado';
 import { ProtectedRoute } from "./ProtectedRoute";
 import { AuthProvider } from "../context/AuthContext";
 import { EventoForm } from "./Eventos/EventoForm";
+import Dashboard from "./Admin/Dashboard/Dashboard";
 
 export default function App() {
     return (
       <AuthProvider>
         <HashRouter>
             <Routes>
-              <Route path="/login" element={<Login />} />
+              <Route path="/admin/login" element={<Login />} />
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/register" element={<Register />} />
-                <Route path="/account" element={<MiCuenta />} />
-                <Route path="/acreditacion" element={<Acreditacion />} />
-                <Route path="/listado" element={<Listado />} />
-                <Route path="/nuevoEvento" element={ <EventoForm />} />
+                <Route path="/admin/dashboard" element={<Dashboard />} />
+                <Route path="/admin/account" element={<MiCuenta />} />
+                <Route path="/admin/acreditacion" element={<Acreditacion />} />
+                <Route path="/admin/listado" element={<Listado />} />
+                <Route path="/admin/nuevoEvento" element={ <EventoForm />} />
               </Route>
               <Route path='/' element={<Welcome />} />
             </Routes>
