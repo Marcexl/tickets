@@ -12,13 +12,13 @@ function Gracias() {
   return (
     <>
     <GlobalSpinner />
-    <Container fluid className=''>
+    <Container fluid className='container-login'>
       <Row>
         <Col className='col-login'>
           <Card className="card-login p-5">
             <img src={People} alt="people" className="people"/>
-            <h4 className="mt-3 ">Muchas gracias ya falta poco</h4>
-            <h4 className="mt-1">para el evento</h4>
+            <h4 className="mt-3 ">Muchas gracias por todo</h4>
+            <h4 className="mt-1">Por ahora no hay eventos para anotarse</h4>
           </Card>
         </Col>
       </Row>

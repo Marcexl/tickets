@@ -24,10 +24,10 @@ export default function App() {
         <HashRouter>
             <Routes>
               <Route path="/admin/login" element={<Login />} />
-              <Route path="/eventos" element={<Eventos />} />
-              <Route path="/cuenta" element={<Cuenta />} />
+              <Route path="/eventos" element={<Gracias />} />
+              <Route path="/cuenta" element={<Gracias />} />
               <Route path="/gracias" element={<Gracias />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<Gracias />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/account" element={<MiCuenta />} />
