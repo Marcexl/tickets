@@ -1,0 +1,9 @@
+.container-admin-login{
+    background-color: #ededed;
+}
+.container-admin-login .row{
+    height: 100%;
+}
+.card-admin-login{
+    min-width: 450px;
+}

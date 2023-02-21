@@ -10,16 +10,23 @@ import {
 } from "react-icons/fa";
 import { storage } from '../../../utils/storage';
 import GlobalSpinner from '../../Spinner/Spinner';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import './menu.css';
 
 function Sidebar() {
   const [loader,setLoader] = useState(false);
+  const [show, setModal] = useState(false);
   const urlHost = process.env.REACT_APP_HOST;
   const navigate = useNavigate();
   const { logOut } = useAuth();
+  
+  const closeModal = () => setModal(false);
+  const showModal = () => setModal(true);
 
   const handleLogOut = () => {
     setLoader(true)
+    closeModal()
     setTimeout(function(){
       logOut()
       navigate("/admin/login")
@@ -29,6 +36,20 @@ function Sidebar() {
 
   return (
     <>
+    <Modal show={show} onHide={closeModal}>
+      <Modal.Header closeButton>
+        <Modal.Title>Cerrar sesion</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Estas seguro que deseas cerrar la sesion?</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={closeModal}>
+          Cancelar
+        </Button>
+        <Button variant="primary" onClick={handleLogOut}>
+          Si
+        </Button>
+      </Modal.Footer>
+    </Modal>
     {loader ? <GlobalSpinner display="block" /> : 
       <div className='aside'>
         <div className='aside-header'>
@@ -48,7 +69,7 @@ function Sidebar() {
             <a href={`${urlHost}/#/admin/listado`}><FaListUl color='white'/> Listado por Evento</a>
           </li>
           <li>
-            <a href="#" onClick={ handleLogOut }><FaPowerOff color='white'/> Salir</a>
+            <button variant="link" onClick={showModal} className="link-logout"><FaPowerOff color='white'/> Salir</button>
           </li>
         </ul>
       </div>

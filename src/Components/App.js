@@ -27,8 +27,8 @@ export default function App() {
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
+              <Route path="/register" element={<Register />} />
               <Route element={<ProtectedRoute />}>
-                <Route path="/register" element={<Register />} />
                 <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/account" element={<MiCuenta />} />
                 <Route path="/admin/acreditacion" element={<Acreditacion />} />

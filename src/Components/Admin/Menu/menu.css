@@ -7,12 +7,10 @@
     z-index: 111;
     border-bottom: 1px solid #CCC;
     height: 60px;
-}
-.logout{
-    color: #212529;
-}
-.logout:hover{
-    color: #700bef;
+    -webkit-box-shadow: 0px 3px 7px 3px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 3px 7px 3px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 7px 3px rgba(0,0,0,0.2);
+
 }
 .navbar-brand{
     color: #212529;
@@ -74,10 +72,22 @@
     background: rgba(255,255,255,0.2);
 }
 
+.aside ul li .link-logout svg,
 .aside ul li a svg{
     position: relative;
     top: -2px;
     margin: 5px;
+}
+.aside ul li .link-logout{
+    color: white;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+}
+.aside ul li .link-logout:hover{
+    background: rgba(255,255,255,0.2);
 }
 .dashboard-link:hover,
 .dashboard-link{
