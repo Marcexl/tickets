@@ -7,7 +7,9 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import GlobalSpinner from '../Spinner/Spinner';
 import Foto from './entrada-empty.jpg';
+import Modal from 'react-bootstrap/Modal';
 import { ConfettiCanvas } from "react-raining-confetti";
+import { QRCodeImg } from '@cheprasov/react-qrcode';
 import './cuenta.css';
 
 function Cuenta() {
@@ -21,16 +23,35 @@ function Cuenta() {
   },3000)
 
   //armo la url para el QR
-  //let userData = localStorage.getItem('usr');
-  //let evento = localStorage.getItem('evento');
-  //let user = JSON.parse(userData);
-  //let dni = user.dni;
-  //var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/gracias?uid='+dni+'&evento='+evento;
+  let userData = localStorage.getItem('usr');
+  let evento = localStorage.getItem('evento');
+  let user = JSON.parse(userData);
+  let dni = user.dni;
+  var pathThanks = 'https://sgiar.org.ar/dialogos/eventos/#/acreditacion?uid='+dni+'&evento='+evento;
 
   return (
     <>
     <GlobalSpinner />
     <ProgressBar id="progressbar" animated variant="info" now={0} label='Generando la entrada, espere por favor...'/>
+    <div
+      id='aviso'
+      className="modal show"
+    >
+      <Modal.Dialog >
+        <Modal.Header>
+          <Modal.Title>Aviso</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>¿Necesitas que te enviemos nuevamente la invitación a tu email?</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>Cancelar</Button>
+          <Button variant="primary" onClick={resendEmai}>Enviar email</Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    </div>
     <Container fluid className='' id="ticket-final">
     <ConfettiCanvas active={true} fadingMode="LIGHT" stopAfterMs={9000} />
       <Row>
@@ -38,9 +59,11 @@ function Cuenta() {
           <Card className="card-login card-ticket" >
             <Card.Title className="mt-3">¡Ya tenés tu entrada , te esperamos!</Card.Title>
             <Card.Body className="card-cuenta">
-              <div class="ticket-container">
+              <div className="ticket-container">
                 <div className="qr" id="qr">
-
+                  <QRCodeImg
+                    value={pathThanks}
+                  />
                 </div>
                 <img src={Foto} className="ticket" alt='ticket'/>
               </div>
@@ -68,7 +91,8 @@ export default Cuenta;
 
 function SendEmail (){
   let data = '';
-  let imgsrc = document.getElementsByClassName("QRCodeImg")[0];
+  let imgsrc = '';
+  imgsrc = document.getElementsByClassName("QRCodeImg")[0];
 
   let userData = localStorage.getItem('usr');
   let user = JSON.parse(userData);
@@ -83,7 +107,7 @@ function SendEmail (){
     headers:{"Content-Type": "application/json" },
     body: data,
     }).then((response) => {
-
+    console.log(response)
     if (response.ok)
     {
       console.log('ok genero qr');
@@ -93,24 +117,62 @@ function SendEmail (){
       downloadTicket.style.display = 'block';
 
       //envio mail
-      fetch('./Mail/mail.php', {
-        method: 'POST',
-        headers:{"Content-Type": "application/json" },
-        body: data,
-        }).then((response) => {
-        if (response.ok)
-        {
-          console.log('ok envio mail');
-        }
-        else
-        {
-          console.log('no se mando el mail');
-        }
-      })
+      if( (!localStorage.getItem('emailsended')) || (localStorage.getItem('emailsended') !== email) )
+      {
+        
+        fetch('./Mail/mail.php', {
+          method: 'POST',
+          headers:{"Content-Type": "application/json" },
+          body: data,
+          }).then((response) => {
+          if (response.ok)
+          {
+            console.log('ok envio mail');
+            localStorage.setItem('emailsended',true)
+          }
+          else
+          {
+            console.log('no se mando el mail');
+          }
+        })
+      }
+      else
+      {
+       document.getElementById("aviso").style.display = 'block'; 
+      }
     }
     else
     {
       console.log('no se creo el querre');
+    }
+  })
+}
+
+function resendEmai(){
+  let data = '';
+  let imgsrc = '';
+  imgsrc = document.getElementsByClassName("QRCodeImg")[0];
+
+  let userData = localStorage.getItem('usr');
+  let user = JSON.parse(userData);
+  let email = user.mail;
+  let dni = user.dni;
+  let evento = localStorage.getItem('evento');
+  data = JSON.stringify({email: email, qr: imgsrc.currentSrc, evento: evento, dni:dni});
+
+  fetch('./Mail/mail.php', {
+    method: 'POST',
+    headers:{"Content-Type": "application/json" },
+    body: data
+    }).then((response) => {
+    if (response.ok)
+    {
+      console.log('ok envio mail');
+      document.getElementById("aviso").style.display = 'none'; 
+    }
+    else
+    {
+      console.log('no se mando el mail');
     }
   })
 }
@@ -128,3 +190,6 @@ function DownloadTicket(){
   return false;
 }
 
+function closeModal(){
+  document.getElementById("aviso").style.display = 'none'; 
+}

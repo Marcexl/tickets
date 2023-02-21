@@ -1,7 +1,6 @@
 .card-title{
     padding: 30px;
 }
-
 .people{
     max-width: 250px;
     display: block;
@@ -11,4 +10,7 @@
 .card-gracias{
     display: block;
     padding-bottom: 60px;
+}
+h4{
+    text-align: center;
 }
