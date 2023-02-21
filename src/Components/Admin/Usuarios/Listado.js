@@ -18,18 +18,20 @@ import { EventosList } from "../../Eventos/EventosList";
 export const Listado = () =>{
     const [aside, setSidebar] = useState('sidebar')
     const [tickets, setTickets] = useState(null);
-    const [idEvento, setIdEvento] = useState(1);
+    const [idEvento, setIdEvento] = useState(3);
     const [acreditados, setAcreditados] = useState(null);
     const [noAcreditados, setNoAcreditados] = useState(null);
 
     const getListado = async (idEvento) => {
         const data = await listadoPorEvento(idEvento)
         data !== null && setTickets(data)
+        getVerificados(idEvento)
+        getNoVerificados(idEvento)
     }
 
-     //get cantidad de verificados
+    //get cantidad de verificados
      const getVerificados = async (idEvento) => {
-        fetch('https://www.sgiar.org.ar/dialogos/test/fetch/getVerificados.php?idEvento=' + idEvento)
+        await fetch('https://www.sgiar.org.ar/dialogos/eventos/fetch/getVerificados.php?idEvento=' + idEvento)
         .then((response) => response.json())
         .then((data) => {
             setAcreditados(data.verificados);
@@ -37,7 +39,7 @@ export const Listado = () =>{
     }
 
     const getNoVerificados = async (idEvento) => {
-        fetch('https://www.sgiar.org.ar/dialogos/test/fetch/getNoVerificados.php?idEvento=' + idEvento)
+        await fetch('https://www.sgiar.org.ar/dialogos/eventos/fetch/getNoVerificados.php?idEvento=' + idEvento)
         .then((response) => response.json())
         .then((data) => {
             setNoAcreditados(data.verificados);
@@ -45,8 +47,6 @@ export const Listado = () =>{
     }
 
     useEffect(() => {
-        getVerificados(idEvento)
-        getNoVerificados(idEvento)
         getListado(idEvento)
     }, [])
 
@@ -54,7 +54,7 @@ export const Listado = () =>{
         <>
         <Nabvar />
         <Sidebar />
-        {tickets === null ? <GlobalSpinner/> :
+        {tickets === null ? <GlobalSpinner display="block"  /> :
             <Container fluid className={aside}>
                  <Row className="h-1">
                     <Col>
@@ -64,7 +64,7 @@ export const Listado = () =>{
                     </div>
                     </Col>
                 </Row>
-                <Row className="h-3">
+                <Row className="h-2">
                     <Col>
                     <div className="card-admin">
                         <Table striped bordered hover id="listado-final" className='listado'>
@@ -86,7 +86,7 @@ export const Listado = () =>{
                     </div>
                     </Col>
                 </Row>
-                <Row className="h-8 row-overflow">
+                <Row className="h-9 row-overflow">
                     <Col>
                     <div className="card-admin-column">
                         <ReactHTMLTableToExcel

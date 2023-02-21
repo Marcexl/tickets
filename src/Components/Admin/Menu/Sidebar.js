@@ -1,5 +1,9 @@
 import Icon from './icon.png';
-import { FaListUl, FaAddressCard } from "react-icons/fa";
+import { 
+  FaListUl, 
+  FaAddressCard, 
+  FaUserAstronaut
+} from "react-icons/fa";
 
 import './menu.css';
 
@@ -13,6 +17,9 @@ function Sidebar() {
           <h2>Panel Admin</h2>
         </div>
         <ul>
+        <li>
+              <a href={`${urlHost}/#/account`}><FaUserAstronaut color='white'/> Datos de la cuenta</a>
+            </li>
             <li>
               <a href={`${urlHost}/#/acreditacion`}><FaAddressCard color='white'/> Acreditacion</a>
             </li>
