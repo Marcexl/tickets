@@ -52,7 +52,7 @@ export const Listado = () =>{
 
     return (
         <>
-        <Nabvar />
+        <Nabvar page="Acreditados por Evento"/>
         <Sidebar />
         {tickets === null ? <GlobalSpinner display="block"  /> :
             <Container fluid className={aside}>

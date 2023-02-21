@@ -8,7 +8,6 @@ const getToken = async () => {
 }
 
 const login = async (data) => {
-  console.log(apiEndpoint)
   const apiLogin = `${apiEndpoint}/auth/login`
   const response = await fetch(apiLogin, {
     method: 'POST',

@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Nabvar from '../Menu/Menu';
 import Sidebar from '../Menu/Sidebar';
 import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './account.css';
 import { Button } from "react-bootstrap";
 
-function MiCuenta() {
+function Dashboard() {
     const [aside, setSidebar] = useState('sidebar')
 
   return (
     <>
-    <Nabvar page="Mi cuenta"/>
+    <Nabvar page="Escritorio" />
     <Sidebar />
     <Container fluid className={aside}>
       <Row className="h-1">
         <Col>
-          <div className="card-admin">
-            <label>Datos de la cuenta:</label>
-          </div>
-        </Col>
-      </Row>
-      <Row className="h-11">
-        <Col>
           <div className="card-admin-column">
+            <label>Bienvenido</label>
+            <p>Que quieres hacer hoy?</p>
           </div>
         </Col>
       </Row>
@@ -34,4 +27,4 @@ function MiCuenta() {
   );
 }
 
-export default MiCuenta;
+export default Dashboard;

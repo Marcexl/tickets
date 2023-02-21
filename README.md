@@ -14,8 +14,11 @@ You can try connect to services running Chrome with no-cors
 You need to run cmd as administrator and then:
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
 
-# use REACT_APP_API_ENDPOINT
-the .env file isnt commited here you need it to call right api
+# use enpoints on env
+the .env file isnt commited so 
+you will need to ask to the site administrator 
+to call the right api
+put it on root project
 
 # usefull comands
 npm run build for upload changes to the server

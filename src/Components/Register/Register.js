@@ -12,18 +12,18 @@ import './register.css';
 
 //var urlMaster = 'http://localhost:3000/';
 var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
-var errorMessage = 'Por favor completa todos los datos';
+const errorMessage = "Por favor completa todos los datos";
+const successMessage = "Te haz registrado con exito!"
 
 function Register() {
+  const [loader, setLoader] = useState(false);
+  const [errorRegister, setErrorRegister] = useState(false)
+  const [message, setMessage] = useState('')
   const [validated, setValidated] = useState(false);
   const [documento, setDocumento] = useState('');
   const [email, setEmail] = useState('');
 
   const RegistrarUsuario = (event) => {
-    var spinner = document.getElementById("spinner");
-    var salert = document.getElementById("success-alert");
-    var dalert = document.getElementById("danger-alert");
-
     const form = event.currentTarget;
 
     // no paso false
@@ -31,11 +31,13 @@ function Register() {
     {
       event.preventDefault();
       event.stopPropagation();
+      setLoader(true)
       setTimeout(() => {
-        dalert.style.display = 'block';
-        dalert.innerHTML = errorMessage;
+        setLoader(false)
+        setErrorRegister(true)
+        setMessage(errorMessage)
         setTimeout( () => {
-          dalert.style.display = 'none';
+          setErrorRegister(false)
         },1500);
       },1000);
     }
@@ -47,7 +49,7 @@ function Register() {
     {
       event.preventDefault();
       //1) activo spinner
-      spinner.style.display = 'block';
+      setLoader(true)
 
       //2) traigo las variables
       let docuFormated  = documento.replace(/\D/g,'');
@@ -76,10 +78,8 @@ function Register() {
         localStorage.setItem("usrId",data.id);
 
         setTimeout( () => {
-          dalert.style.display  = 'none';
-          spinner.style.display = 'none';
-          salert.style.display  = 'block';
-
+          setLoader(false)
+          setMessage(successMessage)
           setTimeout( () => {
             window.location.href = `${urlMaster}#/eventos`;
           },800);
@@ -89,11 +89,11 @@ function Register() {
       .catch((error) => {
         console.error('Error:', error);
         setTimeout(() => {
-          spinner.style.display = 'none';
-          dalert.style.display = 'block';
-          dalert.innerHTML = error;
+          setErrorRegister(true)
+          setLoader(false)
+          setMessage(error)
           setTimeout( () => {
-            dalert.style.display = 'none';
+            setErrorRegister(false)
           },1500);
         },1000);
       });
@@ -103,7 +103,7 @@ function Register() {
 
   return (
     <>
-    <GlobalSpinner />
+    {loader ? <GlobalSpinner display="block"/> :
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -134,16 +134,13 @@ function Register() {
                   Enviar
                 </Button>
               </Form>
-
-              <Alert variant='success' id="success-alert">
-                Te haz registrado con exito!
-              </Alert>
-              <Alert variant='danger' id="danger-alert"></Alert>
+              {errorRegister && <Alert variant={errorRegister ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
             </Card.Body>
           </Card>
         </Col>
       </Row>
     </Container>
+    }
     </>
   );
 }

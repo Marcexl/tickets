@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom'
-import { storage } from '../../../utils/storage';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -15,6 +14,7 @@ import GlobalSpinner from '../../Spinner/Spinner';
 import './login.css';
 
 function Login() {
+  
   const [email,setEmail] = useState('');
   const [pass,setPass]   = useState('');
   const [loader, setLoader] = useState(false);
@@ -31,13 +31,19 @@ function Login() {
       const res = await signIn(email,pass);
       setMessage(res.message)
       setLoader(false)
-      if(res.status == 'ok'){
-        if(location.state?.from) {
-            navigate(location.state.from)
-        }else{
-            navigate("/acreditacion")
+      if(res.status == 'ok')
+      {
+        if(location.state?.from) 
+        {
+          navigate(location.state.from)
         }
-      }else{
+        else
+        {
+          navigate("/admin/dashboard")
+        }
+      }
+      else
+      {
         setErrorLogin(true)
       }
     } catch (err) {
@@ -49,11 +55,11 @@ function Login() {
   return (
     <>
     {loader ? <GlobalSpinner display="block" /> : 
-    <Container className='cotainer-login'>
+    <Container fluid className='container-admin-login'>
       <Row>
         <Col className='col-login'>
-          <Card className="card-login">
-            <Card.Title className="mt-3">Login</Card.Title>
+          <Card className="card-admin-login">
+            <Card.Title className="mt-3">Login Panel Admin</Card.Title>
             <Card.Img variant="top" src={Logo} className="logo-login"/>
             <Card.Body>
               <Form>
