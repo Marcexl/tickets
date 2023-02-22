@@ -11,7 +11,8 @@ const getToken = async () => {
 const login = async (data) => {
   const url = 'https://localhost:3001/auth/login'
   const url2 = 'https://www.sgiar.org.ar:3001/auth/login'
-  const response = await fetch(url2, {
+  const url3 = 'http://192.168.0.101:8080/auth/login'
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -24,7 +25,26 @@ const login = async (data) => {
 const acreditarPersona = async (data) => {
   const url = "https://localhost:3001/ticket/event/acreditate";
   const url2 = "https://www.sgiar.org.ar:3001/ticket/event/acreditate";
-  const response = await fetch(url2, {
+  const url3 = 'http://192.168.0.101:8080/ticket/event/acreditate'
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': await getToken()
+    },
+    body: JSON.stringify(data)
+  })
+  return response.json()
+}
+
+const savePersona = async (data) => {
+  const url = "https://localhost:3001/ticket/save";
+  const url2 = "https://www.sgiar.org.ar:3001/ticket/save";
+  const url3 = `http://192.168.0.101:8080/ticket/save`
+
+  
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -41,9 +61,11 @@ const listadoPorEvento = async (idEvento) => {
 
   const url = `https://localhost:3001/ticket/getAll/evento/${idEvento}`;
   const url2 = `https://www.sgiar.org.ar:3001/ticket/getAll/evento/${idEvento}`;
+    const url3 = `http://192.168.0.101:8080/ticket/getAll/evento/${idEvento}`
+
 
   try{
-    const response = await fetch(url2, {
+    const response = await fetch(url, {
       headers: {Authorization: await getToken()}
     })
     return response.json()
@@ -55,9 +77,11 @@ const listadoPorEvento = async (idEvento) => {
 const getEventosActivos = async () => {
   const url = `https://localhost:3001/eventos`;
   const url2 = `https://www.sgiar.org.ar:3001/eventos`;
+  const url3 = 'http://192.168.0.101:8080/eventos'
+
 
   try{
-    const response = await fetch(url2, {
+    const response = await fetch(url, {
       headers: {Authorization: await getToken()}
     })
     return response.json()
@@ -69,9 +93,11 @@ const getEventosActivos = async () => {
 const newEvento = async (data) => {
   const url = `https://localhost:3001/eventos/save`;
   const url2 = `https://www.sgiar.org.ar:3001/eventos/save`;
+    const url3 = 'http://192.168.0.101:8080/auth/login'
+
 
   try{
-    const response = await fetch(url2, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -98,4 +124,4 @@ const acreditarDrive = async (data) => {
 }
 
 
-export {acreditarPersona, login, listadoPorEvento, getEventosActivos, newEvento, acreditarDrive}
+export {acreditarPersona, login, listadoPorEvento, getEventosActivos, newEvento, acreditarDrive, savePersona}

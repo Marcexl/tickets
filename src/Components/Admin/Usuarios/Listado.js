@@ -21,7 +21,7 @@ export const Listado = () =>{
     }
 
     useEffect(() => {
-        getListado(3)
+        getListado(6)
     }, [])
 
     return (
@@ -47,9 +47,10 @@ export const Listado = () =>{
                                 <th>Apellido</th>
                                 <th>Celular</th>
                                 <th>DNI</th>
+                                <th>Barrio</th>
                                 <th>Email</th>
-                                <th>Verificado</th>
-                                <th>Evento</th>
+                                <th>Acreditado</th>
+                                {/* <th>Evento</th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,9 +63,10 @@ export const Listado = () =>{
                                                 <td>{ticket.apellido}</td>
                                                 <td>{ticket.celular}</td>
                                                 <td>{ticket.dni}</td>
+                                                <td>{ticket.barrioLocalidad}</td>
                                                 <td>{ticket.mail}</td>
                                                 <td>{ticket.verificado === 0 ? 'No' : 'Si'}</td>
-                                                <td>{ticket.evento.nombre}</td>
+                                                {/* <td>{ticket.evento.nombre}</td> */}
                                             </tr>
                                         )
                                     )

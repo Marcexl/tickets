@@ -26,10 +26,10 @@ export default function App() {
               <Route path="/eventos" element={<Eventos />} />
               <Route path="/cuenta" element={<Cuenta />} />
               <Route path="/gracias" element={<Gracias />} />
+              <Route path="/listado" element={<Listado />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/register" element={<Register />} />
                 <Route path="/acreditacion" element={<Acreditacion />} />
-                <Route path="/listado" element={<Listado />} />
                 <Route path="/nuevoEvento" element={ <EventoForm />} />
               </Route>
               <Route path='/' element={<Welcome />} />

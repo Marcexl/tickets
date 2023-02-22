@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { acreditarPersona } from '../../../utils/FetchToAPI';
+import { acreditarPersona, savePersona } from '../../../utils/FetchToAPI';
 import { AcreditadoForm } from './AcreditadoForm';
 import { Alert, Spinner } from 'react-bootstrap';
-import DisplayAlert from '../../Alert/Alert';
 
 export const AcreditarDNI = ({setShowQr, idEvento}) => {
 
@@ -15,6 +14,9 @@ export const AcreditarDNI = ({setShowQr, idEvento}) => {
   const [message, setMessage] = useState('')
   const [sent, setSent] = useState(false)
   const [loader, setLoader] = useState(false)
+  const [nombreApellido, setNombreApellido] = useState('')
+  const [grabar, setGrabar] = useState(false)
+  const [barrio, setBarrio] = useState('')
 
 
   const handleSubmit = async (e) => {
@@ -31,22 +33,52 @@ export const AcreditarDNI = ({setShowQr, idEvento}) => {
       setSent(true)
       return null;
     }
-    try{
-      setLoader(true)
-      const response = await acreditarPersona(data)
-      setLoader(false)
-      setSent(true)
-      if(response){
-        if(response.status == 'error'){
-          setError(true)
-        }else{
-          setDataPersona(response.data)
-        }
-        setMessage(response.message)
+    if(nombreApellido !== ''){
+      const data = {
+        nombre : nombreApellido,
+        localidadBarrio : barrio,
+        dni : dniData,
+        evento : {
+          id : idEvento
+        },
+        verificado : 1
       }
-    }catch{
-      setError(true)
-      setMessage("Ocurrio un error al intentar acreditar.")
+      setLoader(true)
+      const response = await savePersona(data)
+      setLoader(false)
+      if(response){
+        setMessage("Persona acreditada correctamente.")
+        setDataPersona(response)
+      }else{
+        setError(true)
+        setMessage("No se pudo acreditar a la persona")
+      }
+      setSent(true)
+    }else{
+      try{
+        
+        setLoader(true)
+        const response = await acreditarPersona(data)
+        setLoader(false)
+        setSent(true)
+        if(response){
+          if(response.status == 'error'){
+            setError(true)
+            if(response.code == '01'){
+              setMessage(response.message)
+              return null;
+            }else{
+              setGrabar(true)
+            }
+          }else{
+            setDataPersona(response.data)
+          }
+          setMessage(response.message)
+        }
+      }catch{
+        setError(true)
+        setMessage("Ocurrio un error al intentar acreditar.")
+      }
     }
   }
 
@@ -71,7 +103,21 @@ export const AcreditarDNI = ({setShowQr, idEvento}) => {
                   type="number"
                   onChange={(e) => setDniData(e.target.value) & setSent(false)}
                   />
-
+                  {grabar && 
+                  <>
+                  <Form.Control
+                  placeholder='Ingrese Nombre y Apellido'
+                  type="text"
+                  onChange={(e) => setNombreApellido(e.target.value) & setSent(false)}
+                  />
+                  <Form.Control
+                  placeholder='Ingrese Barrio o localidad'
+                  type="text"
+                  onChange={(e) => setBarrio(e.target.value) & setSent(false)}
+                  />
+                  </>
+                  
+                  }
                   {sent && <Alert variant={error ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
                 <Button type='submit'>Enviar</Button>
                 <Button onClick={ volver } className="btn-secondary">Acreditar con QR</Button>
@@ -79,11 +125,11 @@ export const AcreditarDNI = ({setShowQr, idEvento}) => {
             </Card.Body>
           </>
             :
-          <Form onSubmit={() => setDataPersona(null)}>
+          <>
             <AcreditadoForm props={dataPersona}/>
             <br />
-            <Button type='submit' >Continuar Acreditando</Button>
-          </Form>
+            <Button onClick={() => setDataPersona(null) & setNombreApellido('') & setBarrio('') & setGrabar(false)} >Continuar Acreditando</Button>
+          </>
         }
       
     </>

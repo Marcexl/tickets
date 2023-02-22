@@ -14,7 +14,8 @@ function Acreditacion() {
 
   const [showQr, setShowQr] = useState(false)
   const [showDni, setShowDni] = useState(true)
-  const [idEvento, setIdEvento] = useState('')
+  //const [idEvento, setIdEvento] = useState('')
+  const idEvento = 6;
 
   const handleSubmitDni = () => {
     setShowDni(true)
@@ -44,11 +45,11 @@ function Acreditacion() {
       <Row>
           <Col className='col-login'>
             <Card className="card-login" >
-              <Card.Title className="mt-3">Selecciona el evento a acreditar</Card.Title>
-              <EventosList setIdEvento={setIdEvento} />
+              {/* <Card.Title className="mt-3">Selecciona el evento a acreditar</Card.Title> */}
+              {/* <EventosList setIdEvento={setIdEvento} /> */}
             {
-              (showQr) ? <AcreditarQr  setShowDni={setShowDni}/>
-              :
+              // (showQr) ? <AcreditarQr  setShowDni={setShowDni} idEvento={idEvento} />
+              // :
               (showDni) ? <AcreditarDNI setShowQr={setShowQr} idEvento={idEvento} />
               :
               <>
