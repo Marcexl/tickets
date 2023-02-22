@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Nabvar from '../Menu/Menu';
 import Sidebar from '../Menu/Sidebar';
-import Footer from "../Footer";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';

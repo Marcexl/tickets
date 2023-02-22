@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom'
+import { storage } from '../../utils/storage';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -10,10 +12,10 @@ import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import './register.css';
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
 const errorMessage = "Por favor completa todos los datos";
 const successMessage = "Te haz registrado con exito!"
+const urlHost = process.env.REACT_APP_HOST;
+const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 function Register() {
   const [loader, setLoader] = useState(false);
@@ -22,6 +24,7 @@ function Register() {
   const [validated, setValidated] = useState(false);
   const [documento, setDocumento] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
   const RegistrarUsuario = (event) => {
     const form = event.currentTarget;
@@ -59,47 +62,19 @@ function Register() {
         "dni": docuFormated
       }
 
-      //3) registro el usuario
-      var url = "https://www.sgiar.org.ar:3001/ticket/save";
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataString),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('se registro el usuario');
+      //3) guardo en local storage
+      storage.set("usrTicket",dataString)
 
-        //4) guardo en local storage
-        const dataStorage = JSON.stringify(dataString);
-        localStorage.setItem("usr",dataStorage);
-        localStorage.setItem("usrId",data.id);
-
+      setTimeout( () => {
+        setLoader(false)
+        setMessage(successMessage)
         setTimeout( () => {
-          setLoader(false)
-          setMessage(successMessage)
-          setTimeout( () => {
-            window.location.href = `${urlMaster}#/eventos`;
-          },800);
+          navigate("/eventos")
         },800);
+      },800);
 
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        setTimeout(() => {
-          setErrorRegister(true)
-          setLoader(false)
-          setMessage(error)
-          setTimeout( () => {
-            setErrorRegister(false)
-          },1500);
-        },1000);
-      });
     }
   }
-
 
   return (
     <>
