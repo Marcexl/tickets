@@ -27,7 +27,7 @@ const options = [
 function Eventos() {
   const [selected, setSelected] = useState(options[0].value);
   const [loader, setLoader] = useState(false);
-  const [errorEvento, setErrorEvento] = useState(false)
+  const [sendEvento, setSendEvento] = useState(false)
   const [message, setMessage] = useState('')
   const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ function Eventos() {
     if(selected === '')
     {
       setLoader(false)
-      setErrorEvento(true)
+      setSendEvento(2)
       setMessage(emptyEvento)
       return false;
     }
@@ -78,6 +78,7 @@ function Eventos() {
           //si pudo anotarse succesmessage
           setTimeout( () => {
             setLoader(false)
+            setSendEvento(1)
             setMessage(successMessage)
             setTimeout( () => {
               navigate("/cuenta")
@@ -89,11 +90,8 @@ function Eventos() {
           //si no pudo anotarse xq ya esta anotado alreadymessage
           setTimeout(() => {
             setLoader(false)
-            setErrorEvento(true)
+            setSendEvento(2)
             setMessage(alreadyRegister)
-            setTimeout( () => {
-              setErrorEvento(false)
-            },8000);
           },1000);
         }
       })
@@ -102,11 +100,8 @@ function Eventos() {
         // si no pude conecarme
         setTimeout(() => {
           setLoader(false)
-          setErrorEvento(true)
+          setSendEvento(2)
           setMessage(error)
-          setTimeout( () => {
-            setErrorEvento(false)
-          },1500);
         },1000);
       });
     }
@@ -134,7 +129,7 @@ function Eventos() {
                   Anotarse
                 </Button>
               </Form>
-              {errorEvento && <Alert variant={errorEvento ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
+              {sendEvento && <Alert variant={sendEvento === 1 ? 'success' : 'danger'} style={{display: 'block'}}> { message } </Alert>}
             </Card.Body>
           </Card>
         </Col>
