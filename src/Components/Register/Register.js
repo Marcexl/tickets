@@ -19,7 +19,7 @@ const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
 function Register() {
   const [loader, setLoader] = useState(false);
-  const [errorRegister, setErrorRegister] = useState(false)
+  const [sendRegister, setSendRegister] = useState(false)
   const [message, setMessage] = useState('')
   const [validated, setValidated] = useState(false);
   const [documento, setDocumento] = useState('');
@@ -37,11 +37,8 @@ function Register() {
       setLoader(true)
       setTimeout(() => {
         setLoader(false)
-        setErrorRegister(true)
+        setSendRegister(2)
         setMessage(errorMessage)
-        setTimeout( () => {
-          setErrorRegister(false)
-        },1500);
       },1000);
     }
 
@@ -67,6 +64,7 @@ function Register() {
 
       setTimeout( () => {
         setLoader(false)
+        setSendRegister(1)
         setMessage(successMessage)
         setTimeout( () => {
           navigate("/eventos")
@@ -109,7 +107,7 @@ function Register() {
                   Enviar
                 </Button>
               </Form>
-              {errorRegister && <Alert variant={errorRegister ? 'danger' : 'success'} style={{display: 'block'}}> { message } </Alert>}
+              {sendRegister && <Alert variant={sendRegister === 1 ? 'success' : 'danger'} style={{display: 'block'}}> { message } </Alert>}
             </Card.Body>
           </Card>
         </Col>
