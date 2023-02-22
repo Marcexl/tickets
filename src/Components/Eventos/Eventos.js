@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState}from 'react';
+import { useNavigate } from 'react-router-dom'
+import { storage } from '../../utils/storage';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -8,50 +10,61 @@ import Form from 'react-bootstrap/Form';
 import Logo from '../logo.png';
 import GlobalSpinner from '../Spinner/Spinner';
 import Alert from 'react-bootstrap/Alert';
+
 import './eventos.css';
 
-//var urlMaster = 'http://localhost:3000/';
-var urlMaster = 'https://sgiar.org.ar/dialogos/eventos/';
+const urlHost = process.env.REACT_APP_HOST;
+const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+const emptyEvento = "Por favor seleccioná una opción";
+const alreadyRegister = "'Registramos que ya haz generado tu entrada. En breve te va a llegar el email.";
+const successMessage = "Te anotaste con exito!";
+
+const options = [
+  {value: '', text: '--Selecciona la actividad--'},
+  {value: '3', text: 'Reunión Gral. de Líderes de Han (Concierto Conmemorativo) 14 de Febrero 19:00 hs'}
+];
 
 function Eventos() {
+  const [selected, setSelected] = useState(options[0].value);
+  const [loader, setLoader] = useState(false);
+  const [sendEvento, setSendEvento] = useState(false)
+  const [message, setMessage] = useState('')
+  const navigate = useNavigate();
+
+  const handleChange = event => {
+    console.log(event.target.value);
+    setSelected(event.target.value);
+  };
+
   const AgendarEvento = (e) =>{
-    let spinner = document.getElementById("spinner");
-    let salert = document.getElementById("success-alert");
-    let dalert = document.getElementById("danger-alert");
-
+    
     e.preventDefault()
-    spinner.style.display = 'block';
-
-    var option = document.getElementById("eventos");
-    var evento = option.value;
-    if(evento === 0)
+    if(selected === '')
     {
-      spinner.style.display = 'none';
-      dalert.style.display = 'block';
-      salert.style.display = 'none';
+      setLoader(false)
+      setSendEvento(2)
+      setMessage(emptyEvento)
       return false;
     }
     else
     {
       //1) activo spinner
-      spinner.style.display = 'block';
+      setLoader(true)
+    
+      //2) registro el usuario con el evento
+      const apiRegister = `${apiEndpoint}/ticket/save`;
 
-      //2) traigo variable evento + user
-      let userId = localStorage.getItem("usrId");
-
+      //3) traigo variable evento + user
+      let userData = storage.get("usrTicket");
       const dataString = {
-        "id": userId,
+        "dni" : userData.dni,
+        "mail" : userData.mail,
         "evento": {
-          "id": evento
+          "id": selected
         }
       }
 
-      //3) guardo en local
-      localStorage.setItem("evento",evento);
-
-      //4) registro el evento al usuario
-      var url = "https://www.sgiar.org.ar:3001/ticket/event/save";
-      fetch(url, {
+      fetch(apiRegister, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,41 +75,33 @@ function Eventos() {
       .then((data) => {
         if(data === true)
         {
-          console.log('se registro el evento');
-
-          // paso redirecciono
+          //si pudo anotarse succesmessage
           setTimeout( () => {
-            dalert.style.display  = 'none';
-            spinner.style.display = 'none';
-            salert.style.display  = 'block';
-
+            setLoader(false)
+            setSendEvento(1)
+            setMessage(successMessage)
             setTimeout( () => {
-              window.location.href = `${urlMaster}#/cuenta`;
+              navigate("/cuenta")
             },800);
           },800);
         }
         else
         {
+          //si no pudo anotarse xq ya esta anotado alreadymessage
           setTimeout(() => {
-            spinner.style.display = 'none';
-            dalert.style.display = 'block';
-            dalert.innerHTML = 'Registramos que ya haz generado tu entrada. En breve te va a llegar el email.';
-            setTimeout( () => {
-              dalert.style.display = 'none';
-            },8000);
+            setLoader(false)
+            setSendEvento(2)
+            setMessage(alreadyRegister)
           },1000);
         }
       })
       .catch((error) => {
         console.error('Error:', error);
-        // no llego diplay error
+        // si no pude conecarme
         setTimeout(() => {
-          spinner.style.display = 'none';
-          dalert.style.display = 'block';
-          dalert.innerHTML = 'Ha ocurrido un error, por favor intente mas tarde.';
-          setTimeout( () => {
-            dalert.style.display = 'none';
-          },1500);
+          setLoader(false)
+          setSendEvento(2)
+          setMessage(error)
         },1000);
       });
     }
@@ -104,7 +109,7 @@ function Eventos() {
 
   return (
     <>
-    <GlobalSpinner />
+    {loader ? <GlobalSpinner display="block"/> :
     <Container className='container-login'>
       <Row>
         <Col className='col-login'>
@@ -113,25 +118,24 @@ function Eventos() {
             <Card.Img variant="top" src={Logo} className="logo-login"/>
             <Card.Body>
               <Form onSubmit={AgendarEvento}>
-                <Form.Select aria-label="Default select example" id="eventos">
-                    <option value="0">Selecciona la actividad</option>
-                    <option value="3">Reunión Gral. de Líderes de Han (Concierto Conmemorativo) 14 de Febrero 19:00 hs</option>
+                <Form.Select value={selected} onChange={handleChange}>
+                    {options.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.text}
+                    </option>
+                  ))}
                 </Form.Select>
                 <Button variant="primary" type="submit">
                   Anotarse
                 </Button>
               </Form>
-              <Alert variant='success' id="success-alert">
-                Te anotaste con exito!
-              </Alert>
-              <Alert variant='danger' id="danger-alert">
-                Por favor seleccioná una opción
-              </Alert>
+              {sendEvento && <Alert variant={sendEvento === 1 ? 'success' : 'danger'} style={{display: 'block'}}> { message } </Alert>}
             </Card.Body>
           </Card>
         </Col>
       </Row>
     </Container>
+    }
     </>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Nabvar from '../Menu/Menu';
-import Sidebar from '../Menu/Sidebar';
+import Menus from '../Menu/Menu';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -11,8 +10,7 @@ function Dashboard() {
 
   return (
     <>
-    <Nabvar page="Escritorio" />
-    <Sidebar />
+    <Menus page="Escritorio" />
     <Container fluid className={aside}>
       <Row className="h-1">
         <Col>

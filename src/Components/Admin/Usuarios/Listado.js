@@ -1,11 +1,8 @@
 import React from 'react';
-import Nabvar from '../Menu/Menu';
-import Sidebar from '../Menu/Sidebar';
-import Footer from "../Footer";
+import Menus from '../Menu/Menu';
 import GlobalSpinner from '../../Spinner/Spinner';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './listado.css';
@@ -52,8 +49,7 @@ export const Listado = () =>{
 
     return (
         <>
-        <Nabvar page="Acreditados por Evento"/>
-        <Sidebar />
+        <Menus page="Acreditados por Evento"/>
         {tickets === null ? <GlobalSpinner display="block"  /> :
             <Container fluid className={aside}>
                  <Row className="h-1">

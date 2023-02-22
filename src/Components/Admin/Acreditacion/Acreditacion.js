@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Nabvar from '../Menu/Menu';
-import Sidebar from '../Menu/Sidebar';
-import Footer from "../Footer";
+import Menus from '../Menu/Menu';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
@@ -42,8 +40,7 @@ function Acreditacion() {
 
   return (
     <>
-    <Nabvar page="Acreditacion"/>
-    <Sidebar />
+    <Menus page="Acreditacion"/>
     <Container fluid className={aside}>
       <Row className="h-1">
         <Col>
