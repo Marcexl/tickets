@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Nabvar from '../Menu/Menu';
-import Sidebar from '../Menu/Sidebar';
+import React, { useState } from "react";
+import Menus from '../Menu/Menu';
 import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './account.css';
-import { Button } from "react-bootstrap";
 
 function MiCuenta() {
     const [aside, setSidebar] = useState('sidebar')
 
   return (
     <>
-    <Nabvar page="Mi cuenta"/>
-    <Sidebar />
+    <Menus page="Mi cuenta"/>
     <Container fluid className={aside}>
       <Row className="h-1">
         <Col>

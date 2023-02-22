@@ -12,9 +12,8 @@ import { storage } from '../../../utils/storage';
 import GlobalSpinner from '../../Spinner/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import './menu.css';
 
-function Sidebar() {
+function Sidebar(props) {
   const [loader,setLoader] = useState(false);
   const [show, setModal] = useState(false);
   const urlHost = process.env.REACT_APP_HOST;
@@ -51,7 +50,7 @@ function Sidebar() {
       </Modal.Footer>
     </Modal>
     {loader ? <GlobalSpinner display="block" /> : 
-      <div className='aside'>
+      <div className={props.position}>
         <div className='aside-header'>
           <img src={Icon} alt="icon"/>   
           <h2>
