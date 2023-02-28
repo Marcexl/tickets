@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from "../context/AuthContext";
 import { storage } from '../utils/storage';
 
-export const ProtectedRoute = ({ children, redirectTo = "/login" }) => {
+export const ProtectedRoute = ({ children, redirectTo = "/admin/login" }) => {
   const {user} = useAuth()
   const location = useLocation();
   const userStorage = storage.get('user')
