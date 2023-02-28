@@ -8,6 +8,7 @@ happy hacking!
 
 PD: if you have problems during the installation, just run:
 npm i --save ignore-errors
+---
 
 # for local enviroment
 You can try connect to services running Chrome with no-cors
@@ -15,8 +16,8 @@ You need to run cmd as administrator and then:
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
 
 # use enpoints on env
-the .env file isnt commited so 
-you will need to ask to the site administrator 
+the .env file isnt commited so
+you will need to ask to the site administrator
 to call the right api
 put it on root project
 
