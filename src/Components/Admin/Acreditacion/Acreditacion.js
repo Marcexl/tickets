@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Menus from '../Menu/Menu';
-import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,6 +7,7 @@ import { Button } from "react-bootstrap";
 import { AcreditarDNI } from "./AcreditarDNI";
 import { AcreditarQr } from "./AcreditarQR";
 import { EventosList } from "../../Eventos/EventosList";
+import Layout from "../Layout";
 
 function Acreditacion() {
 
@@ -39,9 +38,7 @@ function Acreditacion() {
 
 
   return (
-    <>
-    <Menus page="Acreditacion"/>
-    <Container fluid className={aside}>
+    <Layout>
       <Row className="h-1">
         <Col>
           <div className="card-admin">
@@ -74,8 +71,7 @@ function Acreditacion() {
           </div>
         </Col>
       </Row>
-    </Container>
-    </>
+    </Layout>
   );
 }
 
