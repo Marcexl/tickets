@@ -1,17 +1,12 @@
-import React, { useState } from "react";
-import Menus from '../Menu/Menu';
-import Container from 'react-bootstrap/Container';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Button } from "react-bootstrap";
+import Layout from '../Layout';
+
 
 function Dashboard() {
-    const [aside, setSidebar] = useState('sidebar')
-
   return (
-    <>
-    <Menus page="Escritorio" />
-    <Container fluid className={aside}>
+    <Layout>
       <Row className="h-1">
         <Col>
           <div className="card-admin-column">
@@ -20,8 +15,7 @@ function Dashboard() {
           </div>
         </Col>
       </Row>
-    </Container>
-    </>
+    </Layout>
   );
 }
 

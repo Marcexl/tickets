@@ -1,17 +1,11 @@
-import React, { useState } from "react";
-import Menus from '../Menu/Menu';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './account.css';
+import Layout from '../Layout';
 
 function MiCuenta() {
-    const [aside, setSidebar] = useState('sidebar')
-
   return (
-    <>
-    <Menus page="Mi cuenta"/>
-    <Container fluid className={aside}>
+    <Layout>
       <Row className="h-1">
         <Col>
           <div className="card-admin">
@@ -25,8 +19,7 @@ function MiCuenta() {
           </div>
         </Col>
       </Row>
-    </Container>
-    </>
+    </Layout>
   );
 }
 
